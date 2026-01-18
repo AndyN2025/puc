@@ -1,0 +1,25 @@
+name: Deploy Nuxt App to GitHub Pages
+
+on:
+  push:
+    branches: [ main ] # Ветка, при пуше в которую происходит деплой
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '20' # Укажите вашу версию Node.js
+          cache: 'npm' # или 'yarn'
+      - name: Install dependencies
+        run: npm install # или yarn
+      - name: Build Nuxt app
+        run: npm run build # или yarn build
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: .output/public # Папка сборки вашего Nuxt приложения
+          # publish_branch: gh-pages # Можно указать, если не настроено в Pages
