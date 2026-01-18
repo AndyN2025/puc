@@ -5,9 +5,9 @@ on:
     branches: [ main ]
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+  contents: write  # ← разрешает пушить в ветки
+  pages: write     # для GitHub Pages API
+  id-token: write  
 
 jobs:
   build-and-deploy:
