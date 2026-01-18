@@ -1,0 +1,61 @@
+@use "./reset";
+
+@font-face {
+  font-family: 'IBM';
+  src: url('@/assets/fonts/ibm-PS.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap; 
+}
+
+@font-face {
+  font-family: 'IBM M';
+  src: url('@/assets/fonts/ibm-PS-M.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap; 
+}
+
+@font-face {
+  font-family: 'IBM SB';
+  src: url('@/assets/fonts/ibm-PS-SB.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap; 
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('@/assets/fonts/Inter-R.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap; 
+}
+
+@font-face {
+  font-family: 'Inter M';
+  src: url('@/assets/fonts/Inter-M.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap; 
+}
+
+@font-face {
+  font-family: 'Inter SB';
+  src: url('@/assets/fonts/Inter-SB.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap; 
+}
+
+@font-face {
+  font-family: 'Inter B';
+  src: url('@/assets/fonts/Inter-B.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap; 
+}
+
+body{
+    font-family: 'IBM', sans-serif;
+}

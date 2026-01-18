@@ -1,0 +1,90 @@
+<template>
+  <div class="p-4">
+    <Breadcrumbs :items="breadCrumbs"/> 
+    <DotTitle :text="titleCommon" />
+    <TitleCommon :text="titleCommon"/>
+    <DocumentList :documents="documents" type="save"/>
+  </div>
+</template>
+
+<script setup lang="ts">
+import Breadcrumbs from '@/components/UI/Breadcrumbs.vue';
+import DotTitle from '@/components/UI/DotTitle.vue';
+import TitleCommon from '@/components/UI/TitleCommon.vue';
+import DocumentList from '@/components/UI/DocumentList.vue';
+
+const titleCommon = ref('Бланки документов')
+
+const breadCrumbs = [
+  { text: 'Главная', link: '/' },
+  { text: 'Бланки документов', link: '/docs' }
+] 
+
+const documents = [
+  {
+    title: 'Заявка на обучение по охране труда (ДПО) (очная/заочная)',
+    file: '/blanks/zayvka_01.doc'
+  },
+  {
+    title: 'Заявка на обучение работников 3 группы по безопасности работ на высоте (ДПО)',
+    file: '/blanks/zayvka_02.doc'
+  },
+  {
+    title: 'Заявка на обучение работников по оказанию первой помощи пострадавшим',
+    file: '/blanks/zayvka_03.doc'
+  },
+  {
+    title: 'Заявка на обучение работников безопасным методам работ при воздействии факторов, установленных по СОУТ и проф-рискам.',
+    file: '/blanks/zayvka_04.doc'
+  },
+  {
+    title: 'Заявка на обучение работников использованию (применению) средств индивидуальной защиты',
+    file: '/blanks/zayvka_05.doc'
+  },
+  {
+    title: 'Заявка на обучение работников предприятия по безопасным методам и приемам выполнения работ повышенной опасности',
+    file: '/blanks/zayvka_06.doc'
+  },
+  {
+    title: 'Заявка на дистанционное обучение по пожарной безопасности ДПО',
+    file: '/blanks/zayvka_07.doc'
+  },
+  {
+    title: 'Заявка на профессиональное обучение по программе профессиональной подготовки по профессии рабочих',
+    file: '/blanks/zayvka_08.doc'
+  },
+  {
+    title: 'Заявка на профессиональное обучение по программе переподготовки по профессии рабочих',
+    file: '/blanks/zayvka_09.doc'
+  },
+  {
+    title: 'Заявка на обучение рабочего персонала',
+    file: '/blanks/zayvka_10.doc'
+  },
+  {
+    title: 'Заявка на обучение по ДПО: повышение квалификации в области промышленной безопасности.',
+    file: '/blanks/zayvka_11.doc'
+  },
+  {
+    title: 'Заявка на предаттестационную подготовку по промышленной безопасности',
+    file: '/blanks/zayvka_12.doc'
+  },
+  {
+    title: 'Заявка на предэкзаменационную подготовку работников организаций, осуществляющих эксплуатацию ТЭУ.',
+    file: '/blanks/zayvka_13.doc'
+  },
+  {
+    title: 'Заявка на дистанционное обучение по ДПО: повышение квалификации в области экологической безопасности.',
+    file: '/blanks/zayvka_14.doc'
+  },
+  {
+    title: 'Заявка на обучение по ДПО: повышение квалификации в области оборота наркотических средств, психотропных веществ и прекурсоров.',
+    file: '/blanks/zayvka_15.doc'
+  }
+] 
+
+</script>
+
+<style scoped>
+
+</style>
