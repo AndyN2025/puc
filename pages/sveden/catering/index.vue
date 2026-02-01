@@ -1,14 +1,11 @@
 <template>
   <div class="inter">
     <Breadcrumbs :items="breadCrumbs"/> 
-    <NavBlock :navItems="navSvedenItems" :activeIndex="11"/>
+    <NavBlock :navItems="navSvedenItems" :activeIndex="12"/>
     <DotTitle text="Сведения об образовательной организации" />
     <TitleCommon :text="titleCommon"/>
 
-    <div class="inter__text">
-      <p class="inter__text-item">Договоров с иностранными или международными организациями по вопросам образования и науки — нет.</p>
-      <p class="inter__text-item">Образовательных программ, прошедших международную аккредитацию — нет.</p>
-    </div>
+    <RepairBlock style="margin-bottom: 60px;"/>
   </div>
 </template>
 
@@ -17,9 +14,10 @@ import Breadcrumbs from '@/components/UI/Breadcrumbs.vue';
 import DotTitle from '@/components/UI/DotTitle.vue';
 import TitleCommon from '@/components/UI/TitleCommon.vue';
 import NavBlock from '@/components/UI/NavBlock.vue'
+import RepairBlock from '@/components/UI/RepairBlock.vue'
 import { navSvedenItems } from '@/utils/svedenUtils'
 
-const titleCommon = ref('Международное сотрудничество')
+const titleCommon = ref('Организация питания в образовательной орагнизации')
 
 const breadCrumbs = [
   { text: 'Главная', link: '/' },
@@ -37,7 +35,6 @@ const breadCrumbs = [
     display: flex;
     flex-direction: column;
     gap: 12px;
-    margin-bottom: 130px;
   }
 }
 </style>

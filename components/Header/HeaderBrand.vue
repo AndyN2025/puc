@@ -1,7 +1,7 @@
 <template>
   <div class="header__brand">
     <img :src="logo" alt="Приокский учебный центр"/>
-    <span class="header__title">Приокский учебный центр</span>
+    <span class="header__title">АНО ДПО "Приокский учебный центр"</span>
   </div>
 </template>
 
@@ -16,7 +16,11 @@ import logo from '@/assets/img/logo.svg'
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 10px;
+  gap: 2px;
+
+  img{
+    width: 30px;
+  }
 }
 .header__title{
   color: $color-darkBlue;

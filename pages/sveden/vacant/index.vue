@@ -1,7 +1,7 @@
 <template>
   <div class="p">
     <Breadcrumbs :items="breadCrumbs"/> 
-    <NavBlock :navItems="navSvedenItems" :activeIndex="8"/>
+    <NavBlock :navItems="navSvedenItems" :activeIndex="9"/>
     <DotTitle text="Сведения об образовательной организации" />
     <TitleCommon :text="titleCommon"/>
 
@@ -21,7 +21,7 @@ import TitleCommon from '@/components/UI/TitleCommon.vue';
 import NavBlock from '@/components/UI/NavBlock.vue'
 import { navSvedenItems } from '@/utils/svedenUtils'
 
-const titleCommon = ref('Вакантные места для приема обучающихся')
+const titleCommon = ref('Вакантные места для приема (перевода) обучающихся')
 
 const breadCrumbs = [
   { text: 'Главная', link: '/' },

@@ -98,7 +98,7 @@ import udostover from '@/assets/img/udostoverEx.png'
 const titleCommon = ref('Виды обучения')
 const titleEducation = computed(() => {
   if (selectedTab.value === 'online') {
-    return 'Промышленная безопасность (Онлайн обучение)'
+    return 'Промышленная безопасность (Дистанционное обучение)'
   } else if (selectedTab.value === 'offline') {
     return 'Промышленная безопасность (Очное обучение)'
   } else {
@@ -114,8 +114,8 @@ const breadCrumbs = [
 
 const tabs = [
   { text: 'Все', value: 'all' },
-  { text: 'Онлайн', value: 'online' },
-  { text: 'Офлайн', value: 'offline' }
+  { text: 'Дистанционно', value: 'online' },
+  { text: 'Очно', value: 'offline' }
 ]
 
 const eduTabs = [

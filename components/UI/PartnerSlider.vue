@@ -71,10 +71,10 @@ onBeforeUnmount(() => {
 
 <style lang="scss" scoped>
 .partners-section {
-  padding: 24px 24px 40px;
+  padding: 24px 14px 40px 0;
 
   .section-title {
-    text-align: center;
+    text-align: start;
     font-size: 1.5rem;
     font-weight: 700;
     color: #123970;

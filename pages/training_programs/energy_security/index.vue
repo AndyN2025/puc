@@ -64,8 +64,8 @@ const breadCrumbs = [
 
 const tabs = [
   { text: 'Все', value: 'all' },
-  { text: 'Онлайн', value: 'online' },
-  { text: 'Офлайн', value: 'offline' }
+  { text: 'Дистанционно', value: 'online' },
+  { text: 'Очно', value: 'offline' }
 ]
 
 const selectedTab = ref('all')

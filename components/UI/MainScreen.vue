@@ -90,7 +90,7 @@ const prevSlide = () => {
 
 // Автоматическая смена слайдов
 onMounted(() => {
-  intervalId = setInterval(nextSlide, 3500) // каждые 6.5 секунд
+  intervalId = setInterval(nextSlide, 4500) // каждые 6.5 секунд
 })
 
 onBeforeUnmount(() => {

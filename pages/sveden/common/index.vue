@@ -3,7 +3,7 @@
     <Breadcrumbs :items="breadCrumbs"/> 
     <NavBlock :navItems="navSvedenItems" :activeIndex="0"/>
     <DotTitle text="Сведения об образовательной организации"/>
-    <div class="common">
+    <!-- <div class="common">
       <div class="common__item">
         <div class="common__item-img child">
           <img :src="buildImg" alt="Здание"/>
@@ -58,7 +58,8 @@
           <img :src="buildImg" alt="Здание"/>
         </div>
       </div>
-    </div>
+    </div> -->
+    <OrganizationInfo />
     <DotTitle text="Документы" />
     <DocumentAccordion  :documents="documents" style="margin-bottom: 60px;"/>
   </div>
@@ -67,11 +68,12 @@
 <script setup lang="ts">
 import Breadcrumbs from '@/components/UI/Breadcrumbs.vue';
 import DotTitle from '@/components/UI/DotTitle.vue';
-import TitleCommon from '@/components/UI/TitleCommon.vue';
+// import TitleCommon from '@/components/UI/TitleCommon.vue';
+import OrganizationInfo from '@/components/UI/OrganizationInfo.vue';
 import NavBlock from '@/components/UI/NavBlock.vue'
 import { navSvedenItems } from '@/utils/svedenUtils'
 
-import buildImg from '@/assets/img/common/building.webp'
+// import buildImg from '@/assets/img/common/building.webp'
 import DocumentAccordion from '~/components/UI/DocumentAccordion.vue';
 
 import Akkredit from '@/assets/documents/common/АккредитацияОТ2022.pdf'

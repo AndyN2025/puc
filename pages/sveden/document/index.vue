@@ -15,24 +15,25 @@ import TitleCommon from '@/components/UI/TitleCommon.vue';
 import NavBlock from '@/components/UI/NavBlock.vue'
 import DocumentList from '@/components/UI/DocumentList.vue';
 import { navSvedenItems } from '@/utils/svedenUtils'
-import Ustav from '@/assets/documents/documents/УСТАВ.pdf'
+import Ustav from '@/assets/documents/documents/Ustav.pdf'
+
 import License from '@/assets/documents/common/Лицензия на осуществление образовательной деятельности.pdf'
-import AkkrOrg from '@/assets/documents/documents/1.3.Uvedomleniye_o_vnesenii_v_reyestr_akkreditovannykh_organizatsiy.pdf'
-import SvidIFNS from '@/assets/documents/documents/1.3.Svidetelstvo_IFNS.pdf'
-import SvidGosReg from '@/assets/documents/documents/1.3.Svidetelstvo_IFNS.pdf'
 
 import samoObsl from '@/assets/documents/documents/otchet_o_samoobsl.pdf'
-import predpis from '@/assets/documents/documents/predpisanie_2016.pdf'
 import podtver from '@/assets/documents/documents/podtv_2334.pdf'
 import vnutrTrud from '@/assets/documents/documents/local_act_trud_rasp.pdf'
 import pedsovet from '@/assets/documents/documents/local_act_pedsovet.pdf'
 import kurenie from '@/assets/documents/documents/local_act_kuren.pdf'
-import personData from '@/assets/documents/documents/local_act_obr_pers_dann.pdf'
 import spor from '@/assets/documents/documents/local_act_spor.pdf'
 import slush from '@/assets/documents/documents/local_act_rasp_slush.pdf'
 import profEtik from '@/assets/documents/documents/local_act_prof_etica.pdf'
 import rulePriem from '@/assets/documents/documents/local_act_prav_priem.pdf'
 import practic from '@/assets/documents/documents/local_act_pract_podg.pdf'
+
+import reestrOT from '@/assets/documents/documents/local_vypiska_reestr_ot.pdf'
+import perevodOtch from '@/assets/documents/documents/local_perevod_otchislenie.pdf'
+import uspevaemost from '@/assets/documents/documents/local_uspevaemost.pdf'
+import obuchenie from '@/assets/documents/documents/local_obuchenie.pdf'
 
 const titleCommon = ref('Документы')
 
@@ -52,36 +53,16 @@ const documents = [
     file: License
   },
   {
-    title: 'Свидетельство о государственной регистрации некоммерческой организации',
-    file: SvidGosReg
-  },
+    title: 'Выписка из реестра организаций, оказывающих услуги в области охраны труда',
+    file: reestrOT
+  }, 
   {
-    title: 'Свидетельство о постановке на учёт в налоговом органе',
-    file: SvidIFNS
-  },
-  {
-    title: 'Уведомление о внесении в реестр аккредитованных организаций, оказывающих услуги в области охраны труда',
-    file: AkkrOrg
-  },
-  {
-    title: 'Подтверждение соответствия требованиям постановления Правительства Российской Федерации от 16 декабря 2021 г. № 2334 по обучению',
-    file: podtver
-  },
-  {
-    title: 'Результаты последнего самообследования организации',
-    file: samoObsl,
-  },
-  {
-    title: 'Предписания, вынесенные по результатам последней проверки',
-    file: predpis
+    title: 'Правила внутреннего распорядка обучающихся',
+    file: slush
   },
   {
     title: 'Правила внутреннего трудового распорядка',
     file: vnutrTrud
-  },
-  {
-    title: 'Правила внутреннего распорядка слушателей',
-    file: slush
   },
   {
     title: 'Положение о Педагогическом совете',
@@ -96,10 +77,6 @@ const documents = [
     file: kurenie
   },
   {
-    title: 'Политика в отношении обработки персональных данных',
-    file: personData
-  },
-  {
     title: 'Положение о нормах профессиональной этики педагогических работников',
     file: profEtik
   },
@@ -110,7 +87,23 @@ const documents = [
   {
     title: 'Положение о практической подготовке обучающихся',
     file: practic
-  }
+  },
+  {
+    title: 'Положение о порядке перевода, отчисления и воостановления обучающихся',
+    file: perevodOtch
+  },
+  {
+    title: 'Положение о формах, периодичности и порядке текущего контроля успеваемости, промежуточной и итоговой аттестации',
+    file: uspevaemost
+  },
+  {
+    title: 'Положение об организации и осуществлении образовательной деятельности по дополнительным общеобразовательным общеразвивающим программам',
+    file: obuchenie
+  },
+  {
+    title: 'Результаты последнего самообследования организации',
+    file: samoObsl,
+  },
 ]
 </script>
 

@@ -25,7 +25,7 @@
       @wheel.prevent="handleWheel"
     >
       <div
-        v-for="(item, index) in items"
+        v-for="(item, index) in courseList"
         :key="item.id"
         class="card"
         @click="navigateTo(item.link)"
@@ -49,75 +49,17 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref } from 'vue'
 import DotTitle from '@/components/UI/DotTitle.vue';
-import mainProf from '@/assets/img/mainCard/prof-main.png'
-import mainProm from '@/assets/img/mainCard/prom-main.png'
-import mainOT from '@/assets/img/mainCard/ot-main.png'
-import mainOPO from '@/assets/img/mainCard/opo-main.png'
-import mainFire from '@/assets/img/mainCard/fire-main.png'
-import mainEco from '@/assets/img/mainCard/eco-main.png'
-import mainDrug from '@/assets/img/mainCard/drug-main.png'
+import { courseList } from '@/utils/svedenUtils'
 
 const props = defineProps({
   dotShow: {
     type: Boolean,
     default: true
-  }
+  },
 })
 
-// Данные — 7 элементов
-const items = ref([
-  {
-    id: 1,
-    title: 'Промышленная безопасность',
-    text: 'Обучение специалистов мерам предотвращения аварий и аварийных ситуаций на производстве, контролю оборудования и ведению соответствующей технической документации.',
-    image: mainProm,
-    link: '/training_programs/industrial_safety/'
-  },
-  {
-    id: 2,
-    title: 'Охрана труда',
-    text: 'Подготовка персонала, обеспечивающего соблюдение норм безопасности на рабочем месте, предотвращение производственных травм и правильное оформление документации по охране труда.',
-    image: mainOT,
-    link: `/training_programs/security_work/`
-  },
-  {
-    id: 3,
-    title: 'Профессиональная подготовка',
-    text: 'Подготовка сотрудников к выполнению профессиональных обязанностей с соблюдением нормативов качества, техники безопасности и оформлением необходимой документации.',
-    image: mainProf,
-    link: '/training_programs/professional_education/'
-  },
-  {
-    id: 4,
-    title: 'Пожарная безопасность',
-    text: 'Обучение мерам предотвращения пожаров, действиям в чрезвычайных ситуациях и ведению документации по пожарной безопасности на предприятии.',
-    image: mainFire,
-    link: '/training_programs/fire_safety/'
-  },
-  {
-    id: 5,
-    title: 'Оборот нарко-тических средств',
-    text: 'Подготовка сотрудников к законному и безопасному обращению с наркотическими средствами, психотропными веществами и их прекурсорами с соблюдением требований законодательства.',
-    image: mainDrug,
-    link: '/training_programs/trafficking_in_drugs/',
-  },
-  {
-    id: 6,
-    title: 'Обучение рабочегоперсонала ОПО',
-    text: 'Подготовка работников опасных производственных объектов к безопасной эксплуатации оборудования, минимизации рисков и ведению необходимой технической и отчетной документации.',
-    image: mainOPO,
-    link: `/training_programs/tematicheskie_seminary/`
-  },
-  {
-    id: 7,
-    title: 'Экологическая безопасность',
-    text: 'Обучение персонала мерам минимизации воздействия на окружающую среду, соблюдению природоохранных норм и правильному ведению экологической документации.',
-    image: mainEco,
-    link: '/training_programs/environmental_security/'
-  },
-])
 
 const sliderContainer = ref(null)
 
@@ -150,11 +92,6 @@ const handleWheel = (e) => {
     })
   }
 }
-
-// При монтировании — центрируем первый элемент (опционально)
-onMounted(() => {
-  // Можно добавить auto-scroll при загрузке, если нужно
-})
 </script>
 
 <style lang="scss" scoped>

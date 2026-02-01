@@ -8,7 +8,7 @@
      :modelValue="selectedTab"
       @update:modelValue="handleTabChange"/>
     <DotTitle :text="titleCommon" />
-    <TitleCommon text="Пожарная безопасность (Онлайн обучение)"/>
+    <TitleCommon text="Пожарная безопасность (Дистанционное обучение)"/>
     <ProgramTable 
       :items="programDop" 
       :centralTitle="`Пожарная безопасность`"/>
@@ -69,8 +69,8 @@ const breadCrumbs = [
 
 const tabs = [
   { text: 'Все', value: 'all' },
-  { text: 'Онлайн', value: 'online' },
-  { text: 'Офлайн', value: 'offline' }
+  { text: 'Дистанционно', value: 'online' },
+  { text: 'Очно', value: 'offline' }
 ]
 
 const selectedTab = ref('all')

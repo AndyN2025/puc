@@ -4,7 +4,9 @@
     <NavBlock :navItems="navSvedenItems" :activeIndex="4"/>
     <DotTitle text="Сведения об образовательной организации" />
     <TitleCommon :text="titleCommon"/>
-    <CardSlider :dotShow="false" style="margin-bottom: 40px;"/>
+    <!-- <CardSlider :dotShow="false" style="margin-bottom: 40px;"/> -->
+
+    <ListCourses style="margin-bottom: 60px;"/>
     <DotTitle text="программы и формы обучения" />
     <TitleCommon text="Образовательные программы и подготовка специалистов"/>
 
@@ -66,6 +68,7 @@ import Breadcrumbs from '@/components/UI/Breadcrumbs.vue';
 import DotTitle from '@/components/UI/DotTitle.vue';
 import TitleCommon from '@/components/UI/TitleCommon.vue';
 import NavBlock from '@/components/UI/NavBlock.vue'
+import ListCourses from '@/components/UI/ListCourses.vue';
 import CardSlider from '@/components/UI/CardSlider.vue'
 import { navSvedenItems } from '@/utils/svedenUtils'
 import eduIcon1 from '@/assets/img/common/educ1.svg'

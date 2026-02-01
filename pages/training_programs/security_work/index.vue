@@ -101,9 +101,9 @@ import udostoverExWhite from '@/assets/img/udostoverExWhite.png'
 const titleCommon = ref('Виды обучения')
 const titleEducation = computed(() => {
   if (selectedTab.value === 'online') {
-    return 'Охрана труда (Онлайн обучение)'
+    return 'Охрана труда (Дистанционное обучение)'
   } else if (selectedTab.value === 'offline') {
-    return 'Охрана труда (очное обучение)'
+    return 'Охрана труда (Очное обучение)'
   } else {
     return 'Охрана труда'
   }
@@ -117,8 +117,8 @@ const breadCrumbs = [
 
 const tabs = [
   { text: 'Все', value: 'all' },
-  { text: 'Онлайн', value: 'online' },
-  { text: 'Офлайн', value: 'offline' }
+  { text: 'Дистанционно', value: 'online' },
+  { text: 'Очно', value: 'offline' }
 ]
 
 const eduTabs = [
