@@ -53,19 +53,19 @@ const newsList = ref([
     date: '14.10.2025',
     category: 'Профессиональная переподготовка',
     title: 'Специалист в сфере промышленной безопасности',
-    link: '/news/professional-retraining-1'
+    link: '/news/'
   },
   {
     date: '14.10.2025',
     category: 'Профессиональная переподготовка',
     title: 'Специалист в сфере промышленной безопасности',
-    link: '/news/professional-retraining-2'
+    link: '/news/'
   },
   {
     date: '14.10.2025',
     category: 'Профессиональная переподготовка',
     title: 'Специалист в сфере промышленной безопасности',
-    link: '/news/professional-retraining-3'
+    link: '/news/'
   }
 ])
 </script>
