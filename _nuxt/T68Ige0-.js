@@ -1,0 +1,1 @@
+import{l as t,c as o,a as s,o as a,_ as n}from"./tT6Vsewl.js";const c={class:"p-4"},_=t({__name:"index",setup(l){return(p,e)=>(a(),o("div",c,[...e[0]||(e[0]=[s("h1",{class:"text-2xl font-bold"},"О нас",-1),s("p",null,'Это страница "О нас" Приокского учебного центра.',-1)])]))}}),d=n(_,[["__scopeId","data-v-2ce23f03"]]);export{d as default};
