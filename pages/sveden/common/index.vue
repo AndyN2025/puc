@@ -76,10 +76,16 @@ import { navSvedenItems } from '@/utils/svedenUtils'
 // import buildImg from '@/assets/img/common/building.webp'
 import DocumentAccordion from '~/components/UI/DocumentAccordion.vue';
 
-import Akkredit from '@/assets/documents/common/АккредитацияОТ2022.pdf'
-import License from '@/assets/documents/common/Лицензия на осуществление образовательной деятельности.pdf'
-import ReestrLicense from '@/assets/documents/common/Выписка из реестра лицензий № Л035-01224-40-00374085.pdf'
-import ReestrOrgan from '@/assets/documents/common/Выписка из реестра организаций, оказывающих услуги в области охраны труда.pdf'
+// import Akkredit from '@/assets/documents/common/АккредитацияОТ2022.pdf'
+// import License from '@/assets/documents/common/Лицензия на осуществление образовательной деятельности.pdf'
+// import ReestrLicense from '@/assets/documents/common/Выписка из реестра лицензий № Л035-01224-40-00374085.pdf'
+// import ReestrOrgan from '@/assets/documents/common/Выписка из реестра организаций, оказывающих услуги в области охраны труда.pdf'
+
+import License from '@/assets/documents/common/(01)Лицензия на осуществление образовательной деятельности.pdf'
+import LicenseChange from '@/assets/documents/common/(01)Лицензия на осуществление образовательной деятельности.pdf'
+import ReestrDoc from '@/assets/documents/common/(01)Лицензия на осуществление образовательной деятельности.pdf'
+import AkkreditDoc from '@/assets/documents/common/(01)Лицензия на осуществление образовательной деятельности.pdf'
+
 
 const titleCommon = ref('Основные сведения ')
 
@@ -99,10 +105,10 @@ const gridItems = [
 ]
 
 const documents =[
-  { title: 'Выписка из реестра лицензий по состоянию на 07.11.2025', file: ReestrLicense },
-  { title: 'Выписка из реестра организаций по охране труда', file: ReestrOrgan },
-  { title: 'Лицензия на осуществление образовательной деятельности', file: License },
-  { title: 'Аккредитация от 2022 г.', file: Akkredit },
+  { title: 'Лицензия на осуществление образовательной деятельности.', file: License },
+  { title: 'Выписка из реестра лицензий по состоянию на 01.08.2024г (изменение лицензии)', file: LicenseChange },
+  { title: 'Выписка из реестра организаций, оказывающих услуги в области охраны труда', file: ReestrDoc },
+  { title: 'Уведомление об аккредитации', file: AkkreditDoc },
 ]
 
 </script>

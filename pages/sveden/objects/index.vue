@@ -19,8 +19,38 @@
         </ul>
       </div>
 
-      <div class="technic__table">
-        
+      <ul class="technic__table table">
+        <li class="table-item" v-for="room in rooms" :key="room.id">
+          <div class="table-item__name">{{ room.name }}</div>
+          <ul class="table-item__list" v-if="room.id != 1">
+            <li class="table-item__item" v-for="item in room.content">
+              <img :src="checkIcon" alt="галочка"/>
+              {{ item }}
+            </li>
+          </ul>
+          <ul class="table-item__list" v-else>
+            <li class="table-item__item" v-for="item in room.content[0]">
+              <img :src="checkIcon" alt="галочка"/>
+              {{ item }}
+            </li>
+            <p class="table-item__list-title">Учебно-демонстрационные приборы (устройства) для оборудования работающего под избыточным давлением:</p>
+            <li class="table-item__item" v-for="item in room.content[1]">
+              <img :src="checkIcon" alt="галочка"/>
+              {{ item }}
+            </li>
+          </ul>
+
+        </li>
+      </ul>
+
+      <div class="technic__info">
+        <p class="technic__info-title">Перечень электронных образовательных ресурсов, к которым обеспечивается доступ обучающихся:</p>
+        <ul class="technic__info-list">
+          <li class="technic__info-item" v-for="mat in infoMat" :key="mat.id">
+            {{ mat.text}}
+          </li>
+        </ul>
+
       </div>
     </div>
 
@@ -79,6 +109,13 @@ const breadCrumbs = [
   { text: titleCommon.value + '. Доступная среда', link: '/sveden/vacant/' }
 ] 
 
+const infoMat = [
+  { id: 1, text: 'Интернет-ресурс для проведения онлайн-тренинга «Школа главного инженера  – URL: https://new.sdo-vot.ru/'},
+  { id: 2, text: 'Система дистанционного обучения – URL:  http://edu.pucenter.ru'},
+  { id: 3, text: 'Обучающе-контролирующая система «ОЛИМПОКС» – URL: https://olimpoks.ru'},
+  { id: 4, text: 'Справочно правовая система «КонсультантПлюс» – URL: https://www.consultant.ru'}
+]
+
 const matList = [
   {
     text: `Макеты различных видов промышленного оборудования`
@@ -136,6 +173,83 @@ const materialList = [
       вероятности аварийных ситуаций.`,
     img: material4,
   }
+]
+
+const contentRoom1 = [
+  'персональные компьютеры;',
+  'ноутбук;',
+  'мультимедийный проектор;',
+  'экран;',
+  'доска маркерная',
+  'демонстрационные стенды',
+  'двухместные столы;',
+  'стулья;',
+]
+
+const content2Room1 = [
+  'сосуд воздухосборник;',
+  'счетчик газовый;',
+  'водомер;',
+  'редуктор газовый;',
+  'клапаны предохранительный, обратный;',
+  'манометр;',
+  'мембрана приборов;',
+  'корпус вентиля;',
+  'труба теплообменника;',
+  'вентили;',
+  'лопасти вентилятора;',
+  'вентиль со штуцером;',
+  'кран шаровый;',
+]
+
+const contentRoom2 = [
+  'персональный компьютер;',
+  'телевизор;',
+  'двухместные столы;',
+  'стулья;',
+  'действующий макет подъемного крана;',
+  'конструктивные элементы механического и электрооборудования подъемных сооружений;',
+  'демонстрационные стенды по технике безопасности подъемных работ, работ на высоте.',
+  'съемные грузозахватные приспособления и их конструктивные элементы',
+]
+
+const contentRoom3 = [
+  'персональный компьютер;',
+  'двухместные столы;',
+  'стулья;',
+  'тренажер-симулятор автоматического наружного дефиблирятора;',
+  'манекен-тренажер сердечно-легочной и мозговой реанимации пружинно-механический с индикацией правильности выполнения действий «Максим-П-01»;',
+  'манекен-тренажер для отработки навыков сердечно-лёгочной реанимации ПРАКТИ-МЭН;',
+  'манекен мужской, демонстрационный;',
+  'набор имитаторов ранений и поражений;',
+  'учебный тренажер-манекен «Спасатель»;',
+  'учебный тренажер «Индикатор эффективности СЛР «Темп»;',
+  'плакаты демонстрационные для оказания первой помощи.',
+  'РВ001В ПРАКТИ-БЭБИ Манекен полноростовой для отработки навыков сердечно-легочной реанимации',
+  'газоанализатор газоопасных паров «Сигнал-4К (02);',
+  'тренировочный жилет для отработки приема Геймлиха «Act+Fast»;',
+  'костюм специальный летний для защиты от термических рисков электрической дуги;',
+  'комбинезон химической защиты;',
+  'костюм Л-1;',
+  'фартук полимерный с нагрудником КЩС;',
+  'жилет сигнальный желтый;',
+  'привязь страховочная СПР-04-Ас(BG) искробезопасная;',
+  'привязь страховочная З-71 комфорт серии ВЕРШИНА;',
+  'карабин безопасности AZ 011;',
+  'устройство для подъема и спуска АТ300 серии ВЕРШИНА;',
+  'строп для страховочной привязи BODI GUARD;',
+  'двуплечевой строп BW800;',
+  'противогазы ГП-7КБ Бриз-КАМАФ;',
+  'огнетушитель углекислый;',
+  'огнетушитель порошковый;',
+  'настенная демосистема;',
+  'стенды;',
+]
+
+const rooms = [
+  { id: 1, name: 'Аудитория №1', content: [ contentRoom1, content2Room1 ] },
+  { id: 2, name: 'Аудитория №2', content: contentRoom2 },
+  { id: 3, name: 'Аудитория №3', content: contentRoom3 },
 ]
 
 const rawItems = [
@@ -205,7 +319,7 @@ const rawItems = [
     display: flex;
     flex-direction: row;
     gap: 24px;
-    margin-bottom: 60px;
+    margin-bottom: 40px;
 
     &-text{
       flex: 2;
@@ -227,8 +341,62 @@ const rawItems = [
       gap: 16px;
     }
 
-
     &-item{
+      display: flex;
+      flex-direction: row;
+      gap: 12px;
+    }
+  }
+
+  &__info{
+    margin-bottom: 80px;
+
+    &-title{
+      font-family: 'IBM M';
+      font-size: 18px;
+      margin-bottom: 18px;
+    }
+
+    &-list{
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+  }
+}
+
+.table{
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-bottom: 40px;
+
+  &-item{
+    display: flex;
+    flex-direction: row;
+    gap: 18px;
+    border-radius: 12px;
+    padding: 20px;
+    background-color: #E9F4FF;
+
+    &__name{
+      width: 200px;
+      text-align: center;
+      font-size: 24px;
+    }
+
+    &__list{
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      
+      &-title{
+        margin: 10px 0 10px 20px;
+        font-size: 18px;
+      }
+    }
+
+    &__item{
       display: flex;
       flex-direction: row;
       gap: 12px;

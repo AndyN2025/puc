@@ -6,7 +6,8 @@
 </template>
 
 <script setup lang="ts">
-import logo from '@/assets/img/logo.svg'
+// import logo from '@/assets/img/logo.svg'
+import logo from '@/assets/img/logo-text.png'
 </script>
 
 <style lang="scss" scoped>
@@ -19,7 +20,8 @@ import logo from '@/assets/img/logo.svg'
   gap: 2px;
 
   img{
-    width: 30px;
+    // width: 30px;
+    width: 70px;
   }
 }
 .header__title{
