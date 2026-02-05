@@ -1,1 +1,0 @@
-import{_ as e,c as o,o as s,t as a}from"./CrGfY-qa.js";const c={class:"documents-title"},r={__name:"UITitleCommon",props:{text:{type:String,required:!0,default:""}},setup(t){return(n,_)=>(s(),o("h2",c,a(t.text),1))}},m=e(r,[["__scopeId","data-v-af98373b"]]);export{m as T};
