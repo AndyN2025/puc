@@ -1,8 +1,8 @@
 <template>
-  <div>
-    <section class="section-item">
+  <div> 
+    <!-- <section class="section-item">
       <MainScreen/>
-    </section>
+    </section> -->
     <section class="section-item">
       <!-- <CardSlider /> -->
 

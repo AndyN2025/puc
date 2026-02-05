@@ -47,7 +47,7 @@ const navigateTo = (link: string) => {
 
   &__item {
     width: 330px;
-    height: 320px;
+    height: 380px;
     background-color: white;
     border: 1px solid #a0d4f5;
     border-radius: 8px;
@@ -155,7 +155,7 @@ const navigateTo = (link: string) => {
         margin: 0;
         color: white;
         font-family: 'Inter', sans-serif;
-        max-height: 60%;
+        height: 90%;
         overflow: hidden;
       }
     }
