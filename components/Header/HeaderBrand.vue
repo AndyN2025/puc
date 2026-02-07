@@ -1,7 +1,7 @@
 <template>
   <div class="header__brand">
     <img :src="logo" alt="Приокский учебный центр"/>
-    <span class="header__title">АНО ДПО "Приокский учебный центр"</span>
+    <span class="header__title">АНО ДПО<br/> "Приокский учебный центр"</span>
   </div>
 </template>
 

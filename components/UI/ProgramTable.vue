@@ -19,7 +19,7 @@
     <div class="table-wrapper">
       <div class="table-header">
         <div class="header-cell">Код</div>
-        <div class="header-cell">{{ centralTitle }}</div>
+        <div class="header-cell">Наименование программы</div>
         <div class="header-cell">Объем (часы)</div>
       </div>
 
@@ -113,9 +113,7 @@ const currentTab = ref(props.modelValue ?? (props.tabs?.[0]?.value ?? null))
 function setTab(value, index) {
   currentTab.value = value
   emit('update:modelValue', value)
-  // 🔥 Эмитим и значение, и индекс — выбирай, что удобнее
   emit('tab-change', { value, index })
-  console.log('[Tab changed]', { value, index })
 }
 
 // Определяем режим: блоки или простой список
@@ -185,6 +183,7 @@ const isBlocksMode = computed(() => {
     .header-cell {
       padding: 0 4px;
       text-align: center;
+      font-family: 'IBM M';
     }
   }
 

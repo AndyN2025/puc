@@ -4,58 +4,16 @@
     <NavBlock 
       :navItems="navCourseItems" 
       :activeIndex="1" 
-      :tabs="tabs"
-     :modelValue="selectedTab"
+      :modelValue="selectedTab"
       @update:modelValue="handleTabChange"/>
 
     <DotTitle :text="titleCommon" />
-    <TitleCommon :text="titleEducation"/>
-    
-    <div class="online-block" v-if="selectedTab === 'offline' || 'online'">
-      <div class="online-block__left">
-          <p class="online-block__text">
-            АНО ДПО «Приокский учебный центр» осуществляет подготовку руководителей, специалистов, работников 
-            организаций и работодателей — индивидуальных предпринимателей в области охраны труда в соответствии 
-            с требованиями трудового законодательства Российской Федерации.
-          </p>
-          <p class="online-block__text">
-            Обучение по охране труда направлено на формирование у слушателей знаний, умений и навыков, необходимых 
-            для обеспечения безопасных условий труда и профилактики производственного травматизма. Программа включает 
-            изучение требований Трудового кодекса РФ, федеральных правил, нормативов Минтруда, а также современных методов 
-            оценки и снижения профессиональных рисков.
-          </p>
-          <p class="online-block__text">
-            В ходе обучения рассматриваются вопросы организации системы управления охраной труда, проведения инструктажей, 
-            расследования несчастных случаев, применения средств индивидуальной защиты и соблюдения обязательных норм 
-            безопасности на рабочих местах.
-          </p>
-          <p class="online-block__text">
-            В соответствии со статьёй 219 ТК РФ работники,  и работодатели — индивидуальные предприниматели обязаны проходить 
-            обучение и проверку знаний требований охраны труда. По итогам подготовки проводится проверка знаний, оформляется 
-            протокол комиссии и выдаётся протокол.
-          </p>
-      </div>
-      <div class="online-block__right">
-        <img :src="udostoverExWhite" alt="Образец удостоверения"/>
-      </div>
-    </div>
 
     <ProgramTable 
-      v-if="selectedTab === 'offline'"
-      :items="programsOffline" 
-      :centralTitle="`Охрана труда (Очно)`"/>
-
-    <ProgramTable 
-      v-if="selectedTab === 'all'"
-      :items="programsOffline" 
-      :centralTitle="`Охрана труда (Очно)`"/>
-
-    <ProgramTable 
-      v-if="selectedTab === 'online'"
-      :items="programsOnline" 
-      :centralTitle="`Охрана труда (Онлайн)`"/>
+      :tabs="tabs"
+      :items="selectProgrammList" 
+      @tab-change="changeProgrammList"/>
       
-
     <DotTitle text="Программы" />
     
     
@@ -96,18 +54,8 @@ import StepsList from '@/components/UI/StepsList.vue'
 import EducationInfo from '@/components/UI/EducationInfo.vue'
 import { navCourseItems } from '@/utils/svedenUtils'
 import udostoverEx from '@/assets/img/UdostovExmpl.png'
-import udostoverExWhite from '@/assets/img/udostoverExWhite.png'
 
 const titleCommon = ref('Виды обучения')
-const titleEducation = computed(() => {
-  if (selectedTab.value === 'online') {
-    return 'Охрана труда (Дистанционное обучение)'
-  } else if (selectedTab.value === 'offline') {
-    return 'Охрана труда (Очное обучение)'
-  } else {
-    return 'Охрана труда'
-  }
-})
 
 const breadCrumbs = [
   { text: 'Главная', link: '/' },
@@ -116,74 +64,68 @@ const breadCrumbs = [
 ] 
 
 const tabs = [
-  { text: 'Все', value: 'all' },
-  { text: 'Дистанционно', value: 'online' },
-  { text: 'Очно', value: 'offline' }
-]
-
-const eduTabs = [
-  {id: 1, text: 'Предаттестационная подготовка', value:'подготовка'}, 
-  {id: 2, text: 'Дополнительное проф. образование', value: 'образование' }
+  { text: 'Очно', value: 'offline' },
+  { text: 'Дистанционно', value: 'online' }
 ]
 
 const programsOffline = [
   {
-    code: '-',
+    code: '04-15/1ОТ',
     title: 'Общие вопросы охраны труда и функционирование системы управления охраной труда.',
     hours: 24
   },
   {
-    code: '-',
+    code: '04-15/2ОТ',
     title: 'Безопасные методы и приемы выполнения работ при воздействии вредных и (или) опасных производственных факторов, источников опасности, идентифицированных в рамках специальной оценки условий труда и оценки профессиональных рисков.',
     hours: 18
   },
   {
-    code: '-',
+    code: '04-15/3ОТ',
     title: 'Обучение по использованию (применению) средств индивидуальной защиты.',
     hours: 16
   },
   {
-    code: '-',
+    code: '04-15/4ОТ',
     title: 'Оказание первой помощи пострадавшим.',
     hours: 24
   },
   {
-    code: '-',
+    code: '04-15/5ОТ',
     title: 'Обучение работников, выполняющих работы на высоте с применением средств подмащивания.',
     hours: 24
   },
   {
-    code: '-',
+    code: '04-15/6ОТ',
     title: 'Обучение работников 1 группы по безопасности работ на высоте.',
     hours: 28
   },
   {
-    code: '-',
+    code: '04-15/7ОТ',
     title: 'Обучение работников 2 группы по безопасности работ на высоте.',
     hours: 30
   },
   {
-    code: '-',
+    code: '04-03/1ОТ',
     title: 'Обучение работников 3 группы по безопасности работ на высоте.',
     hours: 32
   },
   {
-    code: '-',
+    code: '04-15/8ОТ',
     title: 'Безопасные методы и приемы выполнения работ повышенной опасности в ограниченных и замкнутых пространствах (ОЗП) работников 1 группы.',
     hours: 24
   },
   {
-    code: '-',
+    code: '04-15/9ОТ',
     title: 'Безопасные методы и приемы выполнения работ повышенной опасности в ограниченных и замкнутых пространствах (ОЗП) работников 2 группы.',
     hours: 26
   },
   {
-    code: '-',
+    code: '04-15/10ОТ',
     title: 'Безопасные методы и приемы выполнения работ повышенной опасности в ограниченных и замкнутых пространствах (ОЗП) работников 3 группы.',
     hours: 32
   },
   {
-    code: '-',
+    code: '04-15/11ОТ',
     title: 'Охрана труда при выполнении погрузочно-разгрузочных работ.',
     hours: 24
   }
@@ -191,8 +133,20 @@ const programsOffline = [
 
 
 const programsOnline = [
-  { code: '-', title: 'Общие вопросы охраны труда и функционирование системы управления охраной труда.', hours: 24 }
+  { code: '04-15/1ОТ', title: 'Общие вопросы охраны труда и функционирование системы управления охраной труда.', hours: 24 },
+  { code: '04-17/1ОТ', title: 'Программа профессиональной переподготовки "Специалист по охране труда"', hours: 256 }
 ]
+
+const selectProgrammList = ref(programsOffline)
+
+const changeProgrammList = (item) => {
+  if(item.value === 'online'){
+    selectProgrammList.value = programsOnline
+  } else {
+    selectProgrammList.value = programsOffline
+  }
+
+}
 
 const selectedTab = ref('all')
 function handleTabChange(value: string) {

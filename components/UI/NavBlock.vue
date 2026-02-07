@@ -1,18 +1,5 @@
 <template>
   <div class="site-navigation">
-    <div v-if="tabs && tabs.length" class="tabs-container">
-      <button
-        v-for="(tab, idx) in tabs"
-        :key="idx"
-        type="button"
-        class="tab-button"
-        :class="{ 'tab-active': tab.value === currentTab }"
-        @click="setTab(tab.value)"
-      >
-        {{ tab.text }}
-      </button>
-    </div>
-
     <div class="nav-grid">
       <NuxtLink
         v-for="(item, index) in navItems"
