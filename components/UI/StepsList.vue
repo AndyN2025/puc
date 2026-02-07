@@ -19,21 +19,43 @@
       <a class="step-description" v-if="index === 1" href="#">{{ step.description }}</a>
       <p class="step-description" v-if="index !== 1">{{ step.description }}</p>
 
+      <div class="step-description__post post" v-if="step.img" >
+        <div class="post-top">
+          <img :src="step.img" alt="Почта России"/>
+          <div class="post__description">
+            <h5 class="post__description-title">Почта России</h5>
+            <div class="post__description-item">
+              <span class="post__description-item__title">Стоимость: </span>
+              <span class="post__description-item__desc">Бесплатно</span>
+            </div>
+
+            <div class="post__description-item">
+              <span class="post__description-item__title">Срок: </span>
+              <span class="post__description-item__desc">От 3-х дней</span>
+            </div>
+          </div>
+        </div>
+        <div class="post-bottom">
+          Заказное письмо с уведомлением. Трек-номер для отслеживания письма отправляется на электронную почту.
+        </div>
+      </div>     
+
       <!-- Кнопка (только для первого элемента) -->
-      <button
+      <!-- <button
         v-if="step.buttonText"
         type="button"
         class="step-button"
         @click="handleButtonClick(step)"
       >
         {{ step.buttonText }}
-      </button>
+      </button> -->
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { computed } from 'vue'
+import logoPostRF from '@/assets/img/common/logo_postrf.png'
 
 const props = defineProps<{
   file?: string 
@@ -79,13 +101,11 @@ const defaultSteps = [
   {
     number: 2,
     title: 'Мы заключаем с Вами договор',
-    description: 'Текст договора',
-    link: '#'
   },
   {
     number: 3,
     title: 'Оплата',
-    description: 'Оплата удобным вам способом по реквизитам Учебного центра. Начало обучения доступно сразу после оплаты'
+    description: 'Начало обучения доступно сразу после оплаты'
   },
   {
     number: 4,
@@ -99,8 +119,9 @@ const defaultSteps = [
   },
   {
     number: 6,
-    title: 'Отправка документов удобным способом',
-    description: 'Получение документов с доставкой по РФ от 3-х дней'
+    title: 'Отправка документов',
+    description: '',
+    img: logoPostRF
   }
 ]
 
@@ -182,6 +203,23 @@ const defaultSteps = [
       line-height: 1.5;
       margin: 0 0 16px 0;
       font-family: 'IBM', sans-serif;
+    }
+  }
+}
+
+.post{
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  &-top{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+
+    img{
+      height: 60px;
+      margin-top: 10px;
     }
   }
 }

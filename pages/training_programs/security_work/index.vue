@@ -14,7 +14,7 @@
       :items="selectProgrammList" 
       @tab-change="changeProgrammList"/>
       
-    <DotTitle text="Программы" />
+    <!-- <DotTitle text="Программы" />
     
     
 
@@ -36,11 +36,11 @@
         diplomaText="Диплом о профессиональной переподготовке установленного образца с занесением в ФИС ФРДО — документ, признаваемый на всей территории РФ. АНО ДПО «Приокский учебный центр» имеет действующую лицензию № Л035-01224-40/00374085 (выдана 07.12.2015) и внесён в реестр аккредитованных организаций по охране труда (№4256 от 29.01.2016). Все программы соответствуют требованиям Постановления Правительства РФ №2334 от 16.12.2021 и федеральным стандартам, что гарантирует юридическую легитимность диплома для трудоустройства, аттестации и повышения квалификации."
         pdfTitle="Положение об оказании платных образовательных услуг"
         :diplomaImage="udostoverEx"
-      />
+      /> -->
 
-    <DotTitle text="начать обучение" />
-    <TitleCommon text="Как мы работаем"/>
-    <StepsList />
+    <DotTitle text="начать обучение" v-if="stepOnline"/>
+    <TitleCommon text="Как мы работаем" v-if="stepOnline"/>
+    <StepsList v-if="stepOnline"/>
   </div>
 </template>
 
@@ -138,12 +138,15 @@ const programsOnline = [
 ]
 
 const selectProgrammList = ref(programsOffline)
+const stepOnline = ref(false)
 
 const changeProgrammList = (item) => {
   if(item.value === 'online'){
     selectProgrammList.value = programsOnline
+    stepOnline.value = true
   } else {
     selectProgrammList.value = programsOffline
+    stepOnline.value = false
   }
 
 }
