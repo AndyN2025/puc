@@ -303,9 +303,6 @@ watch(showModal, (isOpen) => {
       grid-template-columns: 1fr; // На всю ширину - одна колонка
     }
 
-    &.users {
-      // Уже использует стандартную сетку 1:2
-    }
   }
 
   &__title {

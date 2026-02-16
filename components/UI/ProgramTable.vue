@@ -50,9 +50,10 @@
           class="table-row"
           >
           <NuxtLink
+            v-if="link && item?.code && typeof item.code === 'string' && item.code.trim() !== '' && item.code !== '-'"
             :to="`/${link}/${item.code}`"
             class="table-row__link"
-            > 
+          >
             <div class="row-cell">{{ item.textCode }}</div>
             <div class="row-cell">{{ item.title }}</div>
             <div class="row-cell">{{ item.hours }} ч.</div>
@@ -126,6 +127,7 @@ function setTab(value, index) {
 const isBlocksMode = computed(() => {
   return Array.isArray(props.items) && props.items.length > 0 && Array.isArray(props.items[0])
 })
+
 </script>
 
 <style scoped lang="scss">
