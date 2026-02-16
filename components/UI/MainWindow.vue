@@ -12,7 +12,7 @@
 </template>
 
 <script setup lang="ts">
-import mainPic from '@/assets/img/MainIMG.png'
+import mainPic from '@/assets/img/MainIMG.webp'
 
 </script>
 
