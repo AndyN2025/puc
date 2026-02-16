@@ -16,7 +16,13 @@ export default defineNuxtConfig({
 
   // 🔑 Ключевые настройки для GitHub Pages
   nitro: {
-    preset: 'static' // ← генерирует .output/public
+    preset: 'static',           // уже есть — хорошо
+
+    prerender: {
+      crawlLinks: true,         // включить краулер (обычно по умолчанию true)
+      failOnError: false,       // ← НЕ ломать всю сборку из-за одной битой страницы
+      // ignore: ['/training_programs/security_work/utils/**'], // ← опционально, если хочешь временно пропустить проблемный маршрут
+    }
   },
   app: {
     baseURL: '/puc/' // ← замените "puc" на имя вашего репозитория!
