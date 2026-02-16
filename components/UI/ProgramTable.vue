@@ -34,7 +34,7 @@
             v-for="(item, itemIndex) in block"
             :key="itemIndex"
             class="table-row"
-          >
+            >
             <div class="row-cell">{{ item.code }}</div>
             <div class="row-cell">{{ item.title }}</div>
             <div class="row-cell">{{ item.hours }} ч.</div>
@@ -48,10 +48,15 @@
           v-for="(item, index) in items"
           :key="index"
           class="table-row"
-        >
-          <div class="row-cell">{{ item.code }}</div>
-          <div class="row-cell">{{ item.title }}</div>
-          <div class="row-cell">{{ item.hours }} ч.</div>
+          >
+          <NuxtLink
+            :to="`/${link}/${item.code}`"
+            class="table-row__link"
+            > 
+            <div class="row-cell">{{ item.textCode }}</div>
+            <div class="row-cell">{{ item.title }}</div>
+            <div class="row-cell">{{ item.hours }} ч.</div>
+          </NuxtLink>
         </div>
       </template>
     </div>
@@ -67,8 +72,9 @@ const props = defineProps({
     type: Array,
     default: () => null
   },
-  centralTitle:{
+  link:{
     type: String,
+    default: () => null
   },
   // Данные для таблицы — может быть массивом объектов ИЛИ массивом массивов
   items: {
@@ -142,7 +148,7 @@ const isBlocksMode = computed(() => {
     max-width: 360px;
     width: 100%;
     background: #E9F4FF;
-    border-radius: 16px 16px 0 0;
+    border-radius: 8px 8px 0 0;
     cursor: pointer;
     font-size: 16px;
     color: #333;
@@ -170,10 +176,12 @@ const isBlocksMode = computed(() => {
 
 .table-wrapper {
   background-color: #eaf6ff;
+  border-radius: 0 8px 8px 8px;
   
   .table-header {
     display: grid;
     grid-template-columns: 1fr 10fr 1fr;
+    border-radius: 0 8px 0 0;
     background: #e0e0e0;
     padding: 24px 32px;
     font-weight: 500;
@@ -188,11 +196,20 @@ const isBlocksMode = computed(() => {
   }
 
   .table-row {
-    display: grid;
-    grid-template-columns: 1fr 10fr 1fr;
-    background: #eaf6ff;
-    padding: 24px 32px;
-    font-size: 0.875rem;
+    &__link{
+      display: grid;
+      grid-template-columns: 1fr 10fr 1fr;
+      background: #eaf6ff;
+      padding: 24px 32px;
+      font-size: 0.875rem;
+      cursor: pointer;
+      color: black;
+
+        &:hover{
+          background-color: #123970;
+          color: white;
+        }
+    }
 
     .row-cell {
       padding: 0 4px;
