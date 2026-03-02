@@ -3,19 +3,19 @@
     <section class="section-item">
       <MainWindow/>
     </section>
-    <section class="section-item">
+    <section class="section-item container">
       <DotTitle text="Виды обучения"/>
       <ListCourses />
     </section>
-    <section class="section-item">
+    <section class="section-item container">
       <DotTitle text="Коротко о центре" />
       <NewsSection />
     </section>
-    <section class="section-item">
+    <section class="section-item container">
       <DotTitle text="Партнеры" />
       <PartnerSlider />
     </section>
-    <section class="section-item">
+    <section class="section-item container">
       <DotTitle text="Как нас найти" />
       <MapSection />
     </section>

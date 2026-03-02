@@ -1,5 +1,6 @@
 <template>
-  <div class="p">
+  <div class="prehead"></div>
+  <div class="container">
     <Breadcrumbs :items="breadCrumbs"/> 
     <NavBlock 
       :navItems="navCourseItems" 

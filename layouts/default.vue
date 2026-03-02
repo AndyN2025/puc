@@ -15,8 +15,6 @@ import Footer from "@/components/Footer/Footer.vue"
 
 <style lang="scss" scoped>
 .wrapper{
-  max-width: 1480px;
-  padding: 0 20px;
   width: 100%;
   margin: 0 auto;
   display: flex;
@@ -25,7 +23,6 @@ import Footer from "@/components/Footer/Footer.vue"
 }
 
 .main{
-  padding-top: 10px;
   flex: 1;
 }
 </style>

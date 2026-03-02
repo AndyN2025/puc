@@ -1,15 +1,13 @@
 <template>
-  <header class="header">
-    <div class="header__container">
+  <header class="header" :class="{ 'header--scrolled': isScrolled }">
+    <div class="header__container container">
       <HeaderBrand />
       <HeaderNav :items="navItems" />
       <HeaderMail
-        :icon="mailIcon"
         text="EKC_06@MAIL.RU"
         link="mailto:ekc_06@mail.ru"
       />
       <HeaderPhone
-        :icon="phoneIcon"
         textFirst="8 (910) 520-15-64, "
         textSecond="8 (4842) 56-21-83"
       />
@@ -22,9 +20,6 @@ import HeaderBrand from './HeaderBrand.vue'
 import HeaderNav from './HeaderNav.vue'
 import HeaderMail from './HeaderMail.vue'
 
-import phoneIcon from '@/assets/img/phoneIcon.svg'
-import mailIcon from '@/assets/img/mailIcon.svg'
-
 /** Навигация — источник данных (DRY) */
 const navItems = [
   { label: 'Главная', to: '/' },
@@ -32,6 +27,21 @@ const navItems = [
   { label: 'Обучение', to: '/training_programs/' },
   { label: 'Бланки документов', to: '/docs/' }
 ]
+
+const isScrolled = ref(false)
+
+const handleScroll = () => {
+  isScrolled.value = window.scrollY > 10
+}
+
+onMounted(() => {
+  window.addEventListener('scroll', handleScroll, { passive: true })
+  handleScroll() // проверить начальное положение
+})
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', handleScroll)
+})
 </script>
 
 <style lang="scss" scoped>

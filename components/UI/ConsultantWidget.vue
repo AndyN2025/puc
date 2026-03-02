@@ -25,7 +25,7 @@
             @click="toggleForm"
             aria-label="Закрыть"
           >
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white">
               <line x1="18" y1="6" x2="6" y2="18" />
               <line x1="6" y1="6" x2="18" y2="18" />
             </svg>
@@ -308,6 +308,7 @@ defineExpose({
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   z-index: 100;
+  color: white;
 
   &:hover {
     transform: scale(1.1);
@@ -319,7 +320,7 @@ defineExpose({
   }
 
   svg {
-    color: white;
+    color: currentColor;
     stroke-width: 1.5;
     width: 28px;
     height: 28px;
@@ -379,6 +380,9 @@ defineExpose({
       width: 20px;
       height: 20px;
       stroke-width: 2.5;
+      
+      stroke: var(--close-icon-stroke, white);
+      display: block;
     }
   }
 

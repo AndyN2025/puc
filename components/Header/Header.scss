@@ -1,13 +1,36 @@
 @use "@/assets/styles/vars" as *;
 
 .header {
+  position: fixed;
+  z-index: 15;
+  left: 0;
+  top: 0;
   width: 100%;
+  color: white; 
+  transition: color 0.3s ease;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: white;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  &--scrolled {
+    color: $color-darkBlue;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.178);
+
+    &::before {
+      opacity: 1;
+    }
+  }
 
   &__container {
-    max-width: 1440px;
-    margin: 0 auto;
     padding: 16px 0;
-
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -16,7 +39,7 @@
   &__title {
     font-size: 20px;
     font-weight: 600;
-    color: $color-primary;
+    color: inherit;
   }
 
   &__nav {
@@ -25,12 +48,12 @@
   }
 
   &__link {
-    color: $color-black;
+    color: inherit;
     text-decoration: none;
     font-weight: 500;
 
     &:hover {
-      color: $color-primary;
+      opacity: 0.8;
     }
   }
 
@@ -43,6 +66,7 @@
     display: flex;
     align-items: center;
     gap: 4px;
+    color: inherit;
   }
 
   &__icon {

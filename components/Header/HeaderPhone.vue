@@ -1,7 +1,7 @@
 <template>
   <div class="header__phone">
     <div class="header__phone-contact">
-      <img :src="icon" alt="Номер телефона" />
+      <span class="header__phone-logo" v-html="logoRaw" />
       <span class="header__phone-text"><a :href="'tel:' + textFirst">{{ textFirst }}</a></span>
       <span class="header__phone-text"><a :href="'tel:' + textSecond">{{ textSecond }}</a></span>
     </div>
@@ -9,8 +9,9 @@
 </template>
 
 <script setup lang="ts">
-defineProps<{
-  icon: string;
+import logoRaw from '@/assets/img/phoneIcon.svg?raw'
+
+const props = defineProps<{
   textFirst: string;
   textSecond: string;
 }>()
@@ -24,11 +25,23 @@ defineProps<{
     gap: 5px;
     font-size: 16px;
     line-height: 18px;
+    color: inherit; 
 }
 
-.header__phone-text{
-  a{
-    color: black;
-  }
+.header__phone-text a {
+  color: inherit; 
+  text-decoration: none;
+}
+
+.header__phone-logo :deep(svg) {
+  width: 18px;
+  height: auto;
+  display: block;
+  fill: currentColor;
+}
+
+.header__phone-logo :deep(path) {
+  fill: currentColor;
+  transition: fill 0.3s ease;
 }
 </style>

@@ -30,6 +30,7 @@ defineProps<{ items: { label: string; to: string }[] }>()
 }
 
 .header__link{
-  color: $color-black;
+  //color: $color-black;
+  color: inherit;
 }
 </style>

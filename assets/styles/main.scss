@@ -75,3 +75,17 @@
 body{
     font-family: 'IBM', sans-serif;
 }
+
+html:not(.bvi-panel) *, html:not(.bvi-panel) ::after, html:not(.bvi-panel) ::before {
+  box-sizing: border-box;
+}
+
+.container{
+  margin: 0 30px;
+}
+
+.prehead{
+  background-color: #123970;
+  height: 90px;
+  margin-bottom: 10px;
+}

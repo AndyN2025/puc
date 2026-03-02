@@ -1,14 +1,14 @@
 <template>
   <div class="header__brand">
-    <img :src="logo" alt="Приокский учебный центр"/>
+     <!--<img :src="logoWhite" alt="Приокский учебный центр"/>-->
+    <span class="header__logo" v-html="logoRaw" />
     <span class="header__title">АНО ДПО<br/> "Приокский учебный центр"</span>
   </div>
 </template>
 
 <script setup lang="ts">
-// import logo from '@/assets/img/logo.svg'
-// import logo from '@/assets/img/logo-text.png'
-import logo from '@/assets/img/logo-color.svg'
+import logoWhite from '@/assets/img/logo-current.svg'
+import logoRaw from '@/assets/img/logo-current.svg?raw'
 </script>
 
 <style lang="scss" scoped>
@@ -20,13 +20,25 @@ import logo from '@/assets/img/logo-color.svg'
   align-items: center;
   gap: 2px;
 
-  img{
-     width: 40px;
-    //width: 70px;
-  }
+  // img{
+  //    width: 40px;
+  // }
 }
+
+.header__logo :deep(svg) {
+  width: 40px;
+  height: auto;
+  display: block;
+  fill: currentColor; /* <-- Магия работает здесь */
+}
+
+.header__logo :deep(path) {
+  fill: currentColor;
+  transition: fill 0.3s ease;
+}
+
 .header__title{
-  color: $color-darkBlue;
+  color: inherit;
   font-size: 18px;
   line-height: 24px;
   font-family: 'Inter SB', sans-serif;

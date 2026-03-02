@@ -6,20 +6,23 @@
             <div class="main__buttons">
                 <button class="main__buttons-item dark">Заказать звонок</button>
                 <NuxtLink to="/training_programs" class="main__buttons-item light">Наши курсы</NuxtLink>
+                <a :href="'tel:' + telNumber" class="main__buttons-item number" >+7 (4842) 56-21-83</a>
             </div>
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
-import mainPic from '@/assets/img/MainIMG.webp'
+//import mainPic from '@/assets/img/MainIMG.webp'
+import mainPic from '@/assets/img/mainTest1.png'
+const telNumber = ref('84842562183')
 
 </script>
 
 <style lang="scss" scoped>
 .main{
     position: relative;
-    max-height: 700px;
+    height: 90vh;
     min-height: 600px;
     background-size: cover;
     background-position: center;
@@ -28,27 +31,28 @@ import mainPic from '@/assets/img/MainIMG.webp'
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    padding: 0 80px;
-    border-radius: 8px;
+    padding: 0 20px;
+    border-radius: 0 0 8px 8px;
 
     &__content{
-        max-width: 720px;
+        max-width: 780px;
         color: white;
     }
 
     &__title{
-        font-size: 42px;
-        line-height: 42px;
+        font-size: 68px;
+        line-height: 78px;
         text-transform: uppercase;
-        margin-bottom: 16px;
+        margin-top: 80px;
+        margin-bottom: 28px;
         font-family: 'Beb-B';
     }
 
     &__text{
-        font-size: 16px;
-        line-height: 1.3;
+        font-size: 18px;
+        line-height: 1.7;
         font-family: 'IBM';
-        margin-bottom: 54px;
+        margin-bottom: 60px;
     }
 
     &__buttons{
@@ -57,14 +61,14 @@ import mainPic from '@/assets/img/MainIMG.webp'
         gap: 16px;
 
         &-item{
-            width: 216px;
+            width: 256px;
             height: 56px;
             border-radius: 8px;
             border: none;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 16px;
+            font-size: 18px;
             font-family: 'IBM M';
 
 
@@ -75,6 +79,11 @@ import mainPic from '@/assets/img/MainIMG.webp'
             &.light{
                 background-color: white;
                 color: black;
+            }
+
+            &.number{
+                color: white;
+                font-size: 24px;
             }
         }
     }
