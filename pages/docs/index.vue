@@ -1,5 +1,5 @@
 <template>
-  <div class="p-4">
+  <div class="p">
     <Breadcrumbs :items="breadCrumbs"/> 
     <DotTitle :text="titleCommon" />
     <TitleCommon :text="titleCommon"/>

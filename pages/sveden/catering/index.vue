@@ -1,11 +1,11 @@
 <template>
-  <div class="inter">
-    <Breadcrumbs :items="breadCrumbs"/> 
-    <NavBlock :navItems="navSvedenItems" :activeIndex="12"/>
+  <div class="p">
+    <Breadcrumbs :items="breadCrumbs" />
+    <NavBlock :navItems="navSvedenItems" :activeIndex="12" />
     <DotTitle text="Сведения об образовательной организации" />
-    <TitleCommon :text="titleCommon"/>
+    <TitleCommon :text="titleCommon" />
 
-    <RepairBlock style="margin-bottom: 60px;"/>
+    <RepairBlock style="margin-bottom: 60px" />
   </div>
 </template>
 
@@ -22,19 +22,7 @@ const titleCommon = ref('Организация питания в образов
 const breadCrumbs = [
   { text: 'Главная', link: '/' },
   { text: 'Сведения об организации', link: '/sveden/common/' },
-  { text: titleCommon.value, link: '/sveden/inter/' }
-] 
+  { text: titleCommon.value, link: '/sveden/catering/' }
+]
 
 </script>
-
-<style scoped lang="scss">
-.inter{
-  margin-bottom: 60px;
-
-  &__text{
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-}
-</style>

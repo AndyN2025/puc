@@ -1,6 +1,6 @@
 <template>
   <div class="header__brand">
-     <!--<img :src="logoWhite" alt="Приокский учебный центр"/>-->
+     
     <span class="header__logo" v-html="logoRaw" />
     <span class="header__title">АНО ДПО<br/> "Приокский учебный центр"</span>
   </div>
@@ -14,22 +14,20 @@ import logoRaw from '@/assets/img/logo-current.svg?raw'
 <style lang="scss" scoped>
 @use "@/assets/styles/vars" as *;
 
-.header__brand{
+.header__brand {
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 2px;
-
-  // img{
-  //    width: 40px;
-  // }
+  min-width: 0;
+  flex: 0 1 auto;
 }
 
 .header__logo :deep(svg) {
   width: 40px;
   height: auto;
   display: block;
-  fill: currentColor; /* <-- Магия работает здесь */
+  fill: currentColor; 
 }
 
 .header__logo :deep(path) {
@@ -37,10 +35,18 @@ import logoRaw from '@/assets/img/logo-current.svg?raw'
   transition: fill 0.3s ease;
 }
 
-.header__title{
+.header__title {
   color: inherit;
-  font-size: 18px;
-  line-height: 24px;
+  font-size: clamp(0.8125rem, 2vw, 1.125rem);
+  line-height: 1.35;
   font-family: 'Inter SB', sans-serif;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  max-width: 12rem;
+
+  @media (min-width: 30rem) {
+    max-width: min(100%, 22rem);
+  }
 }
 </style>

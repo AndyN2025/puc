@@ -1,6 +1,6 @@
 <template>
   <div class="accordion-item" :class="{ 'accordion-item--open': isOpen }">
-    <!-- Заголовок + теги + кнопка -->
+    
     <div class="accordion-item__header" @click="toggle">
       <div class="accordion-item__title">{{ title }}</div>
       <div class="accordion-item__text">
@@ -20,7 +20,7 @@
       </div>
     </div>
 
-    <!-- Контент (слот) -->
+    
     <div class="accordion-item__content" ref="contentRef">
       <slot v-if="isOpen"></slot>
     </div>
@@ -49,12 +49,10 @@ const toggle = async () => {
   isOpen.value = !isOpen.value
 
   if (isOpen.value) {
-    // Открываем — даем время рендеру, чтобы получить высоту
     await nextTick()
     const height = contentRef.value?.scrollHeight || 0
     contentRef.value!.style.height = `${height}px`
   } else {
-    // Закрываем — сначала устанавливаем текущую высоту, потом анимируем до 0
     const height = contentRef.value?.scrollHeight || 0
     contentRef.value!.style.height = `${height}px`
     await nextTick()
@@ -62,14 +60,12 @@ const toggle = async () => {
   }
 }
 
-// Обработчик окончания анимации — чтобы после закрытия скрыть контент
 const onTransitionEnd = (e: TransitionEvent) => {
   if (e.propertyName === 'height' && !isOpen.value) {
     contentRef.value!.style.height = ''
   }
 }
 
-// Добавляем обработчик события transitionend
 if (contentRef.value) {
   contentRef.value.addEventListener('transitionend', onTransitionEnd)
 }

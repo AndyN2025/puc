@@ -1,142 +1,164 @@
-@use "@/assets/styles/vars" as *;
+@use '@/assets/styles/vars' as *;
+@use '@/assets/styles/mixins' as m;
 
 .footer {
-  background: #fff;
-  border-top: 1px solid #b7d4f6;
-  padding: 40px 0;
-  margin-top: 30px;
+  background: $color-white;
+  border-top: 1px solid $color-footer-border;
+  padding-block: clamp(1.75rem, 4vw, 2.5rem);
+  margin-top: $spacing-xl;
 
   &__container {
     width: 100%;
     margin: 0 auto;
     display: grid;
     grid-template-columns: 1fr;
-    gap: 16px;
+    gap: $spacing-xl;
 
-    @media (min-width: 768px) {
-        grid-template-columns: 7fr 6fr 8fr;
+    @include m.from($bp-md) {
+      gap: $spacing-lg;
+    }
+
+    @include m.from($bp-lg) {
+      grid-template-columns: 7fr 6fr 8fr;
+      gap: $spacing-md;
     }
   }
 
-  /* BRAND */
-  &__brand{
+  &__brand {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-  }
-  &__copyright {
-    font-size: 16px;
-    color: $color-text-muted;
-    line-height: 1.5;
-    max-width: 364px;
+    gap: $spacing-md;
   }
 
-  /* NAV */
-  &__nav-title {
-    font-size: 24px;
-    font-family: 'IBM M', sans-serif;
-    line-height: 36px;
-    margin-bottom: 36px;
+  &__copyright {
+    font-size: $font-size-base;
+    color: $color-text-muted;
+    line-height: $line-height-body;
+    max-width: 22.75rem;
   }
+
+  &__nav-title {
+    font-size: clamp(1.125rem, 2vw, 1.5rem);
+    font-family: $font-ibm-m;
+    line-height: 1.5;
+    margin-bottom: $spacing-lg;
+    color: $color-darkBlue;
+  }
+
   &__nav-list {
     list-style: none;
     padding: 0;
-    margin: 0;
-    font-family: 'IBM', sans-serif;
-    font-size: 18px;
-    line-height: 24px;
-    margin-bottom: 36px;
+    margin: 0 0 $spacing-lg;
+    font-family: $font-ibm;
+    font-size: $font-size-lg;
+    line-height: $spacing-lg;
 
     li {
-      margin-bottom: 8px;
+      margin-bottom: $spacing-sm;
+
       a {
         text-decoration: none;
-        color: #181818;
+        color: $color-black;
+        transition: color $transition-fast;
+
+        &:hover {
+          color: $color-darkBlue;
+        }
       }
     }
   }
 
-  &__licenses-list{
+  &__licenses-list {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: $spacing-md;
   }
 
-  &__licenses-item{
-    font-size: 16px;
-    line-height: 24px;
+  &__licenses-item {
+    font-size: $font-size-base;
+    line-height: $spacing-lg;
     color: $color-text-muted;
     text-decoration: underline;
     cursor: pointer;
   }
 
-  /* CONTACTS */
-  &__contacts{
+  &__contacts {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: $spacing-md;
+  }
 
-    &-block{
-        background-color: $color-lightBlue;
-        border-radius: 0.75rem;
-        padding: 1.5rem;
-        display: flex;
-        flex-direction: column;
-        gap: 2rem;
+  &__contacts-block {
+    background-color: $color-lightBlue;
+    border-radius: $radius-lg;
+    padding: $spacing-lg;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xl;
+  }
+
+  &__contacts-item a {
+    color: $black;
+  }
+
+  &__contacts-content {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-lg;
+    font-family: $font-ibm;
+
+    @include m.from($bp-sm) {
+      flex-direction: row;
+      justify-content: space-between;
     }
 
-    &-item{
-      a{
-        color: black;
+    &__item {
+      display: flex;
+      flex-direction: column;
+      gap: $spacing-lg;
+      width: 100%;
+
+      @include m.from($bp-sm) {
+        width: 50%;
       }
-    }
-
-    &-content{
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        font-family: 'IBM', sans-serif;
-
-        &-item{
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-
-        &__item{
-            display: flex;
-            flex-direction: column;
-            gap: 28px;
-            width: 50%;
-        }
-    }
-
-    &-text{
-        display: flex;
-        flex-direction: column;
-        gap: 16px;
-    }
-
-    &-title{
-        font-size: 24px;
-        line-height: 36px;
-        font-family: 'Inter M', sans-serif;
-        color: #123970;
-    }
-
-    &-oferta{
-        color: $color-text-muted;
-        font-size: 16px;
-        line-height: 24px;
     }
   }
 
-  &__license-link{
+  &__contacts-text {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-md;
+  }
+
+  &__contacts-title {
+    font-size: clamp(1.125rem, 2vw, 1.5rem);
+    line-height: 1.5;
+    font-family: $font-inter-m;
+    color: $color-darkBlue;
+  }
+
+  &__contacts-oferta {
+    color: $color-text-muted;
+    font-size: $font-size-base;
+    line-height: $spacing-lg;
+  }
+
+  &__license-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
     background-color: $color-darkBlue;
-    padding: 26px 35px;
-    border-radius: 12px;
+    padding: clamp(1rem, 3vw, 1.625rem) clamp(1.25rem, 4vw, 2.25rem);
+    border-radius: $radius-lg;
     color: $color-white;
-    font-size: 22px;
-    line-height: 32px;
+    font-size: clamp(1rem, 2.5vw, 1.375rem);
+    line-height: 1.4;
+    transition: filter $transition-base;
+
+    &:hover {
+      filter: brightness(1.08);
+    }
   }
 }

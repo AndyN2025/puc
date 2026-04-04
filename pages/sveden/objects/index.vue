@@ -54,19 +54,7 @@
       </div>
     </div>
 
-    <!-- <ul class="material">
-      <li class="material__item" v-for="item in materialList" :key="item.id">
-        <div class="material__txt">
-          <p class="material__item-title">{{ item.title }}</p>
-          <-- <p class="material__item-text">{{ item.text }}</p> --
-        </div>
-        
-        <div class="material__item-img">
-          <p class="material__item-text">{{ item.text }}</p> 
-          <img :src="item.img" :alt="item.title"/>
-        </div>
-      </li>
-    </ul> -->
+    
 
     <TitleCommon text="Доступная среда" />
 

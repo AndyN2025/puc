@@ -28,5 +28,5 @@ const breadCrumbs = [
 </script>
 
 <style scoped>
-/* Можно писать CSS, если нужно */
+
 </style>

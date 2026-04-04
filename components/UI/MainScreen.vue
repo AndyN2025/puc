@@ -1,6 +1,6 @@
 <template>
   <div class="hero-slider">
-    <!-- Слайды -->
+    
     <div class="slides-container" ref="slidesContainer">
       <div
         v-for="(slide, index) in slides"
@@ -19,7 +19,7 @@
       </div>
     </div>
 
-    <!-- Стрелки навигации -->
+    
     <button class="nav-arrow left" @click="prevSlide">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <path d="M15 18l-6-6 6-6" />
@@ -40,7 +40,6 @@ import slideMore from '@/assets/img/mainSlider/slide-more.webp'
 import slideProf from '@/assets/img/mainSlider/slide-prof.webp'
 import slideFire from '@/assets/img/mainSlider/slide-fire.webp'
 
-// Данные слайдов (можно вынести в отдельный файл или API)
 const slides = ref([
   {
     image: slideProm,
@@ -79,7 +78,6 @@ const slides = ref([
 const currentIndex = ref(0)
 let intervalId = null
 
-// Функции управления слайдером
 const nextSlide = () => {
   currentIndex.value = (currentIndex.value + 1) % slides.value.length
 }
@@ -88,9 +86,8 @@ const prevSlide = () => {
   currentIndex.value = (currentIndex.value - 1 + slides.value.length) % slides.value.length
 }
 
-// Автоматическая смена слайдов
 onMounted(() => {
-  intervalId = setInterval(nextSlide, 4500) // каждые 6.5 секунд
+  intervalId = setInterval(nextSlide, 4500)
 })
 
 onBeforeUnmount(() => {
@@ -100,15 +97,17 @@ onBeforeUnmount(() => {
 
 <style lang="scss" scoped>
 @use "@/assets/styles/vars" as *;
+@use "@/assets/styles/mixins" as m;
 
 .hero-slider {
   position: relative;
   width: 100%;
   max-width: 100%;
-  height: 620px;
+  height: clamp(22rem, 65vw, 38.75rem);
+  min-height: 20rem;
   background-color: $color-border;
   overflow: hidden;
-  border-radius: 10px;
+  border-radius: $radius-lg;
 
   .slides-container {
     width: 100%;
@@ -138,49 +137,54 @@ onBeforeUnmount(() => {
       }
 
       .slide-content {
-            max-width: 1360px;
+            max-width: 85rem;
             width: 100%;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding-top: 0;
+            padding-bottom: 0;
+            @include m.container-padding;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
             height: 100%;
 
         .subtitle {
-          font-size: 2.2rem;
-          font-weight: 400;
-          line-height: 1.2;
-          letter-spacing: 1px;
-          color: white;
-          margin-bottom: 0.5rem;
+          font-size: clamp(0.95rem, 2.5vw, 1.375rem);
+          font-weight: $font-weight-regular;
+          line-height: $line-height-tight;
+          letter-spacing: 0.06em;
+          color: $color-white;
+          margin-bottom: $spacing-sm;
           text-transform: uppercase;
         }
 
         .title {
-          font-size: 3.5rem;
-          font-weight: 600;
-          margin-bottom: 1.5rem;
+          font-size: clamp(1.35rem, 4vw, 3.5rem);
+          font-weight: $font-weight-semibold;
+          margin-bottom: $spacing-lg;
           text-transform: uppercase;
-          color: white;
+          color: $color-white;
+          line-height: $line-height-tight;
+          padding: 0 $spacing-sm;
         }
 
         .cta-button {
-          background-color: white;
+          background-color: $color-white;
           color: $color-darkBlue;
           border: none;
-          padding: 1rem 1.75rem;
-          font-size: 1rem;
-          line-height: 1.5;
-          border-radius: 12px;
+          padding: $spacing-md 1.75rem;
+          font-size: $font-size-base;
+          line-height: $line-height-body;
+          border-radius: $radius-xl;
           cursor: pointer;
-          transition: background-color 0.3s ease;
-          margin: 0 auto 36px;
-          max-width: 216px;
+          transition: background-color $transition-slow;
+          margin: 0 auto clamp(1.25rem, 4vw, 2.25rem);
+          max-width: 13.5rem;
           width: 100%;
 
           &:hover {
-            background-color: #004494;
-            color: white;
+            background-color: $color-cta-hover;
+            color: $color-white;
           }
         }
       }
@@ -193,32 +197,43 @@ onBeforeUnmount(() => {
     transform: translateY(-50%);
     background: rgba(255, 255, 255, 0.2);
     border: 2px dashed rgba(255, 255, 255, 0.5);
-    border-radius: 8px;
-    width: 40px;
-    height: 40px;
+    border-radius: $radius-md;
+    width: 2.5rem;
+    height: 2.5rem;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     z-index: 10;
-    transition: background 0.3s ease;
+    transition: background $transition-slow;
 
     &:hover {
       background: rgba(255, 255, 255, 0.4);
     }
 
     svg {
-      width: 20px;
-      height: 20px;
-      stroke: white;
+      width: 1.25rem;
+      height: 1.25rem;
+      stroke: $color-white;
     }
 
     &.left {
-      left: 20px;
+      left: clamp(0.5rem, 2vw, 1.25rem);
     }
 
     &.right {
-      right: 20px;
+      right: clamp(0.5rem, 2vw, 1.25rem);
+    }
+
+    @include m.until($bp-sm) {
+      width: 2rem;
+      height: 2rem;
+      padding: 0;
+
+      svg {
+        width: 1rem;
+        height: 1rem;
+      }
     }
   }
 }

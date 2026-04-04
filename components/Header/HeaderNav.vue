@@ -17,20 +17,36 @@ defineProps<{ items: { label: string; to: string }[] }>()
 
 <style lang="scss" scoped>
 @use "@/assets/styles/vars" as *;
+@use "@/assets/styles/mixins" as m;
 
-.header__nav{
+.header__nav {
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 16px;
+  flex-wrap: wrap;
+  gap: $spacing-md;
   text-transform: uppercase;
+  font-size: $font-size-base;
+  line-height: $spacing-lg;
 
-  font-size: 16px;
-  line-height: 24px;
+  @include m.until($bp-lg) {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    text-transform: none;
+    font-size: $font-size-lg;
+    gap: $spacing-sm;
+    padding-bottom: $spacing-md;
+    border-bottom: 1px solid $color-border;
+  }
 }
 
-.header__link{
-  //color: $color-black;
+.header__link {
   color: inherit;
+  padding: $spacing-xs 0;
+
+  @include m.from($bp-lg) {
+    padding: 0;
+  }
 }
 </style>

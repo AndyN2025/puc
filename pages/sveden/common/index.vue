@@ -3,62 +3,7 @@
     <Breadcrumbs :items="breadCrumbs"/> 
     <NavBlock :navItems="navSvedenItems" :activeIndex="0"/>
     <DotTitle text="Сведения об образовательной организации"/>
-    <!-- <div class="common">
-      <div class="common__item">
-        <div class="common__item-img child">
-          <img :src="buildImg" alt="Здание"/>
-        </div>
-        <div class="common__item-content child">
-          <TitleCommon :text="titleCommon"/>
-          <div class="common__item-text">
-            <p>В 1998 году во исполнение Федерального закона № 116 от 21 июля 1997 года было создано 
-                Некоммерческое партнёрство «Приокский экспертно-консультационный центр». Организация 
-                была основана для обеспечения квалифицированной экспертной и консультационной поддержки 
-                в профильных областях.</p>
-            <p>В 2014 году, в связи с расширением направления деятельности и введением новых видов 
-                профессионального обучения, была открыта Автономная некоммерческая организация дополнительного 
-                профессионального образования «Приокский учебный центр». Создание АНО ДПО позволило значительно 
-                расширить спектр образовательных услуг.</p>
-            <p>Сегодня АНО ДПО «Приокский учебный центр» предоставляет обучение по дополнительным профессиональным 
-              программам повышения квалификации и профессиональной переподготовки, а также проводит предаттестационную 
-              подготовку в сфере экологической и пожарной безопасности, а также в области оборота наркотических 
-              средств, психотропных веществ и их прекурсоров.</p>
-          </div>
-        </div>
-      </div>
-
-      <ul class="common__item grid">
-        <li 
-            :class="['grid__item', `grid__item-${item.id}`]"  
-            v-for="item in gridItems"
-            :key="item.id">
-          <p class="title">{{ item.title }}</p>
-          <span v-if="item.text" class="text">{{ item.text }}</span>
-        </li>
-      </ul>
-
-      <div class="common__item">
-        <div class="common__item-content child">
-          <TitleCommon text="Юридическое основание"/>
-          <div class="common__item-text">
-            <p>АНО ДПО «Приокский учебный центр» внесена в реестр аккредитованных организаций, оказывающих услуги 
-                в области охраны труда, под регистрационным номером 4256 от 29 января 2016 года. Организация 
-                соответствует требованиям постановления Правительства Российской Федерации от 16 декабря 2021 г. No 2334 по обучению.</p>
-            <p>Организация также внесена в реестр аккредитованных организаций, оказывающих услуги в области охраны труда. 
-                Аккредитация под регистрационным номером № 4256 от 29 января 2016 года подтверждает компетентность учебного 
-                центра и право проводить обучение в сфере охраны труда в соответствии с действующим законодательством.</p>
-            <p>На сегодняшний день АНО ДПО «Приокский учебный центр» предлагает широкий спектр программ профессионального 
-                обучения, ориентированных на развитие практических навыков и повышение квалификации специалистов. Центр 
-                обеспечивает современный уровень подготовки, сочетая методическую базу, опытный преподавательский состав и 
-                актуальные образовательные стандарты.</p>
-          </div>
-        </div>
-
-        <div class="common__item-img child">
-          <img :src="buildImg" alt="Здание"/>
-        </div>
-      </div>
-    </div> -->
+    
     <OrganizationInfo />
     <DotTitle text="Документы" />
     <DocumentAccordion  :documents="documents" style="margin-bottom: 60px;"/>
@@ -68,18 +13,12 @@
 <script setup lang="ts">
 import Breadcrumbs from '@/components/UI/Breadcrumbs.vue';
 import DotTitle from '@/components/UI/DotTitle.vue';
-// import TitleCommon from '@/components/UI/TitleCommon.vue';
 import OrganizationInfo from '@/components/UI/OrganizationInfo.vue';
 import NavBlock from '@/components/UI/NavBlock.vue'
 import { navSvedenItems } from '@/utils/svedenUtils'
 
-// import buildImg from '@/assets/img/common/building.webp'
 import DocumentAccordion from '~/components/UI/DocumentAccordion.vue';
 
-// import Akkredit from '@/assets/documents/common/АккредитацияОТ2022.pdf'
-// import License from '@/assets/documents/common/Лицензия на осуществление образовательной деятельности.pdf'
-// import ReestrLicense from '@/assets/documents/common/Выписка из реестра лицензий № Л035-01224-40-00374085.pdf'
-// import ReestrOrgan from '@/assets/documents/common/Выписка из реестра организаций, оказывающих услуги в области охраны труда.pdf'
 
 import License from '@/assets/documents/common/(01)Лицензия на осуществление образовательной деятельности.pdf'
 import LicenseChange from '@/assets/documents/common/(01)Лицензия на осуществление образовательной деятельности.pdf'
@@ -167,9 +106,9 @@ const documents =[
 
   .grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4 колонки */
-    grid-template-rows: 1fr 1fr;           /* 2 строки */
-    gap: 20px; /* отступы между блоками */
+    grid-template-columns: repeat(4, 1fr); 
+    grid-template-rows: 1fr 1fr;           
+    gap: 20px; 
     list-style: none;
     padding: 0;
     margin: 0;

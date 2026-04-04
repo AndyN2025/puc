@@ -14,7 +14,7 @@ defineProps({
   },
   size: {
     type: String,
-    default: 'normal', // 'normal' или 'small'
+    default: 'normal',
     validator: (value) => ['normal', 'small'].includes(value)
   }
 })

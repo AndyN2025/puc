@@ -1,7 +1,7 @@
 <template>
   <Teleport to="body">
     <div class="consultation-widget">
-      <!-- Иконка звонка - всегда моргает -->
+      
       <button 
         class="consultation-widget__icon-btn"
         :class="{ 'consultation-widget__icon-btn--pulse': isPulsing }"
@@ -13,13 +13,13 @@
         </svg>
       </button>
 
-      <!-- Форма консультации -->
+      
       <transition name="form-slide">
         <div 
           v-if="isFormVisible"
           class="consultation-widget__form"
         >
-          <!-- Крестик ВНЕ формы, в правом верхнем углу -->
+          
           <button 
             class="consultation-widget__close"
             @click="toggleForm"
@@ -31,7 +31,7 @@
             </svg>
           </button>
 
-          <!-- Декоративный элемент -->
+          
           <div class="consultation-widget__decoration">
             <div class="consultation-widget__decoration-circle"></div>
             <div class="consultation-widget__decoration-circle"></div>
@@ -40,11 +40,7 @@
 
           <div class="consultation-widget__content">
             <div class="consultation-widget__header">
-              <!-- <div class="consultation-widget__icon-wrapper">
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white">
-                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
-                </svg>
-              </div> -->
+              
               <h3 class="consultation-widget__title">{{ props.title }}</h3>
             </div>
 
@@ -70,12 +66,7 @@
                     </svg>
                   </div>
                   <span class="consultation-widget__phone-number">{{ phone.formatted }}</span>
-                  <!-- <div class="consultation-widget__phone-arrow">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                      <line x1="5" y1="12" x2="19" y2="12"/>
-                      <polyline points="12 5 19 12 12 19"/>
-                    </svg>
-                  </div> -->
+                  
                 </a>
               </div>
             </div>
@@ -99,11 +90,10 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
 
-// Props для кастомизации
 const props = defineProps({
   delay: {
     type: Number,
-    default: 4000 // 4 секунды
+    default: 4000
   },
   phones: {
     type: Array,
@@ -159,7 +149,6 @@ const handleCall = () => {
   console.log('[Widget] Пользователь нажал на номер телефона')
 }
 
-// ПРОСТОЙ ТАЙМЕР БЕЗ ПРОВЕРОК - для тестирования
 const initWidget = () => {
   console.log('[Widget] 🚀 initWidget вызван')
   console.log('[Widget] autoShow:', props.autoShow)
@@ -192,7 +181,6 @@ onUnmounted(() => {
   }
 })
 
-// Метод для ручного показа
 const forceShowForm = () => {
   console.log('[Widget] forceShowForm вызван')
   isFormVisible.value = true
@@ -204,7 +192,6 @@ const forceShowForm = () => {
   }
 }
 
-// Метод для скрытия
 const forceHideForm = () => {
   console.log('[Widget] forceHideForm вызван')
   isFormVisible.value = false
@@ -216,7 +203,6 @@ const forceHideForm = () => {
   }
 }
 
-// Expose methods для родительского компонента
 defineExpose({
   forceShowForm,
   forceHideForm,
@@ -326,7 +312,6 @@ defineExpose({
     height: 28px;
   }
 
-  // Постоянное моргание с темно-синей тенью
   &--pulse {
     animation: pulse 2s ease-in-out infinite;
   }
@@ -600,7 +585,6 @@ defineExpose({
   }
 }
 
-// Анимация появления/исчезновения формы
 .form-slide-enter-active {
   transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
@@ -629,7 +613,6 @@ defineExpose({
   transform: translateY(40px) scale(0.9);
 }
 
-// Моргание иконки с темно-синей тенью
 @keyframes pulse {
   0%, 100% {
     box-shadow: 0 0 0 0 rgba(26, 74, 140, 0.8);
@@ -639,7 +622,6 @@ defineExpose({
   }
 }
 
-// Адаптивность
 @media (max-width: 480px) {
   .consultation-widget {
     bottom: 16px;

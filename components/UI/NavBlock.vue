@@ -48,82 +48,81 @@ const emit = defineEmits(['update:modelValue'])
 const currentTab = ref(props.modelValue ?? (props.tabs?.[0]?.value ?? null))
 
 function setTab(value) {
-  currentTab.value = value // <-- .value, потому что ref!
+  currentTab.value = value
   emit('update:modelValue', value)
-  console.log('[Tab changed]', value)
 }
 </script>
 
 <style lang="scss" scoped>
+@use '@/assets/styles/vars' as *;
+@use '@/assets/styles/mixins' as m;
+
 .tabs-container {
   display: flex;
-  gap: 8px;
-  margin-bottom: 8px;
+  gap: $spacing-sm;
+  margin-bottom: $spacing-sm;
   flex-wrap: wrap;
 }
 
 .tab-button {
-  padding: 12px 32px;
-  max-width: 180px;
+  padding: $spacing-sm $spacing-xl;
+  max-width: 11.25rem;
   width: 100%;
-  background: #E9F4FF;
-  border-radius: 16px 16px 0 0;
+  background: $color-lightBlue;
+  border-radius: $radius-xl $radius-xl 0 0;
   cursor: pointer;
-  font-size: 16px;
-  color: #333;
-  transition: all 0.2s ease;
+  font-size: $font-size-base;
+  color: $color-text-body;
+  transition: background-color $transition-fast, color $transition-fast;
   border: none;
 
   &:hover {
-    background-color: #123970;
-    color: white;
+    background-color: $color-darkBlue;
+    color: $color-white;
   }
 
   &.tab-active {
-    background-color: #123970;
-    color: white;
+    background-color: $color-darkBlue;
+    color: $color-white;
   }
 }
 
 .site-navigation {
-  // background-color: #eaf6ff;
-  // padding: 24px;
-  // border-radius: 8px;
-  margin-bottom: 60px;
+  margin-bottom: clamp(2rem, 5vw, 3.75rem);
 
   .nav-grid {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
-    background-color: #eaf6ff;
-    padding: 24px;
-    border-radius: 8px;
-    margin-bottom: 32px;
+    gap: $spacing-sm;
+    background-color: $color-bg-nav;
+    padding: clamp(1rem, 3vw, 1.5rem);
+    border-radius: $radius-md;
+    margin-bottom: $spacing-xl;
 
     .nav-item {
       display: inline-block;
-      padding: 8px 16px;
-      margin: 2px 10px;
-      border-radius: 6px;
+      padding: $spacing-sm $spacing-md;
+      margin: 2px $spacing-sm;
+      border-radius: $radius-sm;
       text-align: center;
       font-size: 0.9375rem;
-      color: #333;
+      color: $color-text-body;
       text-decoration: none;
-      transition: all 0.2s ease;
+      transition: background-color $transition-fast, color $transition-fast;
       cursor: pointer;
 
       &:hover {
-        background-color: #123970;
-        color: white;
+        background-color: $color-darkBlue;
+        color: $color-white;
       }
 
       &.is-active {
-        background-color: #123970;
-        color: white;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        background-color: $color-darkBlue;
+        color: $color-white;
+        box-shadow: $shadow-soft;
 
         &:hover {
-          background-color: #004494;
+          background-color: $color-cta-hover;
         }
       }
     }

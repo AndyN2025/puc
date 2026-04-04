@@ -1,11 +1,11 @@
 <template>
   <div class="news-grid">
-    <!-- Заголовок -->
+    
     <h2 class="section-title">Новости</h2>
 
-    <!-- Грид: 2 колонки, 2 строки -->
+    
     <div class="grid-container">
-      <!-- Большая новость слева -->
+      
       <NuxtLink
         v-if="news[0]"
         :to="news[0].link"
@@ -18,7 +18,7 @@
         </div>
       </NuxtLink>
 
-      <!-- Две новости справа -->
+      
       <div v-for="(item, index) in news.slice(1, 3)" :key="index" class="news-item small">
         <NuxtLink :to="item.link" class="news-link">
           <span class="news-date">{{ item.date }}</span>

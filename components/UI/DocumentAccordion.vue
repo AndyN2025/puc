@@ -7,20 +7,20 @@
       :class="{ 'is-expanded': expandedIndex === index }"
       @click="toggleExpand(index)"
     >
-      <!-- Заголовок — всегда на белом фоне -->
+      
       <div class="document-header" :class="{ 'open': expandedIndex === index }">
         <span class="document-number">({{ String(index + 1).padStart(2, '0') }})</span>
         <span class="document-title">{{ doc.title }}</span>
         <span class="document-size" v-if="doc.size">{{ doc.size }}</span>
         <div class="toggle-icon">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path v-if="expandedIndex === index" d="M18 15l-6-6-6 6" /> <!-- вверх -->
-            <path v-else d="M6 9l6 6 6-6" /> <!-- вниз -->
+            <path v-if="expandedIndex === index" d="M18 15l-6-6-6 6" /> 
+            <path v-else d="M6 9l6 6 6-6" /> 
           </svg>
         </div>
       </div>
 
-      <!-- Контент — синий фон при раскрытии -->
+      
       <div class="document-content">
         <div class="pdf-preview-wrapper">
           <embed
@@ -94,7 +94,7 @@ const toggleExpand = (index) => {
       border-top: 2px solid #003366;
       padding: 16px 24px;
       position: relative;
-      z-index: 2; /* чтобы оставался поверх синего фона */
+      z-index: 2; 
 
       &.open{
         background-color: #003366;
@@ -109,10 +109,10 @@ const toggleExpand = (index) => {
     }
 
     .document-content {
-      min-height: 290px; /* высота контента = header + preview */
+      min-height: 290px; 
       opacity: 1;
       padding: 0;
-      background-color: #003366; /* темно-синий */
+      background-color: #003366; 
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
       overflow: hidden;
     }
@@ -187,7 +187,7 @@ const toggleExpand = (index) => {
   position: relative;
   width: 220px;
   height: 285px;
-  overflow: hidden; /* ❗️Запрещаем скролл */
+  overflow: hidden; 
   margin-left: auto;
   border-radius: 6px;
   background: #fff;
@@ -200,7 +200,7 @@ const toggleExpand = (index) => {
   border: none;
   display: block;
   background: #fff;
-  object-fit: contain; /* если PDF не помещается — масштабируется */
+  object-fit: contain; 
 }
 
 .download-overlay {

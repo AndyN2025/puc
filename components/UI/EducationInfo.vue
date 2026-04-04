@@ -1,6 +1,6 @@
 <template>
   <div class="education-info">
-    <!-- Верхние блоки — динамически рендерим -->
+    
     <div class="info-row" v-if="!hasChecklist">
       <div
         v-for="(block, index) in topBlocks"
@@ -13,7 +13,7 @@
         <h3 class="info-title">{{ block.title }}</h3>
 
 
-        <!-- Простой текст -->
+        
         <p class="info-text">
           {{ block.text }}
         </p>
@@ -27,7 +27,7 @@
       >
         <h3 class="info-title">{{ topBlocks[0].title }}</h3>
 
-        <!-- Чеклист -->
+        
         <ul class="info-checklist">
           <li v-for="(item, idx) in topBlocks[0].items" :key="idx" class="info-checklist-item">
             <img class="checkmark" :src="checKIcon" aalt="галочка"/>
@@ -44,7 +44,7 @@
           >
           <h3 class="info-title">{{ block.title }}</h3>
 
-          <!-- Простой текст -->
+          
           <p class="info-text">
             {{ block.text }}
           </p>
@@ -52,7 +52,7 @@
       </div>
     </div>
 
-    <!-- Синий блок снизу -->
+    
     <div class="diploma-block" v-if="diplomaImage !== 'none'">
       <div class="diploma-content">
         <h3 class="diploma-title" v-if="diplomaText">По окончании обучения Вы получаете:</h3>
@@ -99,20 +99,15 @@ import checKIcon from '@/assets/img/checkIcon.svg'
 import Polozhenie from '@/assets/documents/paidEdu/Polozhenie_ob_okazanii_platnyh_obrazovatelnyh_uslug.pdf'
 
 const props = withDefaults(defineProps<{
-  // Блоки сверху — массив объектов
   topBlocks: {
     title: string
     type: 'checklist' | 'text'
     items?: string[]
     text?: string
   }[]
-  // Текст в синем блоке
   diplomaText?: string
-  // Ссылка на PDF
   pdfLink?: string
-  // Название ссылки PDF
   pdfTitle?: string
-  // Изображение диплома
   diplomaImage?: string | Array
 }>(), {
   pdfLink: '#',
@@ -174,6 +169,7 @@ const hasChecklist = computed(() => {
         color: #000000;
         line-height: 1.5;
         margin: 0;
+        white-space: pre-line;
       }
 
       .info-checklist {

@@ -91,7 +91,6 @@
                     </div>
                   </div>
 
-                  <!-- Если одно изображение -->
                   <div v-else class="image-wrapper" @click="openModal(course.img)">
                     <img
                       :src="course.img"
@@ -159,172 +158,6 @@
 
           </div>
 
-
-          <!-- <h1 v-if="course" class="course-detail__title">{{ course.title }}</h1>
-          <h1 v-else class="course-detail__title">Курс не найден</h1>
-
-          <-- Основное описание на всю ширину --
-          <div class="info__item info__item--full-width description">
-              <p class="info__value">{{ course.mainDescription }}</p>
-          </div>
-
-          <-- Категории слушателей --
-          <div class="info__item users">
-              <p class="info__title">Категории слушателей:</p>
-              <div class="info__value">
-                  <ul class="info__users-list">
-                      <li v-for="(user, index) in course.users" :key="index" class="info__users-item">
-                          <img :src="checkIkon"/>
-                          <span>{{ user }}</span>
-                      </li>
-                  </ul>
-              </div>
-          </div>
-
-
-          <div class="info__item requiremets" v-if="course.requiremets">
-              <p class="info__title">Требования к слушателям:</p>
-              <div class="info__value">
-                  <ul class="info__users-list">
-                      <li v-for="(user, index) in course.requiremets" :key="index" class="info__users-item">
-                          <img :src="checkIkon"/>
-                          <span>{{ user }}</span>
-                      </li>
-                  </ul>
-              </div>
-          </div> -->
-
-          <!-- Продолжительность -->
-          <!-- <div class="info__item time">
-              <p class="info__title">Продолжительность обучения:</p>
-              <p class="info__value">{{ course.hours }} часа</p>
-          </div> -->
-
-          <!-- Форма обучения -->
-          <!-- <div class="info__item format" v-if="course.format">
-              <p class="info__title">Форма обучения:</p>
-              <p class="info__value">{{ course.format }}</p>
-          </div> -->
-
-          <!-- Получаемый документ -->
-          <!-- <div class="info__item document">
-              <p class="info__title">Получаемый документ:</p>
-              <div class="info__value">
-                <template v-if="Array.isArray(course.document) && course.document.length">
-                  <ul class="info__value-list" >
-                    <li 
-                      class="info__value-item" 
-                      v-for="document in course.document"
-                      :key="document">
-                      {{ document }}
-                    </li>
-                  </ul>
-                </template>
-
-
-                <p v-else>{{ course.document }}</p>
-
-                <div v-if="Array.isArray(course.img)" class="images-row">
-                  <div 
-                    v-for="(img, index) in course.img" 
-                    :key="index"
-                    class="image-wrapper"
-                    @click="openModal(img)"
-                  >
-                    <img
-                      :src="img"
-                      :alt="`Изображение ${index + 1}`"
-                      class="info__image"
-                    />
-                    <div class="zoom-overlay">
-                      <svg class="zoom-icon" viewBox="0 0 24 24" fill="white">
-                        <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
-                        <path d="M12 10h-2v2H9v-2H7V9h2V7h1v2h2v1z"/>
-                      </svg>
-                    </div>
-                  </div>
-                </div>
-
-                <-- Если одно изображение --
-                <div v-else class="image-wrapper" @click="openModal(course.img)">
-                  <img
-                    :src="course.img"
-                    :alt="`Образец документа: ${course.document}`"
-                    class="info__image"
-                  />
-                  <div class="zoom-overlay">
-                    <svg class="zoom-icon" viewBox="0 0 24 24" fill="white">
-                      <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
-                      <path d="M12 10h-2v2H9v-2H7V9h2V7h1v2h2v1z"/>
-                    </svg>
-                  </div>
-                </div>
-              </div>
-          </div> -->
-
-          <!-- Периодичность (если есть) -->
-          <!-- <div v-if="course.period" class="info__item period">
-              <p class="info__title">Периодичность обучения:</p>
-              <p class="info__value">{{ course.period }}</p>
-          </div> -->
-
-          <!-- <div class="info__item info__item--full-width button-container" style="margin-bottom: 16px;">
-            <div class="buttons-group">
-              <button 
-                  class="info__action-btn info__action-btn--secondary"
-                  @click="downloadApplication"
-                  :disabled="!course?.application"
-                >
-                  Заявка на обучение
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="margin-right:8px">
-                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                    <polyline points="7 10 12 15 17 10" />
-                    <line x1="12" y1="15" x2="12" y2="3" />
-                  </svg>
-              </button>
-              <button 
-                  class="info__action-btn info__action-btn--primary"
-                  @click="openShortInfo"
-                  :disabled="!course?.programm"
-                >
-                  Получить программу *
-
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="margin-right:8px">
-                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                    <polyline points="7 10 12 15 17 10" />
-                    <line x1="12" y1="15" x2="12" y2="3" />
-                  </svg>
-              </button>
-            </div>
-              <p class="info__hint">
-                * Полную программу обучения уточняйте у менеджера по 
-                <span 
-                  class="info__phone-highlight"
-                  @mouseenter="showPhoneTooltip = true"
-                  @mouseleave="showPhoneTooltip = false"
-                >
-                  телефону
-                  <div 
-                    v-if="showPhoneTooltip" 
-                    class="info__phone-tooltip"
-                    @mouseenter="showPhoneTooltip = true"
-                    @mouseleave="showPhoneTooltip = false"
-                  >
-                    <a href="tel:+74842562183" class="info__phone-link">+7 (4842) 56-21-83</a>
-                    <a href="tel:+74842597583" class="info__phone-link">+7 (4842) 59-75-83</a>
-                    <a href="tel:+79105201564" class="info__phone-link">+7 (910) 520-15-64</a>
-                  </div>
-                </span>
-              </p>
-          </div> -->
-
-          <!-- Кнопка на всю ширину -->
-          <!-- <div class="info__item info__item--full-width button-container">
-              <button class="info__back-btn" @click="$router.back()">Назад к списку</button>
-          </div> -->
-
-
-
           <div v-if="showModal" class="image-modal" @click.self="showModal = false">
             <div class="modal-content">
               <button class="modal-close" @click="showModal = false">×</button>
@@ -341,23 +174,22 @@
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
-import { programsOnline, programsOffline } from './utils'
+import { securityWorkPrograms, type TrainingProgram } from './utils'
 import Breadcrumbs from '@/components/UI/Breadcrumbs.vue';
 import ConsultationWidget from '@/components/UI/ConsultantWidget.vue'
 import checkIkon from '@/assets/img/checkIcon.svg'
 
-const securityWorkPrograms = [
-    ...programsOffline,
-    ...programsOnline
-]
-
 const route = useRoute()
-const code = route.params.code
+const code = computed(() => {
+  const raw = route.params.code
+  const c = Array.isArray(raw) ? raw[0] : raw
+  return typeof c === 'string' ? decodeURIComponent(c) : ''
+})
 const showModal = ref(false)
-const selectedImage = ref('')
+const selectedImage = ref<string | null>(null)
 const showPhoneTooltip = ref(false) 
 
 const widgetRef = ref(null)
@@ -375,21 +207,21 @@ const openModal = (img) => {
   showModal.value = true
 }
 
-const course = computed(() => {
-    return securityWorkPrograms.find(p => p.code === code)
+const course = computed<TrainingProgram | undefined>(() => {
+    return securityWorkPrograms.find((p) => p.code === code.value)
 })
 
 const breadCrumbs = computed(() => {
     const crumbs = [
         { text: 'Главная', link: '/' },
         { text: 'Виды обучения', link: '/training_programs/' },
-        { text: 'Охрана труда', link: '/training_programs/security_work' }
+        { text: 'Охрана труда', link: '/training_programs/security_work/' }
     ]
 
     if (course.value) {
         crumbs.push({
             text: course.value.textCode || course.value.title,
-            link: route.path // или конкретный путь к курсу
+            link: route.path
         })
     }
 
@@ -458,7 +290,8 @@ watch(showModal, (isOpen) => {
     margin: 0;
     color: #123970;
     font-family: 'IBM M';
-    font-size: 42px;
+    font-size: 34px;
+    line-height: 42px;
     text-align: center;
   }
 
@@ -504,10 +337,12 @@ watch(showModal, (isOpen) => {
   }
 }
 
-.block__buttons{
+.block__buttons {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   gap: 16px;
+  align-items: center;
 }
 
 .info {
@@ -520,12 +355,12 @@ watch(showModal, (isOpen) => {
     border-radius: 10px;
     padding: 1.6rem;
     display: grid;
-    grid-template-columns: 1fr 4fr; // Заголовок занимает 1 часть, значение - 2 части
+    grid-template-columns: 1fr 4fr; 
     gap: 16px;
     align-items: start;
 
     &--full-width {
-      grid-template-columns: 1fr; // На всю ширину - одна колонка
+      grid-template-columns: 1fr; 
     }
 
   }
@@ -613,6 +448,8 @@ watch(showModal, (isOpen) => {
   margin-top: 8px;
   font-size: 14px;
   color: var(--text-secondary, #666);
+  flex: 1 1 100%;
+  width: 100%;
 }
 
 .info__phone-highlight {
@@ -742,7 +579,6 @@ watch(showModal, (isOpen) => {
   opacity: 0.9;
 }
 
-/* Модалка */
 .image-modal {
   position: fixed;
   inset: 0;
@@ -782,11 +618,10 @@ watch(showModal, (isOpen) => {
   padding: 0 12px;
 }
 
-/* Адаптивность */
 @media (max-width: 768px) {
   .info {
     &__item {
-      grid-template-columns: 1fr; // На мобильных - одна колонка
+      grid-template-columns: 1fr; 
       
       &--full-width {
         grid-template-columns: 1fr;
@@ -800,6 +635,39 @@ watch(showModal, (isOpen) => {
     &__title {
       font-size: 0.95rem;
     }
+  }
+
+  .top {
+    max-width: 100%;
+  }
+
+  .top__title {
+    font-size: clamp(1.25rem, 5vw, 1.75rem);
+    line-height: 1.3;
+  }
+
+  .block {
+    max-width: 100%;
+  }
+
+  .row {
+    flex-direction: column;
+
+    &-item {
+      width: 100%;
+    }
+  }
+
+  .block__buttons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .info__back-btn,
+  .info__action-btn {
+    width: 100%;
+    max-width: 100%;
+    justify-content: center;
   }
 }
 </style>

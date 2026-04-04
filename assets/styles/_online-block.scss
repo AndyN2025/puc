@@ -1,0 +1,102 @@
+@use './vars' as *;
+@use './mixins' as m;
+
+@mixin training-online-block {
+  .online-block {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: $spacing-section-tight;
+    gap: $spacing-lg;
+
+    @include m.from($bp-md) {
+      flex-direction: row;
+      align-items: stretch;
+    }
+
+    &__text {
+      font-family: $font-inter-m;
+      font-size: $font-size-sm;
+      line-height: $spacing-lg;
+      margin-bottom: $spacing-sm;
+    }
+
+    &__left,
+    &__right {
+      flex: 1;
+      min-width: 0;
+    }
+
+    &__list {
+      display: flex;
+      flex-direction: column;
+      gap: $spacing-md;
+
+      @include m.from($bp-md) {
+        flex-direction: row;
+      }
+    }
+
+    &__item {
+      flex: 1;
+      border: 1px solid $color-border-strong;
+      border-radius: $radius-xl;
+      padding: $spacing-lg;
+      display: flex;
+      flex-direction: column;
+      min-height: auto;
+
+      @include m.from($bp-md) {
+        min-height: 26rem;
+      }
+
+      &-title {
+        font-family: $font-inter;
+        font-size: clamp(1.125rem, 2vw, 1.5rem);
+        line-height: 1.3;
+        color: $color-darkBlue;
+        margin-bottom: $spacing-sm;
+      }
+
+      &-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100%;
+        gap: $spacing-md;
+      }
+
+      &-btn {
+        font-family: $font-ibm;
+        font-size: $font-size-sm;
+        text-transform: uppercase;
+        max-width: 15rem;
+        width: 100%;
+        padding: $spacing-sm $spacing-lg;
+        border-radius: $radius-md;
+        background-color: $color-darkBlue;
+        color: $color-white;
+        border: none;
+        cursor: pointer;
+        transition: background-color $transition-base;
+
+        &:hover {
+          filter: brightness(1.06);
+        }
+      }
+    }
+
+    &__right {
+      background-color: $color-lightBlue;
+      border-radius: $radius-lg;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: $spacing-md;
+
+      img {
+        max-width: min(100%, 26rem);
+        height: auto;
+      }
+    }
+  }
+}

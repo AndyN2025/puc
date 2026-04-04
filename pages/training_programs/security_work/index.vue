@@ -1,6 +1,5 @@
 <template>
-  <div class="prehead"></div>
-  <div class="container">
+  <div class="p">
     <Breadcrumbs :items="breadCrumbs"/> 
     <NavBlock 
       :navItems="navCourseItems" 
@@ -13,7 +12,7 @@
     <ProgramTable 
       :tabs="tabs"
       :items="selectProgrammList" 
-      :link="'training_programs/security_work'"
+      link="training_programs/security_work"
       @tab-change="changeProgrammList"/>
       
     <DotTitle text="начать обучение" v-if="stepOnline"/>
@@ -37,7 +36,7 @@ const titleCommon = ref('Виды обучения')
 const breadCrumbs = [
   { text: 'Главная', link: '/' },
   { text: titleCommon.value, link: '/training_programs/' },
-  { text: `Охрана труда`, link: '/security_work/' },
+  { text: 'Охрана труда', link: '/training_programs/security_work/' },
 ] 
 
 const tabs = [
@@ -66,79 +65,7 @@ function handleTabChange(value: string) {
 </script>
 
 <style scoped lang="scss">
-.online-block{
-    display: flex;
-    flex-direction: row;
-    margin-bottom: 60px;
-    gap: 20px;
+@use '@/assets/styles/online-block' as ob;
 
-    &__text{
-      font-family: 'Inter', sans-serif;
-      font-size: 14px;
-      line-height: 24px;
-      margin-bottom: 12px
-    }
-
-    &__left,
-    &__right{
-      flex: 1
-    }
-
-
-    &__list{
-      display: flex;
-      flex-direction: row;
-      gap: 20px;
-    }
-
-    &__item{
-      flex: 1;
-      border: 1px solid #CAD6E0;
-      border-radius: 16px;
-      padding: 24px;
-      display: flex;
-      flex-direction: column;
-      min-height: 420px;
-
-      &-title{
-        font-family: 'Inter', sans-serif;
-        font-size: 24px;
-        line-height: 30px;
-        color: #123970;
-        margin-bottom: 12px;
-      }
-
-      &-content{
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        height: 100%;
-      }
-
-      &-btn{
-        font-family: 'IBM', sans-serif;
-        font-size: 14px;
-        text-transform: uppercase;
-        max-width: 240px;
-        padding: 12px 24px;
-        border-radius: 8px;
-        background-color: #123970;
-        color: white;
-        border: none;
-      }
-    }
-
-    &__right{
-      background-color: #E9F4FF;
-      border-radius: 12px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-      img{
-        max-width: 420px;
-      }
-    }
-
-}
+@include ob.training-online-block;
 </style>

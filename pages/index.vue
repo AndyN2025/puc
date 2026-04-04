@@ -1,5 +1,5 @@
 <template>
-  <div> 
+  <div class="page-home">
     <section class="section-item">
       <MainWindow/>
     </section>
@@ -29,13 +29,10 @@ import PartnerSlider from '@/components/UI/PartnerSlider.vue'
 import MapSection from '@/components/UI/MapSection.vue'
 import DotTitle from '@/components/UI/DotTitle.vue';
 import ListCourses from '@/components/UI/ListCourses.vue'
-
 </script>
 
 <style scoped lang="scss">
-
-.section-item{
-  margin-bottom: 90px;
+.page-home {
+  min-width: 0;
 }
-
 </style>

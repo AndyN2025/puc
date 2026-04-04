@@ -32,7 +32,7 @@ const breadCrumbs = [
 </script>
 
 <style scoped lang="scss">
-/* Можно писать CSS, если нужно */
+
 .inter{
   &__text{
     display: flex;

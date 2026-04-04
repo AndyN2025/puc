@@ -108,5 +108,5 @@ const documents = [
 </script>
 
 <style scoped>
-/* Можно писать CSS, если нужно */
+
 </style>

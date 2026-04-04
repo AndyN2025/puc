@@ -1,6 +1,6 @@
 <template>
   <div class="slider-container">
-    <!-- Заголовок и стрелки -->
+    
     <div class="slider-header">
       <DotTitle text="Виды обучения" v-if="props.dotShow"/>
       <div v-else></div>
@@ -18,7 +18,7 @@
       </div>
     </div>
 
-    <!-- Контейнер слайдера -->
+    
     <div
       ref="sliderContainer"
       class="cards-slider"
@@ -63,17 +63,15 @@ const props = defineProps({
 
 const sliderContainer = ref(null)
 
-// Функция прокрутки влево
 const scrollLeft = () => {
   if (sliderContainer.value) {
     sliderContainer.value.scrollBy({
-      left: -350, // ширина карточки + отступ
+      left: -350,
       behavior: 'smooth'
     })
   }
 }
 
-// Функция прокрутки вправо
 const scrollRight = () => {
   if (sliderContainer.value) {
     sliderContainer.value.scrollBy({
@@ -83,7 +81,6 @@ const scrollRight = () => {
   }
 }
 
-// Обработка колесика мыши
 const handleWheel = (e) => {
   if (sliderContainer.value) {
     sliderContainer.value.scrollBy({
@@ -144,11 +141,11 @@ const handleWheel = (e) => {
     gap: 24px;
     overflow-x: auto;
     scroll-behavior: smooth;
-    padding: 8px 0; /* для выравнивания */
-    scrollbar-width: none; /* скрываем полосу прокрутки в Firefox */
+    padding: 8px 0; 
+    scrollbar-width: none; 
 
     &::-webkit-scrollbar {
-      display: none; /* скрываем полосу прокрутки в Chrome/Safari */
+      display: none; 
     }
 
     .card {

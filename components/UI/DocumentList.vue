@@ -32,20 +32,18 @@ const props = defineProps({
   },
   type: {
     type: String,
-    default: 'read', // 'read' или 'save'
+    default: 'read',
     validator: (value) => ['read', 'save'].includes(value)
   }
 })
 
 const handleDocumentClick = (url) => {
   if (props.type === 'read') {
-    // Открыть в новой вкладке
     window.open(url, '_blank', 'noopener,noreferrer');
   } else if (props.type === 'save') {
-    // Скачать файл
     const link = document.createElement('a');
     link.href = url;
-    link.download = url.split('/').pop(); // имя файла из URL
+    link.download = url.split('/').pop();
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);

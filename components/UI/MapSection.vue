@@ -1,19 +1,19 @@
 <template>
   <div class="contact-section">
-    <!-- Левая колонка — карта -->
+    
     <div class="map-column">
       <div class="map-container">
-        <!-- Заглушка карты — замените на реальную Yandex Map -->
-        <!-- <div id="yandex-map" class="yandex-map"> -->
+        
+        
          <div style="position:relative;overflow:hidden;"><a href="https://yandex.ru/maps/org/priokskiy_uchebny_tsentr/1030102847/?utm_medium=mapframe&utm_source=maps" style="color:#eee;font-size:12px;position:absolute;top:0px;">Приокский учебный центр</a><a href="https://yandex.ru/maps/6/kaluga/category/occupational_safety_and_health/184105368/?utm_medium=mapframe&utm_source=maps" style="color:#eee;font-size:12px;position:absolute;top:14px;">Безопасность труда в Калуге</a><a href="https://yandex.ru/maps/6/kaluga/category/further_education/184106162/?utm_medium=mapframe&utm_source=maps" style="color:#eee;font-size:12px;position:absolute;top:28px;">Дополнительное образование в Калуге</a><iframe src="https://yandex.ru/map-widget/v1/?ll=36.272661%2C54.504872&mode=poi&poi%5Bpoint%5D=36.272394%2C54.505870&poi%5Buri%5D=ymapsbm1%3A%2F%2Forg%3Foid%3D1030102847&z=16.73" width="1000" height="440" frameborder="1" allowfullscreen="true" style="position:relative;"></iframe></div>
-        <!-- </div> -->
+        
       </div>
     </div>
 
-    <!-- Правая колонка — контакты -->
+    
     <div class="contacts-column">
       <div class="contacts-grid">
-        <!-- Верхняя строка — объединяет 2 колонки -->
+        
         <div class="address-row">
           <h3>Учебный центр на ул. Никитина</h3>
           <div class="address-info">
@@ -45,11 +45,21 @@
 </script>
 
 <style lang="scss" scoped>
+@use '@/assets/styles/vars' as *;
+@use '@/assets/styles/mixins' as m;
+
 .contact-section {
   display: flex;
-  gap: 32px;
-  background-color: #fff;
-  border-radius: 8px;
+  flex-direction: column;
+  gap: $spacing-xl;
+  background-color: $color-white;
+  border-radius: $radius-md;
+
+  @include m.from($bp-lg) {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: $spacing-xl;
+  }
 
   .section-title {
     font-size: 1.25rem;
@@ -72,21 +82,33 @@
   }
 
   .map-column {
-    width: 80%;
+    width: 100%;
+    min-width: 0;
+
+    @include m.from($bp-lg) {
+      flex: 1.4;
+    }
 
     .yandex-map {
       width: 100%;
       height: 100%;
-      border-radius: 8px; /* опционально */
+      border-radius: $radius-md;
     }
 
     .map-container {
       position: relative;
       width: 100%;
-      height: 440px;
-      border-radius: 8px;
+      height: clamp(16rem, 50vw, 27.5rem);
+      border-radius: $radius-md;
       overflow: hidden;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      box-shadow: $shadow-soft;
+
+      :deep(iframe) {
+        width: 100%;
+        height: 100%;
+        max-width: 100%;
+        border: 0;
+      }
 
       .map-placeholder {
         position: relative;
@@ -138,7 +160,12 @@
   }
 
   .contacts-column {
-    width: 40%;
+    width: 100%;
+    min-width: 0;
+
+    @include m.from($bp-lg) {
+      flex: 1;
+    }
 
     .contacts-grid {
       display: grid;
@@ -184,8 +211,12 @@
 
       .contact-cards {
         display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 16px;
+        grid-template-columns: 1fr;
+        gap: $spacing-md;
+
+        @include m.from($bp-md) {
+          grid-template-columns: 1fr 1fr;
+        }
 
         .contact-card {
           background: #eaf6ff;

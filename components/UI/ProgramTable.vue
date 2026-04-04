@@ -1,6 +1,5 @@
 <template>
   <div class="programs-table">
-    <!-- Табы (опционально) -->
     <div v-if="tabs && tabs.length" class="tabs-container">
       <button
         v-for="(tab, idx) in tabs"
@@ -11,19 +10,19 @@
         @click="setTab(tab.value, idx)"
       >
         {{ tab.text }}
-        <span v-if="tab.value === currentTab" class="checkmark">✓</span>
       </button>
     </div>
 
-    <!-- Таблица программ -->
-    <div class="table-wrapper">
+    <div
+      class="table-wrapper"
+      :class="{ 'table-wrapper--no-code': hideCodeColumn }"
+    >
       <div class="table-header">
-        <div class="header-cell">Код</div>
+        <div v-if="!hideCodeColumn" class="header-cell">{{ codeColumnTitle }}</div>
         <div class="header-cell">Наименование программы</div>
-        <div class="header-cell">Объем (часы)</div>
+        <div class="header-cell">{{ hoursColumnTitle }}</div>
       </div>
 
-      <!-- Рендерим либо блоки, либо простой список -->
       <template v-if="isBlocksMode">
         <div
           v-for="(block, blockIndex) in items"
@@ -34,30 +33,37 @@
             v-for="(item, itemIndex) in block"
             :key="itemIndex"
             class="table-row"
+          >
+            <component
+              :is="rowLinkComponent(item)"
+              v-bind="rowLinkProps(item)"
+              :class="['table-row__link', rowHref(item) ? 'table-row__link--clickable' : 'table-row__link--plain']"
             >
-            <div class="row-cell">{{ item.code }}</div>
-            <div class="row-cell">{{ item.title }}</div>
-            <div class="row-cell">{{ item.hours }} ч.</div>
+              <div v-if="!hideCodeColumn" class="row-cell">{{ displayCode(item) }}</div>
+              <div class="row-cell">{{ item.title }}</div>
+              <div class="row-cell">{{ formatHours(item) }}</div>
+            </component>
           </div>
-          <!-- Разделитель между блоками (кроме последнего) -->
-          <div v-if="blockIndex < items.length - 1" class="block-divider"></div>
+
+          <div v-if="blockIndex < items.length - 1" class="block-divider" />
         </div>
       </template>
+
       <template v-else>
         <div
           v-for="(item, index) in items"
           :key="index"
           class="table-row"
+        >
+          <component
+            :is="rowLinkComponent(item)"
+            v-bind="rowLinkProps(item)"
+            :class="['table-row__link', rowHref(item) ? 'table-row__link--clickable' : 'table-row__link--plain']"
           >
-          <NuxtLink
-            v-if="link && item?.code && typeof item.code === 'string' && item.code.trim() !== '' && item.code !== '-'"
-            :to="`/${link}/${item.code}`"
-            class="table-row__link"
-          >
-            <div class="row-cell">{{ item.textCode }}</div>
+            <div v-if="!hideCodeColumn" class="row-cell">{{ displayCode(item) }}</div>
             <div class="row-cell">{{ item.title }}</div>
-            <div class="row-cell">{{ item.hours }} ч.</div>
-          </NuxtLink>
+            <div class="row-cell">{{ formatHours(item) }}</div>
+          </component>
         </div>
       </template>
     </div>
@@ -66,18 +72,29 @@
 
 <script setup>
 import { ref, computed } from 'vue'
+import { NuxtLink } from '#components'
 
 const props = defineProps({
-  // Опциональные табы
   tabs: {
     type: Array,
     default: () => null
   },
-  link:{
+  link: {
     type: String,
     default: () => null
   },
-  // Данные для таблицы — может быть массивом объектов ИЛИ массивом массивов
+  hideCodeColumn: {
+    type: Boolean,
+    default: false
+  },
+  codeColumnTitle: {
+    type: String,
+    default: 'Код'
+  },
+  hoursColumnTitle: {
+    type: String,
+    default: 'Объем (часы)'
+  },
   items: {
     type: Array,
     required: true,
@@ -85,27 +102,24 @@ const props = defineProps({
     validator: (items) => {
       if (!Array.isArray(items)) return false
 
-      // Если первый элемент — массив → значит, это блоки
       if (Array.isArray(items[0])) {
         return items.every(block =>
           Array.isArray(block) &&
           block.every(item =>
             typeof item.code === 'string' &&
             typeof item.title === 'string' &&
-            typeof item.hours === 'number'
+            (typeof item.hours === 'number' || typeof item.hours === 'string')
           )
         )
       }
 
-      // Иначе — обычный массив объектов
       return items.every(item =>
         typeof item.code === 'string' &&
         typeof item.title === 'string' &&
-        typeof item.hours === 'number'
+        (typeof item.hours === 'number' || typeof item.hours === 'string')
       )
     }
   },
-  // Для двусторонней привязки текущего таба
   modelValue: {
     type: [String, Number, null],
     default: null
@@ -114,7 +128,6 @@ const props = defineProps({
 
 const emit = defineEmits(['update:modelValue', 'tab-change'])
 
-// Локальное состояние текущего таба
 const currentTab = ref(props.modelValue ?? (props.tabs?.[0]?.value ?? null))
 
 function setTab(value, index) {
@@ -123,47 +136,89 @@ function setTab(value, index) {
   emit('tab-change', { value, index })
 }
 
-// Определяем режим: блоки или простой список
 const isBlocksMode = computed(() => {
   return Array.isArray(props.items) && props.items.length > 0 && Array.isArray(props.items[0])
 })
 
+function formatHours(item) {
+  const h = item?.hours
+  if (h == null) return ''
+  if (typeof h === 'string') return h
+  return `${h} ч.`
+}
+
+function displayCode(item) {
+  return item.textCode ?? item.code
+}
+
+function rowHref(item) {
+  if (!props.link || !item?.code) return null
+  const c = String(item.code).trim()
+  if (c === '' || c === '-') return null
+  const base = props.link.replace(/^\/+|\/+$/g, '')
+  return `/${base}/${encodeURIComponent(c)}`
+}
+
+function rowLinkComponent(item) {
+  return rowHref(item) ? NuxtLink : 'div'
+}
+
+function rowLinkProps(item) {
+  const to = rowHref(item)
+  if (to) {
+    return { to }
+  }
+  return {}
+}
 </script>
 
 <style scoped lang="scss">
+@use '@/assets/styles/vars' as *;
+@use '@/assets/styles/mixins' as m;
+
 .programs-table {
   background: #f8fcff;
-  border-radius: 8px;
-  overflow: hidden;
-  font-family: Arial, sans-serif;
-  margin-bottom: 60px;
+  border-radius: $radius-md;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  font-family: $font-ibm, sans-serif;
+  margin-bottom: clamp(2rem, 5vw, 3.75rem);
 }
 
 .tabs-container {
   display: flex;
-  gap: 8px;
-  background: #fff;
+  flex-wrap: wrap;
+  gap: $spacing-sm;
+  background: $color-white;
   border-bottom: 1px solid #e0e0e0;
+  padding: $spacing-sm;
 
   .tab-button {
-    padding: 16px 32px;
-    max-width: 360px;
-    width: 100%;
-    background: #E9F4FF;
-    border-radius: 8px 8px 0 0;
+    padding: clamp(0.75rem, 2vw, 1rem) clamp(1rem, 3vw, 2rem);
+    max-width: 22.5rem;
+    flex: 1 1 auto;
+    min-width: min(100%, 10rem);
+    background: $color-lightBlue;
+    border-radius: $radius-md $radius-md 0 0;
     cursor: pointer;
-    font-size: 16px;
-    color: #333;
-    transition: all 0.2s ease;
+    font-size: $font-size-sm;
+    color: $color-text-body;
+    transition: background-color $transition-fast, color $transition-fast;
     border: none;
+    position: relative;
+
+    @include m.from($bp-md) {
+      font-size: $font-size-base;
+    }
 
     &:hover {
       background: #d0e6fa;
     }
 
     &.tab-active {
-      background: #123970;
-      color: white;
+      background: $color-darkBlue;
+      color: $color-white;
 
       .checkmark {
         position: absolute;
@@ -177,49 +232,72 @@ const isBlocksMode = computed(() => {
 }
 
 .table-wrapper {
-  background-color: #eaf6ff;
-  border-radius: 0 8px 8px 8px;
-  
+  background-color: $color-bg-nav;
+  border-radius: 0 $radius-md $radius-md $radius-md;
+  min-width: min(100%, 42rem);
+
   .table-header {
     display: grid;
-    grid-template-columns: 1fr 10fr 1fr;
-    border-radius: 0 8px 0 0;
+    grid-template-columns: minmax(4rem, 1.1fr) minmax(0, 10fr) minmax(4rem, 1fr);
+    border-radius: 0 $radius-md 0 0;
     background: #e0e0e0;
-    padding: 24px 32px;
-    font-weight: 500;
-    font-size: 0.875rem;
-    color: #333;
+    padding: clamp(0.75rem, 2vw, 1.5rem) clamp(0.75rem, 3vw, 2rem);
+    font-weight: $font-weight-medium;
+    font-size: $font-size-sm;
+    color: $color-text-body;
 
     .header-cell {
-      padding: 0 4px;
+      padding: 0 $spacing-xs;
       text-align: center;
-      font-family: 'IBM M';
+      font-family: $font-ibm-m, sans-serif;
+
+      &:nth-child(2) {
+        text-align: left;
+      }
     }
   }
 
   .table-row {
-    &__link{
-      display: grid;
-      grid-template-columns: 1fr 10fr 1fr;
-      background: #eaf6ff;
-      padding: 24px 32px;
-      font-size: 0.875rem;
-      cursor: pointer;
-      color: black;
+    align-items: stretch;
 
-        &:hover{
-          background-color: #123970;
-          color: white;
+    &__link {
+      display: grid;
+      grid-template-columns: minmax(4rem, 1.1fr) minmax(0, 10fr) minmax(4rem, 1fr);
+      background: $color-bg-nav;
+      padding: clamp(0.75rem, 2vw, 1.5rem) clamp(0.75rem, 3vw, 2rem);
+      font-size: $font-size-sm;
+      color: $black;
+      text-decoration: none;
+      border: none;
+      border-radius: 0;
+      width: 100%;
+      height: 100%;
+      box-sizing: border-box;
+      text-align: inherit;
+      font: inherit;
+
+      &--clickable {
+        cursor: pointer;
+
+        &:hover {
+          background-color: $color-darkBlue;
+          color: $color-white;
         }
+      }
+
+      &--plain {
+        cursor: default;
+      }
     }
 
     .row-cell {
-      padding: 0 4px;
+      padding: 0 $spacing-xs;
       word-break: break-word;
       text-align: center;
+      align-self: center;
 
       &:nth-child(2) {
-        font-weight: 500;
+        font-weight: $font-weight-medium;
         text-align: start;
       }
     }
@@ -227,7 +305,7 @@ const isBlocksMode = computed(() => {
 
   .block-wrapper {
     &:not(:last-child) {
-      margin-bottom: 16px; // Отступ между блоками
+      margin-bottom: $spacing-md;
     }
   }
 
@@ -236,6 +314,33 @@ const isBlocksMode = computed(() => {
     background: #d0d0d0;
     margin: 2px auto;
     width: 96%;
+  }
+
+  &--no-code {
+    .table-header {
+      grid-template-columns: minmax(0, 10fr) minmax(6rem, 1.2fr);
+
+      .header-cell:first-child {
+        text-align: left;
+      }
+
+      .header-cell:last-child {
+        text-align: center;
+      }
+    }
+
+    .table-row__link {
+      grid-template-columns: minmax(0, 10fr) minmax(6rem, 1.2fr);
+    }
+
+    .row-cell:first-child {
+      font-weight: $font-weight-medium;
+      text-align: start;
+    }
+
+    .row-cell:last-child {
+      text-align: center;
+    }
   }
 }
 </style>

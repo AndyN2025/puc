@@ -10,13 +10,7 @@
         <img :src="Schema" alt="Схема управления" />
       </div>
 
-      <!-- <ul class="struct__list">
-        <li class="struct__item" v-for="item in peoples" :key="item.name">
-          <p class="struct__item-name">{{ item.name }}</p>
-          <p class="struct__item-post">{{ item.post }}</p>
-          <span class="struct__item-otdel">{{ item.otdel }}</span>
-        </li>
-      </ul> -->
+      
     </div>
   </div>
 </template>
@@ -54,7 +48,6 @@ const peoples = [
 
   &__schema{
     flex: 5;
-    // padding: 0 20px 0 0;
     display: flex;
     justify-content: center;
   }

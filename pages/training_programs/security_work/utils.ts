@@ -37,7 +37,23 @@ import programBez3App from '@/assets/documents/training/securityWorks/11-Applica
 import programPz from '@/assets/documents/training/securityWorks/12-Program.doc'
 import programPzApp from '@/assets/documents/training/securityWorks/12-Application.doc'
 
-export const programsOffline = [
+export interface TrainingProgram {
+  textCode: string
+  code: string
+  title: string
+  hours: number
+  mainDescription: string
+  document: string | string[]
+  img: string | string[]
+  users: string[]
+  period?: string
+  requiremets?: string[]
+  programm?: string
+  application?: string
+  format?: string
+}
+
+export const programsOffline: TrainingProgram[] = [
   {
     textCode: '04-15/1ОТ',
     code: '04-15_1-OT',
@@ -344,7 +360,8 @@ import programDistOb from '@/assets/documents/training/securityWorks/Dist_obshie
 import programmDistSpec from '@/assets/documents/training/securityWorks/Dist_spec_04-17.doc'
 import programDistObApp from '@/assets/documents/training/securityWorks/Dist_application_04-15.doc'
 import programmDistSpecApp from '@/assets/documents/training/securityWorks/Dist_application_spec_04-17.doc'
-export const programsOnline = [
+
+export const programsOnline: TrainingProgram[] = [
   { 
     textCode: '04-15/1ОТ', 
     code: '04-15_1-OT_dist', 
@@ -386,5 +403,10 @@ export const programsOnline = [
     ],
     programm: programmDistSpec,
     application: programmDistSpecApp
-  }
+}
+  ]
+
+export const securityWorkPrograms: TrainingProgram[] = [
+  ...programsOffline,
+  ...programsOnline
 ]

@@ -4,14 +4,14 @@
     <NavBlock :navItems="navSvedenItems" :activeIndex="4"/>
     <DotTitle text="Сведения об образовательной организации" />
     <TitleCommon :text="titleCommon"/>
-    <!-- <CardSlider :dotShow="false" style="margin-bottom: 40px;"/> -->
+    
 
     <ListCourses style="margin-bottom: 60px;"/>
     <DotTitle text="программы и формы обучения" />
     <TitleCommon text="Образовательные программы и подготовка специалистов"/>
 
     <div class="accessibility-grid">
-      <!-- Карточка 1 -->
+      
       <div class="accessibility-grid__card">
         <div class="accessibility-grid__icon">
           <img :src="eduIcon1" alt="Иконка лифт"  />
@@ -24,12 +24,12 @@
         </ul>
       </div>
 
-      <!-- Картинка (блок 2) -->
+      
       <div class="accessibility-grid__image">
         <img :src="build" alt="Фото здания" />
       </div>
 
-      <!-- Карточка 3 -->
+      
       <div class="accessibility-grid__card">
         <div class="accessibility-grid__icon">
           <img :src="eduIcon2" alt="Иконка кран"  />
@@ -38,7 +38,7 @@
         <p class="accessibility-grid__text">Предаттестационная подготовка руководителей и специалистов организаций, поднадзорных Федеральной службе по экологическому и технологическому надзору</p>
       </div>
 
-      <!-- Карточка 4 -->
+      
       <div class="accessibility-grid__card">
         <div class="accessibility-grid__icon">
           <img :src="eduIcon3" alt="Иконка обучение"  />
@@ -51,7 +51,7 @@
         </ul>
       </div>
 
-      <!-- Карточка 5 -->
+      
       <div class="accessibility-grid__card">
         <div class="accessibility-grid__icon">
           <img :src="eduIcon4" alt="Иконка завод"  />
@@ -144,7 +144,7 @@ const breadCrumbs = [
 }
 
 .accessibility-grid__image {
-  grid-row: span 2; /* ← занимает 2 строки */
+  grid-row: span 2; 
   border-radius: 12px;
   overflow: hidden;
   position: relative;

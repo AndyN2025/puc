@@ -7,7 +7,7 @@
       @mouseleave="resumeSlider"
     >
       <div class="slider-track" ref="trackRef">
-        <!-- Клонируем элементы дважды для бесшовной прокрутки -->
+        
         <div 
           v-for="(item, index) in duplicatedPartners" 
           :key="index" 
@@ -26,7 +26,7 @@ import { partnerItems } from '@/utils/partnersUtils'
 
 const trackRef = ref(null)
 const animationId = ref(null)
-const isPlaying = ref(false) // ← изначально false, запустим только на клиенте
+const isPlaying = ref(false)
 const speed = 0.8
 
 const duplicatedPartners = computed(() => [...partnerItems, ...partnerItems])
@@ -36,7 +36,6 @@ const animate = () => {
   if (!isPlaying.value || !trackRef.value) return
 
   position -= speed
-  // Используем computed длину — 90px + 24px gap = 114px на элемент
   const itemWidth = 90 + 24
   const totalWidth = partnerItems.length * itemWidth
 

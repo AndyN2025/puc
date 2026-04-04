@@ -2,7 +2,7 @@
   <div class="header__phone">
     <div class="header__phone-contact">
       <span class="header__phone-logo" v-html="logoRaw" />
-      <span class="header__phone-text"><a :href="'tel:' + textFirst">{{ textFirst }}</a></span>
+      <!-- <span class="header__phone-text"><a :href="'tel:' + textFirst">{{ textFirst }}</a></span> -->
       <span class="header__phone-text"><a :href="'tel:' + textSecond">{{ textSecond }}</a></span>
     </div>
   </div>

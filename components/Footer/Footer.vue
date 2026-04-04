@@ -1,7 +1,7 @@
 <template>
   <footer class="footer container">
     <div class="footer__container">
-      <!-- Бренд и копирайт -->
+      
       <div class="footer__brand">
         <HeaderBrand />
         <p class="footer__copyright">
@@ -10,7 +10,7 @@
         </p>
       </div>
 
-      <!-- Навигация -->
+      
        <div class="footer__navigation">
             <nav class="footer__nav" aria-label="Навигация для клиентов">
                 <h3 class="footer__nav-title">Клиентам</h3>
@@ -31,7 +31,7 @@
        </div>
 
 
-      <!-- Контакты -->
+      
       <div class="footer__contacts">
         <div class="footer__contacts-block">
             <div class="footer__contacts-content">
@@ -55,7 +55,7 @@
             <div class="footer__contacts-oferta">Вся информация на сайте не является публичной офертой.</div>
         </div>
 
-        <!-- Лицензия -->
+        
         <a
             :href="License"
             target="_blank"

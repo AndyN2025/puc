@@ -1,7 +1,7 @@
 <template>
   <div class="header__mail">
     <div class="header__mail-contact">
-      <!-- <img :src="icon" alt="Электронная почта" /> -->
+      
       <span class="header__mail-logo" v-html="mailIcon" />
       <a :href="link" class="header__mail-text">{{ text }}</a>
     </div>

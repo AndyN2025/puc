@@ -1,0 +1,35 @@
+@use 'sass:string';
+@use './vars' as *;
+
+@mixin from($bp) {
+  @media (min-width: $bp) {
+    @content;
+  }
+}
+
+@mixin until($bp) {
+  $max: string.unquote('calc(#{$bp} - 1px)');
+  @media (max-width: $max) {
+    @content;
+  }
+}
+
+@mixin container-padding {
+  padding-left: $container-padding-x-mobile;
+  padding-right: $container-padding-x-mobile;
+
+  @include from($bp-md) {
+    padding-left: $container-padding-x-tablet;
+    padding-right: $container-padding-x-tablet;
+  }
+
+  @include from($bp-lg) {
+    padding-left: $container-padding-x-desktop;
+    padding-right: $container-padding-x-desktop;
+  }
+}
+
+@mixin focus-ring {
+  outline: 2px solid rgba($color-darkBlue, 0.45);
+  outline-offset: 2px;
+}

@@ -1,9 +1,9 @@
 <template>
-  <div class="inter">
-    <Breadcrumbs :items="breadCrumbs"/> 
-    <NavBlock :navItems="navSvedenItems" :activeIndex="11"/>
+  <div class="p">
+    <Breadcrumbs :items="breadCrumbs" />
+    <NavBlock :navItems="navSvedenItems" :activeIndex="11" />
     <DotTitle text="Сведения об образовательной организации" />
-    <TitleCommon :text="titleCommon"/>
+    <TitleCommon :text="titleCommon" />
 
     <div class="inter__text">
       <p class="inter__text-item">Договоров с иностранными или международными организациями по вопросам образования и науки — нет.</p>
@@ -30,14 +30,15 @@ const breadCrumbs = [
 </script>
 
 <style scoped lang="scss">
-.inter{
-  margin-bottom: 60px;
+@use '@/assets/styles/vars' as *;
 
-  &__text{
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    margin-bottom: 130px;
-  }
+.inter__text {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+  margin-bottom: clamp(3rem, 10vw, 8rem);
+  max-width: 48rem;
+  line-height: $line-height-body;
+  color: $color-text-body;
 }
 </style>

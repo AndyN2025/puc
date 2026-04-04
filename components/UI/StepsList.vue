@@ -6,16 +6,16 @@
       class="step-card"
       :class="{ 'step-card--first': index === 0 }"
     >
-      <!-- Цифра и линия -->
+      
       <div class="step-header">
         <span class="step-number">{{ step.number }}</span>
         <div class="step-line"></div>
       </div>
 
-      <!-- Заголовок -->
+      
       <h3 class="step-title">{{ step.title }}</h3>
 
-      <!-- Описание -->
+      
       <a class="step-description" v-if="index === 1" href="#">{{ step.description }}</a>
       <p class="step-description" v-if="index !== 1">{{ step.description }}</p>
 
@@ -40,15 +40,8 @@
         </div>
       </div>     
 
-      <!-- Кнопка (только для первого элемента) -->
-      <!-- <button
-        v-if="step.buttonText"
-        type="button"
-        class="step-button"
-        @click="handleButtonClick(step)"
-      >
-        {{ step.buttonText }}
-      </button> -->
+      
+      
     </div>
   </div>
 </template>
@@ -65,7 +58,6 @@ const emit = defineEmits<{
   (e: 'submit', step: any): void
 }>()
 
-// Добавляем file к первому шагу, если он задан
 const stepsWithFile = computed(() => {
   const steps = [...defaultSteps]
   if (props.file && steps[0]) {
@@ -76,17 +68,15 @@ const stepsWithFile = computed(() => {
 
 const handleButtonClick = (step: any) => {
   if (step.file) {
-    // Скачиваем файл
     const link = document.createElement('a')
     link.href = step.file
-    link.download = '' // браузер предложит имя файла из URL
-    link.target = '_blank' // необязательно, но безопаснее
+    link.download = ''
+    link.target = '_blank'
     link.rel = 'noopener noreferrer'
     document.body.appendChild(link)
     link.click()
     document.body.removeChild(link)
   } else {
-    // Если файла нет — просто эмитим событие (как раньше)
     emit('submit', step)
   }
 }
