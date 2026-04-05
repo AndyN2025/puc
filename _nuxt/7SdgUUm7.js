@@ -1,1 +1,0 @@
-import{_ as t,c as o,a as s,o as n}from"./D94sWtpt.js";const c={},a={class:"p"};function r(l,e){return n(),o("div",a,[...e[0]||(e[0]=[s("h1",{class:"text-2xl font-bold"},"О нас",-1),s("p",null,'Это страница "О нас" Приокского учебного центра.',-1)])])}const d=t(c,[["render",r]]);export{d as default};
