@@ -1,6 +1,15 @@
 <template>
-  <div class="main" :style="{ backgroundImage: `url(${mainPic})` }">
-    <div class="container">
+  <div class="main">
+    <img
+      class="main__bg"
+      :src="mainPic"
+      alt=""
+      width="1920"
+      height="825"
+      fetchpriority="high"
+      decoding="async"
+    />
+    <div class="container main__inner">
       <div class="main__content">
         <h1 class="main__title">
           Дополнительное профессиональное образование<br />
@@ -25,7 +34,7 @@
 </template>
 
 <script setup lang="ts">
-import mainPic from '@/assets/img/mainTest1.png'
+import mainPic from '@/assets/img/mainTest1.webp'
 import CallbackRequestModal from '@/components/UI/CallbackRequestModal.vue'
 import { SITE_PHONES } from '@/utils/site'
 
@@ -39,9 +48,7 @@ const callbackModalOpen = ref(false)
 .main {
   position: relative;
   min-height: min(95vh, 52rem);
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -52,6 +59,22 @@ const callbackModalOpen = ref(false)
   padding-left: 0;
   padding-right: 0;
   border-radius: 0 0 $radius-lg $radius-lg;
+
+  &__bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  &__inner {
+    position: relative;
+    z-index: 1;
+  }
 
   &__content {
     width: 100%;

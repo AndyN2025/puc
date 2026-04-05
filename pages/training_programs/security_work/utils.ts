@@ -6,7 +6,7 @@ import uPodmash from '@/assets/img/training/securityWork/ofline/UPodmash.png'
 import uVis1 from '@/assets/img/training/securityWork/ofline/UVisot1.png'
 import uVis2 from '@/assets/img/training/securityWork/ofline/UVisot2.png'
 import uVis3 from '@/assets/img/training/securityWork/ofline/UVisot3.png'
-import uVis3PK from '@/assets/img/training/securityWork/ofline/UVisot3_PK.png'
+import uVis3PK from '@/assets/img/training/securityWork/ofline/UVisot3_PK.webp'
 import uBez1 from '@/assets/img/training/securityWork/ofline/UBez1.png'
 import uBez2 from '@/assets/img/training/securityWork/ofline/Ubez2.png'
 import uBez3 from '@/assets/img/training/securityWork/ofline/Ubez3.png'
@@ -354,7 +354,7 @@ export const programsOffline: TrainingProgram[] = [
   }
 ]
 
-import diplom from '@/assets/img/training/securityWork/distant/diplome.png'
+import diplom from '@/assets/img/training/securityWork/distant/diplome.webp'
 import protocol from '@/assets/img/training/securityWork/distant/protocol.png'
 import programDistOb from '@/assets/documents/training/securityWorks/Dist_obshie_04-15.doc'
 import programmDistSpec from '@/assets/documents/training/securityWorks/Dist_spec_04-17.doc'

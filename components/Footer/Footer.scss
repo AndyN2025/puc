@@ -226,7 +226,7 @@
   }
 
   &__contacts-oferta {
-    color: $color-text-muted;
+    color: color-mix(in srgb, $color-text-body 78%, $color-darkBlue);
     font-size: clamp(0.8125rem, 1.8vw, $font-size-base);
     line-height: $line-height-body;
     display: flex;

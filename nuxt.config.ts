@@ -7,6 +7,7 @@ import { opoWorkerPrograms } from './pages/training_programs/tematicheskie_semin
 import { professionalPrograms } from './pages/training_programs/professional_education/utils'
 import { industrialTrainingPrograms } from './pages/training_programs/industrial_safety/utils'
 import { newsPrerenderPaths } from './data/news'
+import { SITE_COPY, SITE_ORG } from './utils/site'
 
 function trainingCourseRoutes(
   base: string,
@@ -76,6 +77,18 @@ export default defineNuxtConfig({
     }
   },
   app: {
-    baseURL: '/puc/'
+    baseURL: '/puc/',
+    head: {
+      htmlAttrs: { lang: 'ru' },
+      charset: 'utf-8',
+      viewport: 'width=device-width, initial-scale=1',
+      title: `${SITE_ORG.shortName} — ДПО и обучение в Калуге`,
+      meta: [
+        {
+          name: 'description',
+          content: SITE_COPY.contactsLead
+        }
+      ]
+    }
   }
 })

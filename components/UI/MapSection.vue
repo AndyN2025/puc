@@ -2,27 +2,38 @@
   <div class="contact-section">
     
     <div class="map-column">
-      <div class="map-container">
+      <div ref="mapSentinel" class="map-container">
         <div class="map-embed">
-          <a
-            href="https://yandex.ru/maps/org/priokskiy_uchebny_tsentr/1030102847/?utm_medium=mapframe&utm_source=maps"
-            class="map-embed__sr"
-          >{{ SITE_ORG.shortName }}</a>
-          <a
-            href="https://yandex.ru/maps/6/kaluga/category/occupational_safety_and_health/184105368/?utm_medium=mapframe&utm_source=maps"
-            class="map-embed__sr"
-          >Безопасность труда в Калуге</a>
-          <a
-            href="https://yandex.ru/maps/6/kaluga/category/further_education/184106162/?utm_medium=mapframe&utm_source=maps"
-            class="map-embed__sr"
-          >Дополнительное образование в Калуге</a>
-          <iframe
-            src="https://yandex.ru/map-widget/v1/?ll=36.272661%2C54.504872&mode=poi&poi%5Bpoint%5D=36.272394%2C54.505870&poi%5Buri%5D=ymapsbm1%3A%2F%2Forg%3Foid%3D1030102847&z=16.73"
-            width="560"
-            height="400"
-            :title="`Карта: ${SITE_ORG.shortName}, Калуга`"
-            allowfullscreen
-          />
+          <div
+            v-if="!mapLoaded"
+            class="map-embed__lazy"
+            aria-busy="true"
+            aria-live="polite"
+          >
+            <span class="map-embed__lazy-text">Загрузка карты…</span>
+          </div>
+          <template v-else>
+            <a
+              href="https://yandex.ru/maps/org/priokskiy_uchebny_tsentr/1030102847/?utm_medium=mapframe&utm_source=maps"
+              class="map-embed__sr"
+            >{{ SITE_ORG.shortName }}</a>
+            <a
+              href="https://yandex.ru/maps/6/kaluga/category/occupational_safety_and_health/184105368/?utm_medium=mapframe&utm_source=maps"
+              class="map-embed__sr"
+            >Безопасность труда в Калуге</a>
+            <a
+              href="https://yandex.ru/maps/6/kaluga/category/further_education/184106162/?utm_medium=mapframe&utm_source=maps"
+              class="map-embed__sr"
+            >Дополнительное образование в Калуге</a>
+            <iframe
+              src="https://yandex.ru/map-widget/v1/?ll=36.272661%2C54.504872&mode=poi&poi%5Bpoint%5D=36.272394%2C54.505870&poi%5Buri%5D=ymapsbm1%3A%2F%2Forg%3Foid%3D1030102847&z=16.73"
+              width="560"
+              height="400"
+              loading="lazy"
+              :title="`Карта: ${SITE_ORG.shortName}, Калуга`"
+              allowfullscreen
+            />
+          </template>
         </div>
       </div>
     </div>
@@ -67,6 +78,30 @@
 
 <script setup lang="ts">
 import { SITE_ADDRESS, SITE_EMAIL, SITE_ORG, SITE_PHONES, siteMailto } from '@/utils/site'
+
+const mapSentinel = ref<HTMLElement | null>(null)
+const mapLoaded = ref(false)
+
+onMounted(() => {
+  const el = mapSentinel.value
+  if (!el || typeof IntersectionObserver === 'undefined') {
+    mapLoaded.value = true
+    return
+  }
+  const obs = new IntersectionObserver(
+    (entries) => {
+      for (const e of entries) {
+        if (e.isIntersecting) {
+          mapLoaded.value = true
+          obs.disconnect()
+          break
+        }
+      }
+    },
+    { rootMargin: '140px 0px', threshold: 0 }
+  )
+  obs.observe(el)
+})
 </script>
 
 <style lang="scss" scoped>
@@ -167,6 +202,24 @@ import { SITE_ADDRESS, SITE_EMAIL, SITE_ORG, SITE_PHONES, siteMailto } from '@/u
           inset: 0;
           background: color-mix(in srgb, $color-lightBlue 45%, $color-white);
           border-radius: inherit;
+        }
+
+        &__lazy {
+          position: absolute;
+          inset: 0;
+          z-index: 1;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: color-mix(in srgb, $color-lightBlue 50%, $color-white);
+          border-radius: inherit;
+        }
+
+        &__lazy-text {
+          font-size: $font-size-sm;
+          font-family: $font-ibm-m;
+          font-weight: $font-weight-semibold;
+          color: $color-darkBlue;
         }
 
         :deep(iframe),
@@ -300,7 +353,7 @@ import { SITE_ADDRESS, SITE_EMAIL, SITE_ORG, SITE_PHONES, siteMailto } from '@/u
 
             .label {
               font-size: $font-size-sm;
-              color: $color-text-muted;
+              color: color-mix(in srgb, $color-text-body 85%, $color-darkBlue);
               font-weight: $font-weight-semibold;
             }
 
