@@ -59,7 +59,7 @@ defineProps({
 
   .breadcrumbs-list {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     align-items: center;
     list-style: none;
     margin: 0;
@@ -67,11 +67,14 @@ defineProps({
     min-width: 0;
     width: 100%;
     max-width: 100%;
-    row-gap: 0.35rem;
     column-gap: 0;
 
+    @include m.until($bp-lg) {
+      overflow: hidden;
+    }
+
     @include m.from($bp-lg) {
-      flex-wrap: nowrap;
+      overflow: visible;
     }
 
     .breadcrumb-item {
@@ -80,22 +83,29 @@ defineProps({
       gap: 8px;
       min-width: 0;
 
-      &:not(.is-active) {
-        flex-shrink: 1;
+      @include m.until($bp-lg) {
+        flex: 0 1 auto;
 
-        @include m.from($bp-lg) {
-          flex-shrink: 0;
+        &.is-active {
+          flex: 1 1 0;
+          min-width: 0;
+          overflow: hidden;
         }
       }
 
-      &.is-active {
-        flex: 1 1 100%;
-        min-width: 0;
-        overflow: hidden;
+      @include m.from($bp-lg) {
+        flex-shrink: 0;
 
-        @include m.from($bp-lg) {
+        &.is-active {
           flex: 1 1 0;
+          min-width: 0;
+          overflow: hidden;
         }
+      }
+
+      &:not(.is-active) .breadcrumb-link {
+        flex: 1 1 0;
+        min-width: 0;
       }
 
       .breadcrumb-link {
@@ -108,11 +118,6 @@ defineProps({
         text-overflow: ellipsis;
         white-space: nowrap;
 
-        @include m.until($bp-lg) {
-          display: block;
-          max-width: 100%;
-        }
-
         &:hover {
           color: #004494;
           text-decoration: underline;
@@ -120,6 +125,7 @@ defineProps({
       }
 
       .breadcrumb-text {
+        flex: 1 1 auto;
         color: #333;
         font-weight: 600;
         display: block;
@@ -127,7 +133,6 @@ defineProps({
         text-overflow: ellipsis;
         white-space: nowrap;
         min-width: 0;
-        max-width: 100%;
       }
 
       .breadcrumb-separator {

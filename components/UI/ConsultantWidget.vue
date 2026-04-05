@@ -89,6 +89,7 @@
 
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
+import { sitePhonesForConsultantWidget } from '@/utils/site'
 
 const props = defineProps({
   delay: {
@@ -97,11 +98,7 @@ const props = defineProps({
   },
   phones: {
     type: Array,
-    default: () => [
-      { number: '+74842562183', formatted: '+7 (4842) 56-21-83' },
-      { number: '+74842597583', formatted: '+7 (4842) 59-75-83' },
-      { number: '+79105201564', formatted: '+7 (910) 520-15-64' }
-    ]
+    default: () => sitePhonesForConsultantWidget()
   },
   title: {
     type: String,

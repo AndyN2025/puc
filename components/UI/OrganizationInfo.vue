@@ -4,7 +4,7 @@
       
       <div class="info-label">Полное наименование образовательной организации</div>
       <div class="info-value">
-        Автономная некоммерческая организация дополнительного профессионального образования «Приокский учебный центр»
+        {{ SITE_ORG.nameFull }}
       </div>
 
       
@@ -22,7 +22,7 @@
       
       <div class="info-label">Адрес местонахождения образовательной организации</div>
       <div class="info-value">
-        248002, Калужская область, г. Калуга, ул. Никитина, д. 41 помещ. 6
+        {{ SITE_ADDRESS.legal }}
       </div>
 
       
@@ -36,21 +36,30 @@
       
       <div class="info-label">Контактные телефоны</div>
       <div class="info-value phones">
-        <a href="tel:+74842562183" class="phone-link">8 (4842) 56-21-83</a>
-        <a href="tel:+74842597583" class="phone-link">8 (4842) 59-75-83</a>
-        <a href="tel:+79105201564" class="phone-link">8 (910) 520-15-64</a>
+        <a
+          v-for="p in SITE_PHONES"
+          :key="p.tel"
+          :href="`tel:${p.tel}`"
+          class="phone-link"
+        >{{ p.display8 }}</a>
       </div>
 
       
       <div class="info-label">Адрес электронной почты</div>
       <div class="info-value">
-        <a href="mailto:ekc_06@mail.ru" class="email-link">ekc_06@mail.ru</a>
+        <a :href="siteMailto()" class="email-link">{{ SITE_EMAIL }}</a>
       </div>
     </div>
   </div>
 </template>
 
+<script setup lang="ts">
+import { SITE_ADDRESS, SITE_EMAIL, SITE_ORG, SITE_PHONES, siteMailto } from '@/utils/site'
+</script>
+
 <style scoped lang="scss">
+@use '@/assets/styles/vars' as *;
+
 .organization-info {
   width: 100%;
   max-width: 100%;
@@ -66,21 +75,23 @@
 }
 
 .info-label {
-  font-family: 'IBM M';
-  color: #1f2937;
-  background-color: #eaf6ff;
+  font-family: 'IBM M', sans-serif;
+  color: $color-darkBlue;
+  background-color: $color-bg-nav;
   padding: 16px;
   align-self: start;
   min-height: 88px;
+  font-weight: 600;
 }
 
 .info-value {
-  color: #374151;
+  color: $color-text-body;
   padding: 16px;
   align-self: start;
   font-size: 18px;
+  background-color: $color-white;
 
-  &.phones{
+  &.phones {
     padding: 0 8px;
   }
 }
@@ -124,28 +135,42 @@
 @media (max-width: 768px) {
   .info-grid {
     grid-template-columns: 1fr;
-    gap: 8px;
+    gap: 0;
   }
 
+  /* Как на десктопе: подпись на голубом, значение на белом — пара визуально связана */
   .info-label {
-    font-size: 15px;
-    padding: 12px;
-    font-weight: 500;
+    margin-top: 14px;
+    font-size: clamp(0.875rem, 3.2vw, 1rem);
+    padding: 12px 14px;
+    min-height: 0;
+    font-weight: 600;
+    color: $color-darkBlue;
+    background-color: $color-bg-nav;
+    border: 1px solid $color-border-strong;
+    border-bottom: none;
+    border-radius: 10px 10px 0 0;
+  }
+
+  .info-grid > .info-label:first-child {
+    margin-top: 0;
   }
 
   .info-value {
     font-size: 15px;
-    padding: 12px;
+    padding: 12px 14px 14px;
+    background-color: $color-white;
+    border: 1px solid $color-border-strong;
+    border-top: none;
+    border-radius: 0 0 10px 10px;
+
+    &.phones {
+      padding: 12px 14px 14px;
+    }
   }
 
-  .info-label,
-  .info-value {
-    border: none;
-    background-color: transparent;
-  }
-
-  .info-value {
-    padding-left: 12px;
+  .info-value + .info-label {
+    margin-top: 14px;
   }
 }
 </style>

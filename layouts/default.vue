@@ -5,12 +5,14 @@
       <NuxtPage />
     </main>
     <Footer />
+    <CookieConsent />
   </div>
 </template>
 
 <script setup lang="ts">
 import Header from "@/components/Header/Header.vue"
 import Footer from "@/components/Footer/Footer.vue"
+import CookieConsent from "@/components/UI/CookieConsent.vue"
 </script>
 
 <style lang="scss" scoped>

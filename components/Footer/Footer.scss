@@ -36,6 +36,8 @@
     justify-content: flex-start;
     gap: $spacing-md;
     min-width: 0;
+    /* Как в шапке: логотип (currentColor) и название — фирменный синий */
+    color: $color-darkBlue;
 
     @include m.from($bp-md) {
       grid-column: 1 / -1;
@@ -48,7 +50,7 @@
 
   &__copyright {
     font-size: clamp(0.875rem, 2vw, $font-size-base);
-    color: $color-text-muted;
+    color: color-mix(in srgb, $color-darkBlue 82%, $color-text-muted);
     line-height: $line-height-body;
     max-width: 100%;
 
@@ -227,6 +229,41 @@
     color: $color-text-muted;
     font-size: clamp(0.8125rem, 1.8vw, $font-size-base);
     line-height: $line-height-body;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: $spacing-sm;
+  }
+
+  &__contacts-oferta-text {
+    display: block;
+    margin: 0;
+    padding: 0;
+  }
+
+  &__cookie-settings {
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: none;
+    font: inherit;
+    font-size: clamp(0.8125rem, 1.8vw, $font-size-base);
+    color: $color-darkBlue;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    cursor: pointer;
+    text-align: left;
+    transition: color $transition-fast;
+
+    &:hover {
+      color: $color-cta-hover;
+    }
+
+    &:focus-visible {
+      outline: 2px solid $color-darkBlue;
+      outline-offset: 2px;
+      border-radius: $radius-sm;
+    }
   }
 
   &__license-link {
@@ -260,7 +297,7 @@
     }
 
     @include m.from($bp-md) {
-      width: auto;
+      // width: auto;
       align-self: flex-start;
     }
   }

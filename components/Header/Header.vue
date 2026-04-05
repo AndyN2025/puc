@@ -14,7 +14,7 @@
         class="header__burger"
         :aria-expanded="menuOpen"
         aria-controls="header-mobile-panel"
-        aria-label="Открыть меню"
+        :aria-label="menuOpen ? 'Свернуть меню' : 'Открыть меню'"
         @click="toggleMenu"
       >
         <span class="header__burger-line" aria-hidden="true" />
@@ -28,12 +28,12 @@
         <HeaderNav :items="navItems" />
         <div class="header__panel-contacts">
           <HeaderMail
-            text="EKC_06@MAIL.RU"
-            link="mailto:ekc_06@mail.ru"
+            :text="SITE_EMAIL_HEADER_DISPLAY"
+            :link="siteMailto()"
           />
           <HeaderPhone
-            textFirst="8 (910) 520-15-64, "
-            textSecond="8 (4842) 56-21-83"
+            :textFirst="headerPhoneFirst"
+            :textSecond="headerPhoneSecond"
           />
         </div>
       </div>
@@ -52,6 +52,11 @@ import HeaderBrand from './HeaderBrand.vue'
 import HeaderNav from './HeaderNav.vue'
 import HeaderMail from './HeaderMail.vue'
 import HeaderPhone from './HeaderPhone.vue'
+import {
+  SITE_EMAIL_HEADER_DISPLAY,
+  SITE_PHONES,
+  siteMailto
+} from '@/utils/site'
 
 const route = useRoute()
 
@@ -60,11 +65,16 @@ const isHomePage = computed(() => {
   return p === '/' || p === '' || p === '/puc' || p === '/puc/'
 })
 
+const headerPhoneFirst = `${SITE_PHONES[2]!.display8}, `
+const headerPhoneSecond = SITE_PHONES[0]!.display8
+
 const navItems = [
   { label: 'Главная', to: '/' },
   { label: 'Об организации', to: '/sveden/common/' },
   { label: 'Обучение', to: '/training_programs/' },
-  { label: 'Бланки документов', to: '/docs/' }
+  { label: 'Бланки документов', to: '/docs/' },
+  { label: 'Новости', to: '/news/' },
+  { label: 'Контакты', to: '/contacts/' }
 ]
 
 const isScrolled = ref(false)

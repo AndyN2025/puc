@@ -72,6 +72,9 @@ if (contentRef.value) {
 </script>
 
 <style scoped lang="scss">
+@use '@/assets/styles/vars' as *;
+@use '@/assets/styles/mixins' as m;
+
 .accordion-item {
   border: 1px solid #123970;
   border-radius: 8px;
@@ -104,31 +107,36 @@ if (contentRef.value) {
     flex-grow: 1;
   }
 
-  &__text{
+  &__text {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
     width: 100%;
     margin-bottom: 16px;
   }
 
   &__tags {
     display: flex;
+    flex-wrap: wrap;
     gap: 8px;
-    max-width: 90%;
+    max-width: 100%;
+    min-width: 0;
   }
 
   &__tag {
-    background: #E9F4FF;
+    background: $color-lightBlue;
     padding: 4px 12px;
     border-radius: 8px;
     font-size: 0.875rem;
-    color: #000000;
-    white-space: nowrap;
-    display: flex;
+    color: $color-black;
+    white-space: normal;
+    line-height: 1.35;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-    font-family: 'IBM', sans-serif;
+    font-family: $font-ibm;
   }
 
   &__toggle-btn {
@@ -161,6 +169,38 @@ if (contentRef.value) {
 
     &:not(:empty) {
       padding: 20px;
+    }
+  }
+
+  @include m.until($bp-md) {
+    padding: 16px 14px 8px;
+    margin-bottom: 18px;
+
+    &__title {
+      font-size: clamp(1.0625rem, 4.2vw, 1.375rem);
+      line-height: 1.25;
+    }
+
+    &__text {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: start;
+      gap: 10px 12px;
+    }
+
+    &__tags {
+      grid-column: 1;
+      min-width: 0;
+    }
+
+    &__toggle-btn {
+      grid-column: 2;
+      grid-row: 1;
+      align-self: start;
+    }
+
+    &__content:not(:empty) {
+      padding: 14px;
     }
   }
 }

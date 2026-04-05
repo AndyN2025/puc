@@ -28,6 +28,7 @@ import DotTitle from '@/components/UI/DotTitle.vue'
 import TitleCommon from '@/components/UI/TitleCommon.vue'
 import NavBlock from '@/components/UI/NavBlock.vue'
 import { navSvedenItems } from '@/utils/svedenUtils'
+import { SITE_EMAIL, SITE_PHONES } from '@/utils/site'
 
 const titleCommon = ref('Руководство')
 
@@ -43,18 +44,18 @@ const peoples = [
     name: 'Шмарева Елена Геннадьевна',
     post: 'Генеральный директор',
     otdel: 'Администрация',
-    phone: '8-(910)-520-15-64',
-    phoneDop: '8-(4842)-56-21-83',
-    email: 'ekc_06@mail.ru'
+    phone: SITE_PHONES[2]!.display8,
+    phoneDop: SITE_PHONES[0]!.display8,
+    email: SITE_EMAIL
   },
   {
     id: 2,
     name: 'Стрекалова Наталия Валентиновна',
     post: 'Главный бухгалтер',
     otdel: 'Финансовый отдел',
-    phone: '8-(910)-520-15-64',
-    phoneDop: '8-(4842)-56-21-83',
-    email: 'ekc_06@mail.ru'
+    phone: SITE_PHONES[2]!.display8,
+    phoneDop: SITE_PHONES[0]!.display8,
+    email: SITE_EMAIL
   }
 ]
 

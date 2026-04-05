@@ -180,9 +180,12 @@
                   @mouseenter="showPhoneTooltip = true"
                   @mouseleave="showPhoneTooltip = false"
                 >
-                  <a href="tel:+74842562183" class="info__phone-link">+7 (4842) 56-21-83</a>
-                  <a href="tel:+74842597583" class="info__phone-link">+7 (4842) 59-75-83</a>
-                  <a href="tel:+79105201564" class="info__phone-link">+7 (910) 520-15-64</a>
+                  <a
+                    v-for="p in SITE_PHONES"
+                    :key="p.tel"
+                    :href="`tel:${p.tel}`"
+                    class="info__phone-link"
+                  >{{ p.displayPlus7 }}</a>
                 </div>
               </span>
             </p>
@@ -218,6 +221,7 @@ import { computed, ref, watch } from 'vue'
 import Breadcrumbs from '@/components/UI/Breadcrumbs.vue'
 import ConsultationWidget from '@/components/UI/ConsultantWidget.vue'
 import checkIkon from '@/assets/img/checkIcon.svg'
+import { SITE_PHONES } from '@/utils/site'
 
 export interface TrainingProgramCourseDetailBreadcrumb {
   text: string

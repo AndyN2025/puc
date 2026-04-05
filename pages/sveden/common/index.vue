@@ -16,6 +16,7 @@ import DotTitle from '@/components/UI/DotTitle.vue';
 import OrganizationInfo from '@/components/UI/OrganizationInfo.vue';
 import NavBlock from '@/components/UI/NavBlock.vue'
 import { navSvedenItems } from '@/utils/svedenUtils'
+import { SITE_EMAIL } from '@/utils/site'
 
 import DocumentAccordion from '~/components/UI/DocumentAccordion.vue';
 
@@ -39,7 +40,7 @@ const gridItems = [
   { id: 2, title: 'АНО ДПО «ПУЦ»', text: 'Сокращенное наименование'},
   { id: 3, title: `АНО ДПО «ПУЦ» Приокский учебный центр`, text: 'Полное наименование'},
   { id: 4, title: 'ул. Никитина, 41', text: 'Фактический адрес'},
-  { id: 5, title: 'ekc_06@mail.ru', text: 'Адрес электронной почты'},  
+  { id: 5, title: SITE_EMAIL, text: 'Адрес электронной почты'},  
   { id: 6, title: `05.05.2014`, text: 'Дата образования'},
 ]
 

@@ -10,29 +10,7 @@
     />
     <DotTitle :text="titleCommon" />
     <TitleCommon :text="titleEducation" />
-
-    <!-- <div class="online-block">
-      <div class="online-block__left">
-        <p class="online-block__text">
-          АНО ДПО «Приокский учебный центр» проводит подготовку специалистов организаций, поднадзорных Федеральной службе по
-          экологическому, технологическому и атомному надзору, по направлениям промышленной безопасности:
-        </p>
-
-        <ul class="online-block__list">
-          <li v-for="item in podgotovkaList" :key="item.id" class="online-block__item">
-            <h4 class="online-block__item-title">{{ item.title }}</h4>
-            <div class="online-block__item-content">
-              <p class="online-block__item-text">{{ item.text }}</p>
-              <button type="button" class="online-block__item-btn">ОТКРЫТЬ ЗАЯВКУ</button>
-            </div>
-          </li>
-        </ul>
-      </div>
-      <div class="online-block__right">
-        <img :src="udostover" alt="Образец удостоверения" />
-      </div>
-    </div> -->
-
+    
     <DotTitle text="предаттестационная подготовка" />
     <ProgramTable :items="industrialPreAttestForTable" link="training_programs/industrial_safety" />
 

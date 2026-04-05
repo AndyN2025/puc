@@ -12,8 +12,14 @@
           <p>Мебель (эргономичные столы и стулья), мультимедийные комплексы (проектор, телевизор, персональные компьютеры, принтеры, акустические системы), специализированные учебные пособия, стенды, плакаты и различное оборудование, в том числе:</p>
         </div>
         <ul class="technic__content-list">
-          <li class="technic__content-item" v-for="item in matList">
-            <img :src="checkIcon" alt="галочка"/>
+          <li class="technic__content-item" v-for="item in matList" :key="item.text">
+            <img
+              class="technic__content-check"
+              :src="checkIcon"
+              alt=""
+              width="20"
+              height="20"
+            />
             <p>{{ item.text }}</p>
           </li>
         </ul>
@@ -410,26 +416,81 @@ const rawItems = [
       gap: 16px;
     }
 
-    &-item{
+    &-item {
       display: flex;
       flex-direction: row;
+      align-items: flex-start;
       gap: 12px;
+
+      p {
+        margin: 0;
+        min-width: 0;
+        font-family: $font-ibm, sans-serif;
+        font-size: $font-size-base;
+        line-height: $line-height-body;
+        color: $color-text-body;
+      }
+    }
+
+    &-check {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      object-fit: contain;
+      margin-top: 0.2em;
     }
   }
 
-  &__info{
+  @include m.until($bp-md) {
+    &__content {
+      flex-direction: column;
+      gap: 16px;
+      margin-bottom: 28px;
+
+      &-text,
+      &-list {
+        flex: none;
+        width: 100%;
+        min-width: 0;
+      }
+
+      &-text {
+        padding: 16px;
+      }
+
+      &-list {
+        padding: 16px;
+      }
+    }
+  }
+
+  &__info {
     margin-bottom: 80px;
 
-    &-title{
-      font-family: 'IBM M';
-      font-size: 18px;
+    &-title {
+      font-family: 'IBM M', sans-serif;
+      font-size: clamp(1rem, 2.5vw, 1.125rem);
       margin-bottom: 18px;
+      line-height: $line-height-tight;
+      color: $color-darkBlue;
     }
 
-    &-list{
+    &-list {
       display: flex;
       flex-direction: column;
       gap: 12px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    &-item {
+      font-family: $font-ibm, sans-serif;
+      font-size: clamp(0.875rem, 2.4vw, 1rem);
+      line-height: $line-height-body;
+      color: $color-text-body;
+      overflow-wrap: anywhere;
+      word-break: break-word;
     }
   }
 }
@@ -592,16 +653,17 @@ const rawItems = [
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 1.75rem;
-  height: 1.75rem;
+  width: 2rem;
+  height: 2rem;
   margin-top: 0.125rem;
   border-radius: $radius-sm;
   background: color-mix(in srgb, $color-darkBlue 12%, $color-white);
 
+  /* Единый размер с галочкой в списке оснащения (20×20) */
   img {
     display: block;
-    width: 1rem;
-    height: 1rem;
+    width: 20px;
+    height: 20px;
     object-fit: contain;
   }
 }

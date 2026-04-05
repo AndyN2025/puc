@@ -1,43 +1,39 @@
 <template>
-  <div class="p">
-    <Breadcrumbs :items="breadCrumbs"/> 
-    <DotTitle text="Что нового?" />
+  <div class="p news-page">
+    <Breadcrumbs :items="breadCrumbs" />
+    <DotTitle text="Новости центра" />
 
-    <NewsGrid  :news="news"/>
+    <p class="news-page__lead">
+      Актуальные объявления о наборах, форматах обучения и направлениях подготовки
+      в АНО ДПО «Приокский учебный центр». Выберите материал, чтобы открыть полный текст.
+    </p>
+
+    <NewsArchiveGrid :items="newsArticles" />
   </div>
 </template>
 
 <script setup lang="ts">
-import Breadcrumbs from '@/components/UI/Breadcrumbs.vue';
-import DotTitle from '@/components/UI/DotTitle.vue';
-import NewsGrid from '@/components/UI/NewsGrid.vue';
+import Breadcrumbs from '@/components/UI/Breadcrumbs.vue'
+import DotTitle from '@/components/UI/DotTitle.vue'
+import NewsArchiveGrid from '@/components/UI/NewsArchiveGrid.vue'
+import { newsArticles } from '@/data/news'
 
 const breadCrumbs = [
-    { text: 'Главная', link: '/' },
-    { text: 'Новости', link: '/news' }
-  ] 
-
-const news = ref([
-  {
-    title: 'Промышленная безопасность',
-    date: '10.09.2025',
-    image: 'https://via.placeholder.com/600x280?text=Обучение+по+промышленной+безопасности',
-    link: '/news/'
-  },
-  {
-    title: 'Профессиональная переподготовка "Специалист в сфере промышленной безопасности"',
-    date: '14.10.2025',
-    image: 'https://via.placeholder.com/300x200?text=Переподготовка',
-    link: '/news/'
-  },
-  {
-    title: 'Промышленная безопасность',
-    date: '12.11.2025',
-    image: 'https://via.placeholder.com/300x200?text=Безопасность',
-    link: '/news/'
-  }
-])
+  { text: 'Главная', link: '/' },
+  { text: 'Новости', link: '/news' }
+]
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+@use '@/assets/styles/vars' as *;
+
+.news-page {
+  &__lead {
+    margin: 0 0 $spacing-xl;
+    font-family: $font-ibm;
+    font-size: clamp(1rem, 2vw, 1.0625rem);
+    line-height: $line-height-relaxed;
+    color: $color-text-body;
+  }
+}
 </style>

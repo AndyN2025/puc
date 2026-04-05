@@ -39,20 +39,29 @@
                     <h3 class="footer__contacts-title">Для связи</h3>
                     <div class="footer__contacts-text">
                         <ul class="footer__contacts-list">
-                            <li class="footer__contacts-item" v-for="phone in phoneList"><a :href="'tel:' + phone">{{ phone }}</a></li>
+                            <li
+                              v-for="p in SITE_PHONES"
+                              :key="p.tel"
+                              class="footer__contacts-item"
+                            >
+                              <a :href="`tel:${p.tel}`">{{ p.display8 }}</a>
+                            </li>
                         </ul>
-                        <a href="mailto:ekc_06@mail.ru" class="header__mail-text">ekc_06@mail.ru</a>
+                        <a :href="siteMailto()" class="header__mail-text">{{ SITE_EMAIL }}</a>
                     </div>
 
                 </div>
                 <div class="footer__contacts-content__item">
                     <h3 class="footer__contacts-title">Адрес</h3>
                     <address class="footer__contacts-text">
-                        г. Калуга, ул. Никитина, д. 41, четвертый этаж, офис 401
+                        {{ SITE_ADDRESS.footer }}
                     </address>
                 </div>
             </div>
-            <div class="footer__contacts-oferta">Вся информация на сайте не является публичной офертой.</div>
+            <div class="footer__contacts-oferta">
+              <span class="footer__contacts-oferta-text">Вся информация на сайте не является публичной офертой.</span>
+              <button type="button" class="footer__cookie-settings" @click="openCookieConsentBanner">Настройки файлов cookie</button>
+            </div>
         </div>
 
         
@@ -73,7 +82,9 @@
 </template>
 
 <script setup lang="ts">
-import HeaderBrand from '@/components/Header/HeaderBrand.vue';
+import HeaderBrand from '@/components/Header/HeaderBrand.vue'
+import { openCookieConsentBanner } from '@/utils/cookieConsent'
+import { SITE_ADDRESS, SITE_EMAIL, SITE_PHONES, siteMailto } from '@/utils/site'
 import License from '@/assets/documents/common/Лицензия на осуществление образовательной деятельности.pdf'
 import Akkredit from '@/assets/documents/common/АккредитацияОТ2022.pdf'
 import ReestrLic from '@/assets/documents/common/Выписка из реестра лицензий № Л035-01224-40-00374085.pdf'
@@ -86,12 +97,6 @@ const navItems = [
   { to: '/news/', label: 'Новости' },
   { to: '/contacts/', label: 'Контакты' },
 ];
-
-const phoneList = [
-    `8 (4842) 56-21-83`,
-    `8 (4842) 59-75-83`,
-    `8 (910) 520-15-64`
-]
 
 const licensesList = [
     { title: 'Аккредитация', url: Akkredit },

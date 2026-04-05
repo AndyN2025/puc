@@ -3,10 +3,27 @@
     
     <div class="map-column">
       <div class="map-container">
-        
-        
-         <div style="position:relative;overflow:hidden;"><a href="https://yandex.ru/maps/org/priokskiy_uchebny_tsentr/1030102847/?utm_medium=mapframe&utm_source=maps" style="color:#eee;font-size:12px;position:absolute;top:0px;">Приокский учебный центр</a><a href="https://yandex.ru/maps/6/kaluga/category/occupational_safety_and_health/184105368/?utm_medium=mapframe&utm_source=maps" style="color:#eee;font-size:12px;position:absolute;top:14px;">Безопасность труда в Калуге</a><a href="https://yandex.ru/maps/6/kaluga/category/further_education/184106162/?utm_medium=mapframe&utm_source=maps" style="color:#eee;font-size:12px;position:absolute;top:28px;">Дополнительное образование в Калуге</a><iframe src="https://yandex.ru/map-widget/v1/?ll=36.272661%2C54.504872&mode=poi&poi%5Bpoint%5D=36.272394%2C54.505870&poi%5Buri%5D=ymapsbm1%3A%2F%2Forg%3Foid%3D1030102847&z=16.73" width="1000" height="440" frameborder="1" allowfullscreen="true" style="position:relative;"></iframe></div>
-        
+        <div class="map-embed">
+          <a
+            href="https://yandex.ru/maps/org/priokskiy_uchebny_tsentr/1030102847/?utm_medium=mapframe&utm_source=maps"
+            class="map-embed__sr"
+          >{{ SITE_ORG.shortName }}</a>
+          <a
+            href="https://yandex.ru/maps/6/kaluga/category/occupational_safety_and_health/184105368/?utm_medium=mapframe&utm_source=maps"
+            class="map-embed__sr"
+          >Безопасность труда в Калуге</a>
+          <a
+            href="https://yandex.ru/maps/6/kaluga/category/further_education/184106162/?utm_medium=mapframe&utm_source=maps"
+            class="map-embed__sr"
+          >Дополнительное образование в Калуге</a>
+          <iframe
+            src="https://yandex.ru/map-widget/v1/?ll=36.272661%2C54.504872&mode=poi&poi%5Bpoint%5D=36.272394%2C54.505870&poi%5Buri%5D=ymapsbm1%3A%2F%2Forg%3Foid%3D1030102847&z=16.73"
+            width="560"
+            height="400"
+            :title="`Карта: ${SITE_ORG.shortName}, Калуга`"
+            allowfullscreen
+          />
+        </div>
       </div>
     </div>
 
@@ -19,19 +36,27 @@
           <div class="address-info">
             <div class="info-item">
               <span class="label">Адрес:</span>
-              <span class="value">г.Калуга, ул. Никитина, д. 41</span>
+              <span class="value">{{ SITE_ADDRESS.short }}</span>
             </div>
             <div class="info-item">
               <span class="label">Офис:</span>
               <span class="value">401, четвёртый этаж</span>
             </div>
             <div class="info-item">
-              <span class="label">Телефоны:</span>
-              <span class="value">(4842) 56-21-83</span>
+              <span class="label">Телефоны</span>
+              <span class="value value--phones">
+                <a
+                  v-for="p in SITE_PHONES"
+                  :key="p.tel"
+                  :href="`tel:${p.tel}`"
+                >{{ p.display8 }}</a>
+              </span>
             </div>
             <div class="info-item">
-              <span class="label">По любым вопросам</span>
-              <span class="value">8 (910) 520-15-64</span>
+              <span class="label">E-mail</span>
+              <span class="value">
+                <a class="map-email" :href="siteMailto()">{{ SITE_EMAIL }}</a>
+              </span>
             </div>
           </div>
         </div>
@@ -40,8 +65,8 @@
   </div>
 </template>
 
-<script setup>
-
+<script setup lang="ts">
+import { SITE_ADDRESS, SITE_EMAIL, SITE_ORG, SITE_PHONES, siteMailto } from '@/utils/site'
 </script>
 
 <style lang="scss" scoped>
@@ -54,11 +79,13 @@
   gap: $spacing-xl;
   background-color: $color-white;
   border-radius: $radius-md;
+  width: 100%;
+  min-width: 0;
 
   @include m.from($bp-lg) {
     flex-direction: row;
-    align-items: flex-start;
-    gap: $spacing-xl;
+    align-items: stretch;
+    gap: $spacing-lg;
   }
 
   .section-title {
@@ -86,7 +113,11 @@
     min-width: 0;
 
     @include m.from($bp-lg) {
-      flex: 1.4;
+      flex: 3 1 0;
+      display: flex;
+      flex-direction: column;
+      align-self: stretch;
+      min-height: 0;
     }
 
     .yandex-map {
@@ -98,16 +129,65 @@
     .map-container {
       position: relative;
       width: 100%;
-      height: clamp(16rem, 50vw, 27.5rem);
+      height: clamp(16rem, 50vw, 24.5rem);
       border-radius: $radius-md;
       overflow: hidden;
       box-shadow: $shadow-soft;
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
 
-      :deep(iframe) {
-        width: 100%;
+      @include m.from($bp-lg) {
+        flex: 1 1 auto;
         height: 100%;
-        max-width: 100%;
-        border: 0;
+        min-height: clamp(16rem, 36vh, 24.5rem);
+      }
+
+      .map-embed {
+        position: relative;
+        flex: 1;
+        min-height: 0;
+        width: 100%;
+        overflow: hidden;
+
+        &__sr {
+          position: absolute;
+          width: 1px;
+          height: 1px;
+          padding: 0;
+          margin: -1px;
+          overflow: hidden;
+          clip: rect(0, 0, 0, 0);
+          white-space: nowrap;
+          border: 0;
+        }
+
+        &__skeleton {
+          position: absolute;
+          inset: 0;
+          background: color-mix(in srgb, $color-lightBlue 45%, $color-white);
+          border-radius: inherit;
+        }
+
+        :deep(iframe),
+        iframe {
+          display: block;
+          width: 100%;
+          max-width: 100%;
+          border: 0;
+
+          @include m.until($bp-lg) {
+            height: 100%;
+            min-height: 100%;
+          }
+
+          @include m.from($bp-lg) {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+          }
+        }
       }
 
       .map-placeholder {
@@ -164,7 +244,11 @@
     min-width: 0;
 
     @include m.from($bp-lg) {
-      flex: 1;
+      flex: 1 1 0;
+      display: flex;
+      flex-direction: column;
+      align-self: stretch;
+      min-height: 0;
     }
 
     .contacts-grid {
@@ -172,38 +256,81 @@
       grid-template-rows: auto auto;
       gap: 24px;
 
+      @include m.from($bp-lg) {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        min-height: 0;
+        gap: 0;
+      }
+
       .address-row {
-        background: #E9F4FF;
-        padding: 20px;
-        border-radius: 8px;
-        box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+        background: $color-lightBlue;
+        padding: clamp(0.875rem, 2vw, 1.25rem);
+        border-radius: $radius-lg;
+        box-shadow: $shadow-soft;
+        border: 1px solid $color-border;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+
+        @include m.from($bp-lg) {
+          flex: 1;
+          min-height: 0;
+        }
 
         h3 {
-          font-size: 1.25rem;
-          font-weight: 700;
-          color: #123970;
-          margin-bottom: 42px;
+          font-size: clamp(1rem, 1.1vw + 0.75rem, 1.125rem);
+          font-weight: $font-weight-semibold;
+          font-family: $font-ibm-m;
+          color: $color-darkBlue;
+          margin: 0 0 $spacing-md;
+          line-height: $line-height-tight;
         }
 
         .address-info {
           display: grid;
           grid-template-columns: 1fr;
-          gap: 22px;
+          gap: $spacing-md;
 
           .info-item {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: $spacing-xs;
 
             .label {
-              font-size: 18px;
-              color: #666;
-              font-weight: 600;
+              font-size: $font-size-sm;
+              color: $color-text-muted;
+              font-weight: $font-weight-semibold;
             }
 
             .value {
-              font-size: 18px;
-              color: #333;
+              font-size: clamp(0.8125rem, 0.5vw + 0.7rem, $font-size-base);
+              color: $color-text-body;
+              line-height: $line-height-body;
+              word-break: break-word;
+
+              &--phones {
+                display: flex;
+                flex-direction: column;
+                gap: $spacing-xs;
+              }
+
+              a {
+                color: $color-darkBlue;
+                text-decoration: none;
+                font-weight: $font-weight-medium;
+                transition: color $transition-fast;
+
+                &:hover {
+                  color: $color-cta-hover;
+                  text-decoration: underline;
+                }
+              }
+            }
+
+            .map-email {
+              word-break: break-all;
             }
           }
         }

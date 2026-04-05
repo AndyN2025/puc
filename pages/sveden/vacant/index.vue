@@ -49,30 +49,49 @@ const vacantList = [
 </script>
 
 <style scoped lang="scss">
-.vacant{
+@use '@/assets/styles/vars' as *;
+@use '@/assets/styles/mixins' as m;
+
+.vacant {
   display: flex;
   flex-direction: row;
-  gap: 20px;
+  flex-wrap: wrap;
+  gap: clamp(16px, 3vw, 20px);
   margin-bottom: 70px;
+  padding: 0;
+  list-style: none;
 
-  &__item{
-    flex: 1;
-    padding: 22px;
-    border-radius: 12px;
-    background-color: #E9F4FF;
+  &__item {
+    flex: 1 1 280px;
+    min-width: 0;
+    padding: clamp(16px, 4vw, 22px);
+    border-radius: $radius-lg;
+    background-color: $color-lightBlue;
+    border: 1px solid $color-border;
 
-    &-title{
-      font-size: 24px;
-      line-height: 30px;
-      color: #123970;
-      margin-bottom: 16px;
-      font-family: 'Inter M', sans-serif;
+    &-title {
+      font-size: clamp(1.125rem, 3.5vw, 1.5rem);
+      line-height: 1.3;
+      color: $color-darkBlue;
+      margin: 0 0 12px;
+      font-family: $font-inter-m, sans-serif;
     }
 
-    &-text{
-      font-size: 16px;
-      line-height: 20px;
-      font-family: 'IBM', sans-serif;
+    &-text {
+      margin: 0;
+      font-size: clamp(0.9375rem, 2.8vw, 1rem);
+      line-height: $line-height-relaxed;
+      font-family: $font-ibm, sans-serif;
+      color: $color-text-body;
+    }
+  }
+
+  @include m.until($bp-md) {
+    flex-direction: column;
+
+    &__item {
+      flex: 1 1 auto;
+      width: 100%;
     }
   }
 }
