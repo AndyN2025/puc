@@ -6,58 +6,98 @@
   border-top: 1px solid $color-footer-border;
   padding-block: clamp(1.75rem, 4vw, 2.5rem);
   margin-top: $spacing-xl;
+  min-width: 0;
 
   &__container {
     width: 100%;
+    max-width: 100%;
     margin: 0 auto;
     display: grid;
     grid-template-columns: 1fr;
-    gap: $spacing-xl;
+    gap: clamp(1.5rem, 4vw, 2rem);
+    min-width: 0;
 
+    /* Планшет: бренд на всю ширину, ссылки и контакты в две колонки */
     @include m.from($bp-md) {
-      gap: $spacing-lg;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: clamp(1.25rem, 3vw, 2rem);
+      row-gap: clamp(1.5rem, 3vw, 2rem);
     }
 
     @include m.from($bp-lg) {
-      grid-template-columns: 7fr 6fr 8fr;
-      gap: $spacing-md;
+      grid-template-columns: minmax(0, 7fr) minmax(0, 6fr) minmax(0, 8fr);
+      gap: clamp(1rem, 2vw, 1.5rem);
     }
   }
 
   &__brand {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
     gap: $spacing-md;
+    min-width: 0;
+
+    @include m.from($bp-md) {
+      grid-column: 1 / -1;
+    }
+
+    @include m.from($bp-lg) {
+      grid-column: auto;
+    }
   }
 
   &__copyright {
-    font-size: $font-size-base;
+    font-size: clamp(0.875rem, 2vw, $font-size-base);
     color: $color-text-muted;
     line-height: $line-height-body;
-    max-width: 22.75rem;
+    max-width: 100%;
+
+    @include m.from($bp-lg) {
+      max-width: 22.75rem;
+    }
+  }
+
+  &__navigation {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-lg;
+    min-width: 0;
+
+    @include m.from($bp-md) {
+      grid-column: 1;
+    }
+
+    @include m.from($bp-lg) {
+      grid-column: auto;
+    }
   }
 
   &__nav-title {
-    font-size: clamp(1.125rem, 2vw, 1.5rem);
+    font-size: clamp(1rem, 2.2vw, 1.5rem);
     font-family: $font-ibm-m;
-    line-height: 1.5;
-    margin-bottom: $spacing-lg;
+    line-height: 1.35;
+    margin: 0 0 $spacing-md;
     color: $color-darkBlue;
   }
 
   &__nav-list {
     list-style: none;
     padding: 0;
-    margin: 0 0 $spacing-lg;
+    margin: 0;
     font-family: $font-ibm;
-    font-size: $font-size-lg;
-    line-height: $spacing-lg;
+    font-size: clamp(1rem, 2vw, 1.125rem);
+    line-height: 1.45;
 
     li {
       margin-bottom: $spacing-sm;
 
+      &:last-child {
+        margin-bottom: 0;
+      }
+
       a {
+        display: inline-block;
+        padding: 0.2rem 0;
         text-decoration: none;
         color: $color-black;
         transition: color $transition-fast;
@@ -72,30 +112,55 @@
   &__licenses-list {
     display: flex;
     flex-direction: column;
-    gap: $spacing-md;
+    gap: $spacing-sm;
+    margin: 0;
+    padding: $spacing-md 0 0;
+    list-style: none;
+    border-top: 1px solid color-mix(in srgb, $color-footer-border 85%, $color-text-muted);
+
+    @include m.from($bp-md) {
+      padding-top: $spacing-lg;
+    }
   }
 
   &__licenses-item {
-    font-size: $font-size-base;
-    line-height: $spacing-lg;
+    font-size: clamp(0.875rem, 1.8vw, $font-size-base);
+    line-height: 1.45;
     color: $color-text-muted;
     text-decoration: underline;
+    text-underline-offset: 3px;
     cursor: pointer;
+    padding: 0.35rem 0;
+    transition: color $transition-fast;
+
+    &:hover {
+      color: $color-darkBlue;
+    }
   }
 
   &__contacts {
     display: flex;
     flex-direction: column;
     gap: $spacing-md;
+    min-width: 0;
+
+    @include m.from($bp-md) {
+      grid-column: 2;
+    }
+
+    @include m.from($bp-lg) {
+      grid-column: auto;
+    }
   }
 
   &__contacts-block {
     background-color: $color-lightBlue;
     border-radius: $radius-lg;
-    padding: $spacing-lg;
+    padding: clamp(1rem, 3vw, 1.5rem);
     display: flex;
     flex-direction: column;
-    gap: $spacing-xl;
+    gap: clamp(1rem, 2.5vw, 1.5rem);
+    border: 1px solid color-mix(in srgb, $color-border 70%, transparent);
   }
 
   &__contacts-item a {
@@ -108,19 +173,34 @@
     gap: $spacing-lg;
     font-family: $font-ibm;
 
-    @include m.from($bp-sm) {
+    /* «Связь» и «Адрес» в ряд с планшета — на телефоне колонкой комфортнее */
+    @include m.from($bp-md) {
       flex-direction: row;
       justify-content: space-between;
+      align-items: flex-start;
+      gap: $spacing-lg;
     }
 
     &__item {
       display: flex;
       flex-direction: column;
-      gap: $spacing-lg;
+      gap: $spacing-md;
       width: 100%;
+      min-width: 0;
 
-      @include m.from($bp-sm) {
-        width: 50%;
+      @include m.from($bp-md) {
+        flex: 1 1 0;
+        max-width: 50%;
+      }
+
+      @include m.until($bp-md) {
+        padding-bottom: $spacing-md;
+        border-bottom: 1px solid color-mix(in srgb, $color-darkBlue 12%, transparent);
+
+        &:last-child {
+          padding-bottom: 0;
+          border-bottom: none;
+        }
       }
     }
   }
@@ -129,19 +209,24 @@
     display: flex;
     flex-direction: column;
     gap: $spacing-md;
+    font-size: clamp(0.875rem, 2vw, $font-size-base);
+    line-height: $line-height-body;
+    font-style: normal;
+    min-width: 0;
   }
 
   &__contacts-title {
-    font-size: clamp(1.125rem, 2vw, 1.5rem);
-    line-height: 1.5;
+    font-size: clamp(1rem, 2.2vw, 1.5rem);
+    line-height: 1.35;
     font-family: $font-inter-m;
     color: $color-darkBlue;
+    margin: 0;
   }
 
   &__contacts-oferta {
     color: $color-text-muted;
-    font-size: $font-size-base;
-    line-height: $spacing-lg;
+    font-size: clamp(0.8125rem, 1.8vw, $font-size-base);
+    line-height: $line-height-body;
   }
 
   &__license-link {
@@ -149,16 +234,34 @@
     align-items: center;
     justify-content: center;
     text-align: center;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
     background-color: $color-darkBlue;
-    padding: clamp(1rem, 3vw, 1.625rem) clamp(1.25rem, 4vw, 2.25rem);
+    padding: clamp(0.875rem, 2.5vw, 1.625rem) clamp(1rem, 3vw, 2.25rem);
     border-radius: $radius-lg;
     color: $color-white;
-    font-size: clamp(1rem, 2.5vw, 1.375rem);
-    line-height: 1.4;
-    transition: filter $transition-base;
+    font-size: clamp(0.9375rem, 2.2vw, 1.375rem);
+    line-height: 1.35;
+    font-family: $font-ibm-m;
+    font-weight: $font-weight-semibold;
+    text-decoration: none;
+    transition:
+      filter $transition-base,
+      transform $transition-fast;
 
     &:hover {
       filter: brightness(1.08);
+    }
+
+    &:focus-visible {
+      outline: 2px solid $color-darkBlue;
+      outline-offset: 3px;
+    }
+
+    @include m.from($bp-md) {
+      width: auto;
+      align-self: flex-start;
     }
   }
 }

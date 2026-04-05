@@ -19,27 +19,93 @@
         </ul>
       </div>
 
-      <ul class="technic__table table">
-        <li class="table-item" v-for="room in rooms" :key="room.id">
-          <div class="table-item__name">{{ room.name }}</div>
-          <ul class="table-item__list" v-if="room.id != 1">
-            <li class="table-item__item" v-for="item in room.content">
-              <img :src="checkIcon" alt="галочка"/>
-              {{ item }}
-            </li>
-          </ul>
-          <ul class="table-item__list" v-else>
-            <li class="table-item__item" v-for="item in room.content[0]">
-              <img :src="checkIcon" alt="галочка"/>
-              {{ item }}
-            </li>
-            <p class="table-item__list-title">Учебно-демонстрационные приборы (устройства) для оборудования работающего под избыточным давлением:</p>
-            <li class="table-item__item" v-for="item in room.content[1]">
-              <img :src="checkIcon" alt="галочка"/>
-              {{ item }}
-            </li>
-          </ul>
-
+      <ul class="technic__rooms" role="list">
+        <li
+          v-for="room in rooms"
+          :key="room.id"
+          class="technic__room"
+          :class="{ 'technic__room--open': roomExpanded[room.id] }"
+        >
+          <button
+            type="button"
+            class="technic__room-trigger"
+            :id="`technic-room-trigger-${room.id}`"
+            :aria-expanded="roomExpanded[room.id]"
+            :aria-controls="`technic-room-panel-${room.id}`"
+            @click="toggleRoom(room.id)"
+          >
+            <span class="technic__room-title">{{ room.name }}</span>
+            <span class="technic__room-trigger-hint" aria-hidden="true">
+              {{ roomExpanded[room.id] ? 'Свернуть' : 'Подробнее' }}
+            </span>
+            <svg
+              class="technic__room-chevron"
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M6 9l6 6 6-6" />
+            </svg>
+          </button>
+          <div
+            :id="`technic-room-panel-${room.id}`"
+            class="technic__room-panel"
+            role="region"
+            :aria-labelledby="`technic-room-trigger-${room.id}`"
+            :hidden="!roomExpanded[room.id]"
+          >
+            <div class="technic__room-body">
+              <template v-if="room.id !== 1">
+                <ul class="technic__room-list">
+                  <li
+                    v-for="(item, idx) in room.content"
+                    :key="idx"
+                    class="technic__room-row"
+                  >
+                    <span class="technic__room-icon" aria-hidden="true">
+                      <img :src="checkIcon" alt="" width="20" height="20" />
+                    </span>
+                    <span class="technic__room-text">{{ item }}</span>
+                  </li>
+                </ul>
+              </template>
+              <template v-else>
+                <ul class="technic__room-list">
+                  <li
+                    v-for="(item, idx) in room.content[0]"
+                    :key="'r1a-' + idx"
+                    class="technic__room-row"
+                  >
+                    <span class="technic__room-icon" aria-hidden="true">
+                      <img :src="checkIcon" alt="" width="20" height="20" />
+                    </span>
+                    <span class="technic__room-text">{{ item }}</span>
+                  </li>
+                </ul>
+                <p class="technic__room-subtitle">
+                  Учебно-демонстрационные приборы (устройства) для оборудования работающего под избыточным давлением:
+                </p>
+                <ul class="technic__room-list">
+                  <li
+                    v-for="(item, idx) in room.content[1]"
+                    :key="'r1b-' + idx"
+                    class="technic__room-row"
+                  >
+                    <span class="technic__room-icon" aria-hidden="true">
+                      <img :src="checkIcon" alt="" width="20" height="20" />
+                    </span>
+                    <span class="technic__room-text">{{ item }}</span>
+                  </li>
+                </ul>
+              </template>
+            </div>
+          </div>
         </li>
       </ul>
 
@@ -78,6 +144,7 @@
 </template>
 
 <script setup lang="ts">
+import { reactive } from 'vue'
 import Breadcrumbs from '@/components/UI/Breadcrumbs.vue';
 import DotTitle from '@/components/UI/DotTitle.vue';
 import TitleCommon from '@/components/UI/TitleCommon.vue';
@@ -240,6 +307,17 @@ const rooms = [
   { id: 3, name: 'Аудитория №3', content: contentRoom3 },
 ]
 
+/** Какие аудитории развёрнуты (по клику на строку) */
+const roomExpanded = reactive<Record<number, boolean>>({
+  1: false,
+  2: false,
+  3: false
+})
+
+function toggleRoom(id: number) {
+  roomExpanded[id] = !roomExpanded[id]
+}
+
 const rawItems = [
   {
     text: 'АНО ДПО «ПУЦ» обеспечивает доступную и удобную образовательную среду для людей с ОВЗ, учитывая их особенности и потребности.',
@@ -264,6 +342,9 @@ const rawItems = [
 </script>
 
 <style scoped lang="scss">
+@use '@/assets/styles/vars' as *;
+@use '@/assets/styles/mixins' as m;
+
 .material{
   display: grid;
   gap: 18px;
@@ -353,42 +434,207 @@ const rawItems = [
   }
 }
 
-.table{
+.technic__rooms {
+  list-style: none;
+  margin: 0 0 $spacing-xl;
+  padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 24px;
-  margin-bottom: 40px;
+  gap: $spacing-md;
+}
 
-  &-item{
-    display: flex;
-    flex-direction: row;
-    gap: 18px;
-    border-radius: 12px;
-    padding: 20px;
-    background-color: #E9F4FF;
+.technic__room {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  border-radius: $radius-xl;
+  background: $color-white;
+  border: 1px solid $color-border-strong;
+  box-shadow: $shadow-soft;
+  overflow: hidden;
+}
 
-    &__name{
-      width: 200px;
-      text-align: center;
-      font-size: 24px;
-    }
+.technic__room-trigger {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+  width: 100%;
+  margin: 0;
+  padding: $spacing-md $spacing-lg;
+  text-align: left;
+  cursor: pointer;
+  border: none;
+  font: inherit;
+  background: linear-gradient(
+    135deg,
+    $color-darkBlue 0%,
+    color-mix(in srgb, $color-darkBlue 88%, #000) 100%
+  );
+  color: $color-white;
+  border-radius: calc(#{$radius-xl} - 1px);
+  transition:
+    filter $transition-fast,
+    box-shadow $transition-fast;
 
-    &__list{
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      
-      &-title{
-        margin: 10px 0 10px 20px;
-        font-size: 18px;
-      }
-    }
+  &:hover {
+    filter: brightness(1.06);
+  }
 
-    &__item{
-      display: flex;
-      flex-direction: row;
-      gap: 12px;
-    }
+  &:focus {
+    outline: none;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $color-white;
+    outline-offset: -4px;
+    box-shadow: inset 0 0 0 2px color-mix(in srgb, $color-lightBlue 40%, $color-darkBlue);
+  }
+}
+
+.technic__room--open .technic__room-trigger {
+  border-radius: calc(#{$radius-xl} - 1px) calc(#{$radius-xl} - 1px) 0 0;
+  box-shadow: inset 0 -1px 0 color-mix(in srgb, $color-white 15%, transparent);
+}
+
+.technic__room-title {
+  flex: 1;
+  margin: 0;
+  font-family: $font-ibm-m;
+  font-size: clamp(1.0625rem, 2.2vw, 1.3125rem);
+  font-weight: $font-weight-semibold;
+  line-height: $line-height-tight;
+  color: inherit;
+  letter-spacing: 0.02em;
+}
+
+.technic__room-trigger-hint {
+  flex-shrink: 0;
+  font-family: $font-ibm;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  opacity: 0.88;
+  white-space: nowrap;
+
+  @include m.until($bp-sm) {
+    display: none;
+  }
+}
+
+.technic__room-chevron {
+  flex-shrink: 0;
+  display: block;
+  color: inherit;
+  opacity: 0.95;
+  transition: transform $transition-base;
+}
+
+.technic__room--open .technic__room-chevron {
+  transform: rotate(180deg);
+}
+
+.technic__room-panel {
+  border-top: 1px solid color-mix(in srgb, $color-darkBlue 18%, $color-border-strong);
+
+  &[hidden] {
+    display: none;
+  }
+}
+
+.technic__room-body {
+  padding: $spacing-lg;
+  background: linear-gradient(
+    180deg,
+    $color-lightBlue 0%,
+    color-mix(in srgb, $color-lightBlue 35%, $color-white) 48%,
+    $color-white 100%
+  );
+
+  @include m.from($bp-md) {
+    padding: $spacing-xl;
+  }
+}
+
+.technic__room-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+}
+
+.technic__room-list + .technic__room-list {
+  margin-top: $spacing-md;
+}
+
+.technic__room-row {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: $spacing-md;
+  align-items: flex-start;
+  padding: $spacing-sm $spacing-md;
+  border-radius: $radius-lg;
+  transition: background-color $transition-fast;
+
+  &:nth-child(even) {
+    background: color-mix(in srgb, $color-lightBlue 45%, transparent);
+  }
+
+  &:hover {
+    background: color-mix(in srgb, $color-lightBlue 70%, $color-white);
+  }
+}
+
+.technic__room-icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  margin-top: 0.125rem;
+  border-radius: $radius-sm;
+  background: color-mix(in srgb, $color-darkBlue 12%, $color-white);
+
+  img {
+    display: block;
+    width: 1rem;
+    height: 1rem;
+    object-fit: contain;
+  }
+}
+
+.technic__room-text {
+  font-family: $font-ibm;
+  font-size: $font-size-base;
+  line-height: $line-height-body;
+  color: $color-text-body;
+}
+
+.technic__room-subtitle {
+  margin: $spacing-lg 0 $spacing-md;
+  padding: $spacing-md $spacing-lg;
+  font-family: $font-ibm-m;
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  line-height: $line-height-tight;
+  color: $color-darkBlue;
+  background: color-mix(in srgb, $color-lightBlue 55%, $color-white);
+  border-left: 4px solid $color-darkBlue;
+  border-radius: 0 $radius-md $radius-md 0;
+  box-shadow: inset 0 1px 0 color-mix(in srgb, $color-white 80%, transparent);
+}
+
+@include m.until($bp-md) {
+  .technic__room-row {
+    padding: $spacing-sm;
+  }
+
+  .technic__room-subtitle {
+    padding: $spacing-md;
+    font-size: $font-size-base;
   }
 }
 
