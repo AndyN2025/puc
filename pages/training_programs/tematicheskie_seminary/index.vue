@@ -29,7 +29,7 @@ import NavBlock from '@/components/UI/NavBlock.vue'
 import ProgramTable from '@/components/UI/ProgramTable.vue'
 import StepsList from '@/components/UI/StepsList.vue'
 import { navCourseItems } from '@/utils/svedenUtils'
-import { opoTrainingGoal, opoWorkerPrograms } from './utils'
+import { opoWorkerPrograms } from './utils'
 
 const titleCommon = ref('Виды обучения')
 

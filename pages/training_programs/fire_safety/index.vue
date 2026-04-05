@@ -27,7 +27,6 @@ import DotTitle from '@/components/UI/DotTitle.vue';
 import TitleCommon from '@/components/UI/TitleCommon.vue';
 import ProgramTable from '@/components/UI/ProgramTable.vue';
 import NavBlock from '@/components/UI/NavBlock.vue'
-import EducationInfo from '@/components/UI/EducationInfo.vue'
 import StepsList from '@/components/UI/StepsList.vue'
 import { navCourseItems } from '@/utils/svedenUtils'
 import { firePrograms } from './utils'
