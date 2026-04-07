@@ -1,0 +1,99 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Settings {
+  id              Int      @id @default(1)
+  mainTitle       String   @default("")
+  mainDescription String   @default("")
+  email           String   @default("")
+  phones          Phone[]
+  updatedAt       DateTime @updatedAt
+}
+
+model Phone {
+  id           String   @id @default(uuid())
+  tel          String // e.g. +74842562183
+  display8     String // e.g. 8 (4842) 56-21-83
+  displayPlus7 String // e.g. +7 (4842) 56-21-83
+  settingsId   Int
+  settings     Settings @relation(fields: [settingsId], references: [id])
+}
+
+model News {
+  id        String   @id @default(uuid())
+  slug      String   @unique
+  title     String
+  date      String
+  category  String
+  excerpt   String
+  accent    Int      @default(0) // 0, 1, 2, 3
+  body      String   // JSON string of array of paragraphs
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Category {
+  id          String   @id @default(uuid())
+  slug        String   @unique // e.g. fire_safety
+  title       String // e.g. Пожарная безопасность
+  howWeWork   String?  // JSON string or rich text for "Как мы работаем"
+  courses     Course[]
+  isEnabled   Boolean  @default(true)
+}
+
+model Course {
+  id              String   @id @default(uuid())
+  categorySlug    String
+  category        Category @relation(fields: [categorySlug], references: [slug])
+  
+  code            String   @unique
+  textCode        String?
+  title           String
+  hours           String
+  mainDescription String?
+  
+  users           String? // JSON string array: "Кто должен проходить аттестацию"
+  requirements    String? // JSON string array
+  format          String?
+  period          String?
+  
+  applicationFile String? // url to uploaded application
+  programFile     String? // url to uploaded program
+  documents       CourseDocument[]
+  
+  isEnabled       Boolean  @default(true)
+}
+
+model CourseDocument {
+  id       String  @id @default(uuid())
+  courseId String
+  course   Course  @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  title    String  // title of the document
+  fileUrl  String  // url to the uploaded file
+}
+
+model Teacher {
+  id          String   @id @default(uuid())
+  name        String
+  diploma     String?  // file url or description
+  certificate String?  // file url or description
+  programs    String?  // JSON string array or comma separated
+}
+
+model Classroom {
+  id          String   @id @default(uuid())
+  name        String   // "Аудитория 1"
+  content     String   // rich text or JSON for equipment list
+}
+
+model DocumentBlank {
+  id       String  @id @default(uuid())
+  title    String
+  fileUrl  String
+}
