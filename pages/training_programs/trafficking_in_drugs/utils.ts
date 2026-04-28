@@ -1,3 +1,7 @@
+import diplomaDoc13 from '@/assets/documents/diploms/Выдаваемый документ №13.jpg'
+import requestDrugs17 from '@/assets/documents/requestStudy/17) Заявка Организация деятельности по обороту наркотических средств, психотропных веществ и их прекурсоров.doc'
+import requestDrugs18 from '@/assets/documents/requestStudy/18) Заявка Государственное регулирование в сфере оборота наркотических средств, психотропных веществ и их прекурсоров при осуществлении медицинской и фармацевтической деятельности.doc'
+
 /** Общие для всех программ раздела (прекурсоры / оборот). */
 export const drugsListeners = [
   'Руководители и специалисты, ответственные за оборот наркотических средств, психотропных веществ и их прекурсоров на предприятии;',
@@ -51,7 +55,9 @@ export const drugsPrograms: DrugsTrainingProgram[] = [
     users: drugsListeners,
     requiremets: drugsRequirements,
     format: drugsFormatCombined,
-    document: drugsDocumentDefault
+    document: drugsDocumentDefault,
+    img: diplomaDoc13,
+    application: requestDrugs17
   },
   {
     code: 'nar_02',
@@ -63,7 +69,9 @@ export const drugsPrograms: DrugsTrainingProgram[] = [
     users: drugsListeners,
     requiremets: drugsRequirements,
     format: drugsFormatCombined,
-    document: drugsDocumentDefault
+    document: drugsDocumentDefault,
+    img: diplomaDoc13,
+    application: requestDrugs18
   }
 ]
 

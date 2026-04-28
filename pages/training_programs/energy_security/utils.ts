@@ -1,3 +1,7 @@
+import diplomaDoc3 from '@/assets/documents/diploms/Выдаваемый документ №3.jpg'
+import diplomaDoc4 from '@/assets/documents/diploms/Выдаваемый документ №4.jpg'
+import requestEnergy from '@/assets/documents/requestStudy/3) Заявка ТЭУ.doc'
+
 /**
  * Кто должен проходить проверку знаний — каждый элемент = категория + периодичность в одном пункте
  * (в шаблоне курса выводится как список с тем же смыслом, что «категории слушателей»).
@@ -68,7 +72,9 @@ export const energyPrograms: EnergyTrainingProgram[] = [
     users: energyKnowledgeCheckAudience,
     requiremets: energyRequirements,
     format: energyTrainingFormatsLine,
-    document: energyDocumentDefault
+    document: energyDocumentDefault,
+    img: [diplomaDoc3, diplomaDoc4],
+    application: requestEnergy
   }
 ]
 

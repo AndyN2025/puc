@@ -1,13 +1,11 @@
 <template>
-  <div class="header__brand">
-     
+  <NuxtLink to="/" class="header__brand" aria-label="Перейти на главную">
     <span class="header__logo" v-html="logoRaw" />
     <span class="header__title">АНО ДПО<br/> "Приокский учебный центр"</span>
-  </div>
+  </NuxtLink>
 </template>
 
 <script setup lang="ts">
-import logoWhite from '@/assets/img/logo-current.svg'
 import logoRaw from '@/assets/img/logo-current.svg?raw'
 </script>
 
@@ -21,6 +19,8 @@ import logoRaw from '@/assets/img/logo-current.svg?raw'
   gap: 2px;
   min-width: 0;
   flex: 0 1 auto;
+  text-decoration: none;
+  color: inherit;
 }
 
 .header__logo :deep(svg) {

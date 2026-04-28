@@ -100,6 +100,18 @@ const callbackModalOpen = ref(false)
     max-width: 42rem;
   }
 
+  /* Планшет: чуть больше вертикального воздуха в hero-тексте */
+  @media (min-width: ($bp-md + 1)) and (max-width: $bp-lg) {
+    .main__title {
+      margin-top: 30px;
+      margin-bottom: 60px;
+    }
+
+    .main__text {
+      margin-bottom: 70px;
+    }
+  }
+
   &__buttons {
     display: flex;
     flex-direction: row;
@@ -170,6 +182,12 @@ const callbackModalOpen = ref(false)
     .main__text {
       margin-left: auto;
       margin-right: auto;
+      margin-bottom: 52px;
+    }
+
+    .main__title {
+      margin-top: 16px;
+      margin-bottom: 40px;
     }
 
     .main__buttons {

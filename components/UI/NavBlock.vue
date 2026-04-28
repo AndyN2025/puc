@@ -11,6 +11,10 @@
         {{ item.text }}
       </NuxtLink>
     </div>
+    <p class="nav-scroll-hint">
+      <span class="nav-scroll-hint__icon" aria-hidden="true">↔</span>
+      Свайпните, чтобы посмотреть все разделы
+    </p>
   </div>
 </template>
 
@@ -126,6 +130,81 @@ function setTab(value) {
         }
       }
     }
+  }
+}
+
+@include m.until($bp-md) {
+  .site-navigation {
+    margin-bottom: clamp(1.5rem, 4vw, 2rem);
+    padding-inline: 10px;
+
+    .nav-grid {
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      overflow-y: hidden;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      scroll-snap-type: x mandatory;
+      background: linear-gradient(180deg, $color-bg-nav 0%, color-mix(in srgb, $color-bg-nav 86%, $color-white) 100%);
+      border: 1px solid color-mix(in srgb, $color-darkBlue 12%, $color-white);
+      border-radius: $radius-xl;
+      box-shadow: $shadow-soft;
+      padding: 0.5625rem;
+      margin-bottom: $spacing-sm;
+      gap: $spacing-xs;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+
+      .nav-item {
+        flex: 0 0 auto;
+        scroll-snap-align: start;
+        white-space: nowrap;
+        margin: 0;
+        padding: 0.625rem 0.9rem;
+        border-radius: 999px;
+        border: 1px solid color-mix(in srgb, $color-darkBlue 14%, $color-white);
+        background: $color-white;
+        font-size: 0.875rem;
+        line-height: 1.2;
+        transition:
+          background-color $transition-fast,
+          color $transition-fast,
+          border-color $transition-fast,
+          transform $transition-fast;
+
+        &:active {
+          transform: translateY(1px);
+        }
+      }
+    }
+  }
+
+  .nav-scroll-hint {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    margin: 0;
+    padding: 0.3rem 0.55rem;
+    border-radius: 999px;
+    background: color-mix(in srgb, $color-lightBlue 60%, $color-white);
+    color: $color-darkBlue;
+    font-size: 0.75rem;
+    line-height: 1.2;
+    border: 1px solid color-mix(in srgb, $color-darkBlue 10%, $color-white);
+  }
+
+  .nav-scroll-hint__icon {
+    font-size: 0.85rem;
+    line-height: 1;
+    opacity: 0.8;
+  }
+}
+
+@include m.from($bp-md) {
+  .nav-scroll-hint {
+    display: none;
   }
 }
 </style>

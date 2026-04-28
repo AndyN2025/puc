@@ -19,7 +19,7 @@ import Ustav from '@/assets/documents/documents/Ustav.pdf'
 
 import License from '@/assets/documents/common/Лицензия на осуществление образовательной деятельности.pdf'
 
-import samoObsl from '@/assets/documents/documents/otchet_o_samoobsl.pdf'
+import samoObsl from '@/assets/documents/Отчет о самообследовании 2025.pdf'
 import podtver from '@/assets/documents/documents/podtv_2334.pdf'
 import vnutrTrud from '@/assets/documents/documents/local_act_trud_rasp.pdf'
 import pedsovet from '@/assets/documents/documents/local_act_pedsovet.pdf'

@@ -4,21 +4,15 @@
     <NavBlock
       :navItems="navCourseItems"
       :activeIndex="0"
-      :tabs="tabs"
-      :modelValue="selectedTab"
-      @update:modelValue="handleTabChange"
     />
     <DotTitle :text="titleCommon" />
-    <TitleCommon :text="titleEducation" />
-    
-    <DotTitle text="предаттестационная подготовка" />
-    <ProgramTable :items="industrialPreAttestForTable" link="training_programs/industrial_safety" />
-
-    <DotTitle text="повышение квалификации (ст. 14.1 116-фз)" />
-    <ProgramTable :items="industrialPkForTable" link="training_programs/industrial_safety" />
-
-    <DotTitle text="профессиональная переподготовка" />
-    <ProgramTable :items="industrialDopForTable" link="training_programs/industrial_safety" />
+    <TitleCommon text="Промышленная безопасность" />
+    <ProgramTable
+      :tabs="programTabs"
+      :items="selectedProgramList"
+      link="training_programs/industrial_safety"
+      @tab-change="changeProgramList"
+    />
 
     <DotTitle text="начать обучение" />
     <TitleCommon text="Как мы работаем" />
@@ -43,28 +37,27 @@ import {
 
 const titleCommon = ref('Виды обучения')
 
-const selectedTab = ref('all')
-function handleTabChange(value: string) {
-  selectedTab.value = value
-}
-
-const titleEducation = computed(() => {
-  if (selectedTab.value === 'online') return 'Промышленная безопасность (Дистанционное обучение)'
-  if (selectedTab.value === 'offline') return 'Промышленная безопасность (Очное обучение)'
-  return 'Промышленная безопасность'
-})
-
 const breadCrumbs = [
   { text: 'Главная', link: '/' },
   { text: titleCommon.value, link: '/training_programs/' },
   { text: 'Промышленная безопасность', link: '/training_programs/industrial_safety/' }
 ]
 
-const tabs = [
-  { text: 'Все', value: 'all' },
-  { text: 'Дистанционно', value: 'online' },
-  { text: 'Очно', value: 'offline' }
+const programTabs = [
+  { text: 'Предаттестационная подготовка', value: 'pre_attest' },
+  { text: 'Повышение квалификации', value: 'qualification' }
 ]
+
+const selectedProgramList = ref(industrialPreAttestForTable)
+
+function changeProgramList(item: { value: string }) {
+  if (item.value === 'qualification') {
+    selectedProgramList.value = [...industrialPkForTable, ...industrialDopForTable]
+    return
+  }
+
+  selectedProgramList.value = industrialPreAttestForTable
+}
 </script>
 
 <style scoped lang="scss">

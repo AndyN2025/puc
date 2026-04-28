@@ -1,3 +1,6 @@
+import diplomaDoc14 from '@/assets/documents/diploms/Выдаваемый документ №14.bmp'
+import requestOpo13 from '@/assets/documents/requestStudy/13) Заявка Подготовка рабочего персонала.doc'
+
 export const opoTrainingGoal =
   'Целью обучения рабочего персонала ОПО является совершенствование и (или) получение новых знаний и (или) повышение профессионального уровня, необходимых для профессиональной деятельности, в целях обеспечения безопасной эксплуатации оборудования, безопасных методов выполнения работ, к которым допускается работник.'
 
@@ -142,7 +145,9 @@ function buildOpoProgram(index: number, row: { title: string; hours: number | st
     ],
     format: opoFormat,
     period: opoPeriod,
-    document: opoDocument
+    document: opoDocument,
+    img: diplomaDoc14,
+    application: requestOpo13
   }
 }
 
