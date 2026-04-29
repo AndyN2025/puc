@@ -29,7 +29,7 @@ import request14 from '@/assets/documents/request/14) Заявка Програ�
 import request15 from '@/assets/documents/request/15) Заявка Профессиональная переподготовка в области промышленной безопасности.doc';
 import request16 from '@/assets/documents/request/16) Заявка Профессиональная переподготовка по экологической безопасности.doc';
 import request17 from '@/assets/documents/request/17) Заявка Организация деятельности по обороту наркотических средств, психотропных веществ и их прекурсоров.doc';
-import request18 from '@/assets/documents/request/18) Заявка Государственное регулирование в сфере оборота наркотических средств, психотропных веществ и их прекурсоров при осуществлении медицинской и фармацевтической деятельности.doc';
+import request18 from '@/assets/documents/request/18) Заявка Госрегулирование НС ПВ медфарм.doc';
 
 const titleCommon = ref('Бланки документов')
 

@@ -1,6 +1,6 @@
 import diplomaDoc13 from '@/assets/documents/diploms/Выдаваемый документ №13.jpg'
 import requestDrugs17 from '@/assets/documents/requestStudy/17) Заявка Организация деятельности по обороту наркотических средств, психотропных веществ и их прекурсоров.doc'
-import requestDrugs18 from '@/assets/documents/requestStudy/18) Заявка Государственное регулирование в сфере оборота наркотических средств, психотропных веществ и их прекурсоров при осуществлении медицинской и фармацевтической деятельности.doc'
+import requestDrugs18 from '@/assets/documents/requestStudy/18) Заявка Госрегулирование НС ПВ медфарм.doc'
 
 /** Общие для всех программ раздела (прекурсоры / оборот). */
 export const drugsListeners = [
