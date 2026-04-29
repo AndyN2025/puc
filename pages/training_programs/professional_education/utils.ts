@@ -1,5 +1,4 @@
-import diplomaDoc15 from '@/assets/documents/diploms/Выдаваемый документ №15.jpg'
-import requestProfessional12 from '@/assets/documents/requestStudy/12) Заявка Профессиональное обучение по профессии рабочего.doc'
+const requestProfessional12 = '/request-study/req-12.doc'
 
 export const professionalTrainingIntro =
   'Профессиональное обучение направлено на приобретение лицами различного возраста профессиональной компетенции, в том числе для работы с конкретным оборудованием, технологиями, аппаратно-программными и иными профессиональными средствами, получение указанными лицами квалификации по профессии рабочего.'
@@ -168,7 +167,7 @@ function buildProfProgram(
     requiremets: profRequirements,
     format: profFormat,
     document: profDocument,
-    img: diplomaDoc15,
+    img: '/diploms/doc-15.jpg',
     application: requestProfessional12
   }
 }

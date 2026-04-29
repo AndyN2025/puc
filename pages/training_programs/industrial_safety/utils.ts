@@ -1,9 +1,7 @@
 import { industrialPkGroups } from './industrial_pk_data'
-import diplomaDoc1 from '@/assets/documents/diploms/Выдаваемый документ №1.jpg'
-import diplomaDoc2 from '@/assets/documents/diploms/Выдаваемый документ №2.jpg'
-import requestIndustrialPk from '@/assets/documents/requestStudy/1) Заявка Промышленная безопасность (ДПО).doc'
-import requestIndustrialPre from '@/assets/documents/requestStudy/2) Заявка Промышленная безопасность (предаттестационная подготовка).doc'
-import requestIndustrialRetrain from '@/assets/documents/requestStudy/15) Заявка Профессиональная переподготовка в области промышленной безопасности.doc'
+const requestIndustrialPk = '/request-study/req-01.doc'
+const requestIndustrialPre = '/request-study/req-02.doc'
+const requestIndustrialRetrain = '/request-study/req-15.doc'
 
 export interface ProgramItem {
   code: string
@@ -402,7 +400,7 @@ function buildIndustrialTrainingPrograms(): IndustrialTrainingProgram[] {
         period: 'Не реже 1 раза в 5 лет.',
         document:
           'По итогам обучения и проверки знаний оформляются документы в соответствии с требованиями аттестации (конкретную форму уточняйте у менеджеров учебного центра).',
-        img: diplomaDoc1,
+        img: '/diploms/doc-01.jpg',
         application: requestIndustrialPre,
         mainDescription: `${INDUSTRIAL_PRE_INTRO}\n\nТема программы: «${row.title}». Код программы: ${tc}.`
       })
@@ -425,7 +423,7 @@ function buildIndustrialTrainingPrograms(): IndustrialTrainingProgram[] {
         format: INDUSTRIAL_FORMAT,
         period: 'Не реже 1 раза в 5 лет.',
         document: 'Удостоверение о повышении квалификации с внесением сведений в реестр ФИС ФРДО.',
-        img: diplomaDoc1,
+        img: '/diploms/doc-01.jpg',
         application: requestIndustrialPk,
         mainDescription: `${INDUSTRIAL_PK_INTRO}\n\n${row.title}`
       })
@@ -448,7 +446,7 @@ function buildIndustrialTrainingPrograms(): IndustrialTrainingProgram[] {
       period: 'Согласно учебному плану программы переподготовки.',
       document:
         'Диплом о профессиональной переподготовке установленного образца с занесением сведений в реестр ФИС ФРДО.',
-      img: diplomaDoc2,
+      img: '/diploms/doc-02.jpg',
       application: requestIndustrialRetrain,
       mainDescription: row.title
     })

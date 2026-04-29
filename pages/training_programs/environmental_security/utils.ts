@@ -1,9 +1,5 @@
-import diplomaDoc9 from '@/assets/documents/diploms/Выдаваемый документ №9.jpg'
-import diplomaDoc10 from '@/assets/documents/diploms/Выдаваемый документ №10.jpg'
-import diplomaDoc11 from '@/assets/documents/diploms/Выдаваемый документ №11.jpg'
-import diplomaDoc12 from '@/assets/documents/diploms/Выдаваемый документ №12.jpg'
-import requestEco11 from '@/assets/documents/requestStudy/11) Заявка Экологическая безопасность.doc'
-import requestEco16 from '@/assets/documents/requestStudy/16) Заявка Профессиональная переподготовка по экологической безопасности.doc'
+const requestEco11 = '/request-study/req-11.doc'
+const requestEco16 = '/request-study/req-16.doc'
 
 const ecoFormat =
   'Заочная с применением дистанционных образовательных технологий, без отрыва от работы (онлайн в любое время и из любого региона).'
@@ -55,7 +51,7 @@ export const environmentalProgramsPq: EnvironmentalTrainingProgram[] = [
     format: ecoFormat,
     period: 'Не реже одного раза в 3 года.',
     document: docPq,
-    img: diplomaDoc9,
+    img: '/diploms/doc-09.jpg',
     application: requestEco11
   },
   {
@@ -72,7 +68,7 @@ export const environmentalProgramsPq: EnvironmentalTrainingProgram[] = [
     format: ecoFormat,
     period: 'Не реже одного раза в 5 лет.',
     document: docPq,
-    img: diplomaDoc10,
+    img: '/diploms/doc-10.jpg',
     application: requestEco11
   },
   {
@@ -89,7 +85,7 @@ export const environmentalProgramsPq: EnvironmentalTrainingProgram[] = [
     format: ecoFormat,
     period: 'Не реже одного раза в 5 лет.',
     document: docPq,
-    img: diplomaDoc11
+    img: '/diploms/doc-11.jpg'
   }
 ]
 
@@ -109,7 +105,7 @@ export const environmentalProgramsPpo: EnvironmentalTrainingProgram[] = [
     requiremets: ecoRequirements,
     format: ecoFormat,
     document: docPpo,
-    img: diplomaDoc12,
+    img: '/diploms/doc-12.jpg',
     application: requestEco16
   }
 ]

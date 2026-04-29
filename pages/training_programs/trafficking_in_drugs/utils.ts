@@ -1,6 +1,5 @@
-import diplomaDoc13 from '@/assets/documents/diploms/Выдаваемый документ №13.jpg'
-import requestDrugs17 from '@/assets/documents/requestStudy/17) Заявка Организация деятельности по обороту наркотических средств, психотропных веществ и их прекурсоров.doc'
-import requestDrugs18 from '@/assets/documents/requestStudy/18) Заявка Госрегулирование НС ПВ медфарм.doc'
+const requestDrugs17 = '/request-study/req-17.doc'
+const requestDrugs18 = '/request-study/req-18.doc'
 
 /** Общие для всех программ раздела (прекурсоры / оборот). */
 export const drugsListeners = [
@@ -56,7 +55,7 @@ export const drugsPrograms: DrugsTrainingProgram[] = [
     requiremets: drugsRequirements,
     format: drugsFormatCombined,
     document: drugsDocumentDefault,
-    img: diplomaDoc13,
+    img: '/diploms/doc-13.jpg',
     application: requestDrugs17
   },
   {
@@ -70,7 +69,7 @@ export const drugsPrograms: DrugsTrainingProgram[] = [
     requiremets: drugsRequirements,
     format: drugsFormatCombined,
     document: drugsDocumentDefault,
-    img: diplomaDoc13,
+    img: '/diploms/doc-13.jpg',
     application: requestDrugs18
   }
 ]

@@ -1,6 +1,4 @@
-import diplomaDoc3 from '@/assets/documents/diploms/Выдаваемый документ №3.jpg'
-import diplomaDoc4 from '@/assets/documents/diploms/Выдаваемый документ №4.jpg'
-import requestEnergy from '@/assets/documents/requestStudy/3) Заявка ТЭУ.doc'
+const requestEnergy = '/request-study/req-03.doc'
 
 /**
  * Кто должен проходить проверку знаний — каждый элемент = категория + периодичность в одном пункте
@@ -73,7 +71,7 @@ export const energyPrograms: EnergyTrainingProgram[] = [
     requiremets: energyRequirements,
     format: energyTrainingFormatsLine,
     document: energyDocumentDefault,
-    img: [diplomaDoc3, diplomaDoc4],
+    img: ['/diploms/doc-03.jpg', '/diploms/doc-04.jpg'],
     application: requestEnergy
   }
 ]

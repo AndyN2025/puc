@@ -2,11 +2,7 @@
  * Та же форма полей, что у курсов охраны труда (для единого шаблона [code].vue).
  * В таблице: code, textCode, title, hours; остальное — для страницы курса.
  */
-import diplomaDoc5 from '@/assets/documents/diploms/Выдаваемый документ №5.jpg'
-import diplomaDoc6 from '@/assets/documents/diploms/Выдаваемый документ №6.jpg'
-import diplomaDoc7 from '@/assets/documents/diploms/Выдаваемый документ №7.jpg'
-import diplomaDoc8 from '@/assets/documents/diploms/Выдаваемый документ №8.jpg'
-import requestFireSafety from '@/assets/documents/requestStudy/10) Заявка Пожарная безопасность.doc'
+const requestFireSafety = '/request-study/req-10.doc'
 
 export interface FireTrainingProgram {
   textCode?: string
@@ -45,7 +41,7 @@ export const firePrograms: FireTrainingProgram[] = [
     document:
       'Удостоверение о повышении квалификации установленного образца с внесением в реестр ФИС ФРДО.',
     period: 'Не реже 1 раза в 5 лет.',
-    img: diplomaDoc5,
+    img: '/diploms/doc-05.jpg',
     application: requestFireSafety
   },
   {
@@ -68,7 +64,7 @@ export const firePrograms: FireTrainingProgram[] = [
     document:
       'Удостоверение о повышении квалификации установленного образца с внесением в реестр ФИС ФРДО.',
     period: 'Не реже 1 раза в 5 лет.',
-    img: diplomaDoc6,
+    img: '/diploms/doc-06.jpg',
     application: requestFireSafety
   },
   {
@@ -91,7 +87,7 @@ export const firePrograms: FireTrainingProgram[] = [
     document:
       'Удостоверение о повышении квалификации установленного образца с внесением в реестр ФИС ФРДО.',
     period: 'Не реже 1 раза в 5 лет.',
-    img: diplomaDoc7,
+    img: '/diploms/doc-07.jpg',
     application: requestFireSafety
   },
   {
@@ -114,7 +110,7 @@ export const firePrograms: FireTrainingProgram[] = [
     ],
     format: 'Дистанционное (онлайн в любое время и из любого региона).',
     document: 'Диплом о профессиональной переподготовке с внесением в реестр ФИС ФРДО.',
-    img: diplomaDoc8,
+    img: '/diploms/doc-08.jpg',
     application: requestFireSafety
   }
 ]
