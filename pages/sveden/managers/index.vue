@@ -8,13 +8,27 @@
     <div class="struct">
       <ul class="struct__list">
         <li class="struct__item" v-for="item in peoples" :key="item.name">
-          <p class="struct__item-name">{{ item.name }}</p>
-          <p class="struct__item-post">{{ item.post }}</p>
-          <span class="struct__item-otdel">{{ item.otdel }}</span>
-          <div class="struct__item-contacts">
-            <a :href="'tel:' + normalizeTel(item.phone)" class="struct__item-contacts__item">{{ item.phone }}</a>
-            <a :href="'tel:' + normalizeTel(item.phoneDop)" class="struct__item-contacts__item">{{ item.phoneDop }}</a>
-            <a :href="'mailto:' + item.email" class="struct__item-contacts__item">{{ item.email }}</a>
+          <div :itemprop="item.leadershipTag" itemscope>
+            <p class="struct__item-name" itemprop="fio">{{ item.name }}</p>
+            <p class="struct__item-post" itemprop="post">{{ item.post }}</p>
+            <span class="struct__item-otdel">{{ item.otdel }}</span>
+            <div class="struct__item-contacts">
+              <a
+                itemprop="telephone"
+                :href="'tel:' + normalizeTel(item.phone)"
+                class="struct__item-contacts__item"
+              >{{ item.phone }}</a>
+              <a
+                itemprop="telephone"
+                :href="'tel:' + normalizeTel(item.phoneDop)"
+                class="struct__item-contacts__item"
+              >{{ item.phoneDop }}</a>
+              <a
+                itemprop="email"
+                :href="'mailto:' + item.email"
+                class="struct__item-contacts__item"
+              >{{ item.email }}</a>
+            </div>
           </div>
         </li>
       </ul>
@@ -46,7 +60,8 @@ const peoples = [
     otdel: 'Администрация',
     phone: SITE_PHONES[2]!.display8,
     phoneDop: SITE_PHONES[0]!.display8,
-    email: SITE_EMAIL
+    email: SITE_EMAIL,
+    leadershipTag: 'rucovodstvo' as const
   },
   {
     id: 2,
@@ -55,7 +70,8 @@ const peoples = [
     otdel: 'Финансовый отдел',
     phone: SITE_PHONES[2]!.display8,
     phoneDop: SITE_PHONES[0]!.display8,
-    email: SITE_EMAIL
+    email: SITE_EMAIL,
+    leadershipTag: 'rucovodstvoZam' as const
   }
 ]
 

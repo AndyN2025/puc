@@ -1,54 +1,46 @@
 <template>
   <div class="document-list">
-    <div
+    <a
       v-for="(doc, index) in documents"
       :key="index"
       class="document-item"
-      @click="handleDocumentClick(doc.file)"
+      :href="doc.file"
+      :target="type === 'read' ? '_blank' : undefined"
+      :rel="type === 'read' ? 'noopener noreferrer' : undefined"
+      :download="type === 'save' ? '' : undefined"
+      :itemprop="doc.micro"
     >
       <span class="document-number">{{ String(index + 1).padStart(2, '0') }}</span>
       <span class="document-title">{{ doc.title }}</span>
       <span class="download-icon">
-        <img :src="dwnlIcon" :alt="props.type === 'save' ? 'Скачать документ' : 'Открыть документ'" />
+        <img :src="dwnlIcon" :alt="type === 'save' ? 'Скачать документ' : 'Открыть документ'" />
       </span>
-    </div>
+    </a>
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
+import type { PropType } from 'vue'
 import dwnlIcon from '@/assets/img/common/downLoadIcon.svg'
 
-const props = defineProps({
+export interface DocumentListItem {
+  title: string
+  file: string
+  /** Атрибут микроразметки (методические рекомендации Рособрнадзора и др.) */
+  micro?: string
+}
+
+defineProps({
   documents: {
-    type: Array,
-    required: true,
-    default: () => [],
-    validator: (items) => {
-      return items.every(item =>
-        typeof item.title === 'string' &&
-        typeof item.file === 'string'
-      )
-    }
+    type: Array as PropType<DocumentListItem[]>,
+    required: true
   },
   type: {
     type: String,
     default: 'read',
-    validator: (value) => ['read', 'save'].includes(value)
+    validator: (value: string) => ['read', 'save'].includes(value)
   }
 })
-
-const handleDocumentClick = (url) => {
-  if (props.type === 'read') {
-    window.open(url, '_blank', 'noopener,noreferrer');
-  } else if (props.type === 'save') {
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = url.split('/').pop();
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  }
-}
 </script>
 
 <style lang="scss" scoped>
@@ -63,14 +55,14 @@ const handleDocumentClick = (url) => {
     padding: 12px 16px;
     background-color: white;
     border-top: 1px solid #e0e0e0;
-    
     border-radius: 4px;
     cursor: pointer;
     transition: all 0.2s ease;
     position: relative;
     color: #666;
+    text-decoration: none;
 
-    &:last-child{
+    &:last-child {
       border-bottom: 1px solid #e0e0e0;
     }
 
@@ -119,6 +111,11 @@ const handleDocumentClick = (url) => {
         opacity: 1;
       }
     }
+  }
+
+  .document-item:hover .download-icon {
+    color: inherit;
+    opacity: 1;
   }
 }
 </style>

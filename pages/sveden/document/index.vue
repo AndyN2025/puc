@@ -43,26 +43,31 @@ const breadCrumbs = [
   { text: titleCommon.value, link: '/sveden/document/' }
 ] 
 
+/** itemprop соответствуют методическим рекомендациям (микроразметка для мониторинга) */
 const documents = [
   {
     title: 'Устав',
-    file: Ustav
+    file: Ustav,
+    micro: 'ustavDocLink'
   },
   {
     title: 'Лицензия на право осуществления образовательной деятельности',
-    file: License
+    file: License,
+    micro: 'licenseDocLink'
   },
   {
     title: 'Выписка из реестра организаций, оказывающих услуги в области охраны труда',
     file: reestrOT
-  }, 
+  },
   {
     title: 'Правила внутреннего распорядка обучающихся',
-    file: slush
+    file: slush,
+    micro: 'localActStud'
   },
   {
     title: 'Правила внутреннего трудового распорядка',
-    file: vnutrTrud
+    file: vnutrTrud,
+    micro: 'localActOrder'
   },
   {
     title: 'Положение о Педагогическом совете',
@@ -82,7 +87,8 @@ const documents = [
   },
   {
     title: 'Правила приема слушателей на обучение',
-    file: rulePriem
+    file: rulePriem,
+    micro: 'priemDocLink'
   },
   {
     title: 'Положение о практической подготовке обучающихся',
@@ -90,11 +96,13 @@ const documents = [
   },
   {
     title: 'Положение о порядке перевода, отчисления и восстановления обучающихся',
-    file: perevodOtch
+    file: perevodOtch,
+    micro: 'perevodDocLink'
   },
   {
     title: 'Положение о формах, периодичности и порядке текущего контроля успеваемости, промежуточной и итоговой аттестации',
-    file: uspevaemost
+    file: uspevaemost,
+    micro: 'tekKontrolDocLink'
   },
   {
     title: 'Положение об организации и осуществлении образовательной деятельности по дополнительным общеобразовательным общеразвивающим программам',
@@ -103,7 +111,8 @@ const documents = [
   {
     title: 'Результаты последнего самообследования организации',
     file: samoObsl,
-  },
+    micro: 'reportEduDocLink'
+  }
 ]
 </script>
 

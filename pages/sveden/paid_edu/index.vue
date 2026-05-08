@@ -38,7 +38,9 @@ const breadCrumbs = [
   { text: titleCommon.value, link: '/sveden/paid_edu/' }
 ] 
 
-const documents =[{ title: 'Положение об оказании платных образовательных услуг', file: paidDoc },]
+const documents = [
+  { title: 'Положение об оказании платных образовательных услуг', file: paidDoc, micro: 'paidEdu' }
+]
 
 </script>
 

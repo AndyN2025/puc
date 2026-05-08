@@ -1,60 +1,76 @@
 <template>
-  <div class="organization-info">
+  <!-- Микроразметка по методичке: itemprop; отдельный itemtype (schema.org) не требуется документом -->
+  <section class="organization-info" itemscope>
     <div class="info-grid">
-      
-      <div class="info-label">Полное наименование образовательной организации</div>
-      <div class="info-value">
+      <div class="info-label">{{ labels.fullName }}</div>
+      <div class="info-value" itemprop="fullName">
         {{ SITE_ORG.nameFull }}
       </div>
 
-      
-      <div class="info-label">Сокращенное наименование образовательной организации</div>
-      <div class="info-value">АНО ДПО «ПУЦ»</div>
+      <div class="info-label">{{ labels.shortName }}</div>
+      <div class="info-value" itemprop="shortName">{{ orgText.shortName }}</div>
 
-      
-      <div class="info-label">Дата создания образовательной организации</div>
-      <div class="info-value">05.05.2014 г.</div>
+      <div class="info-label">{{ labels.regDate }}</div>
+      <div class="info-value" itemprop="regDate">{{ orgText.regDate }}</div>
 
-      
-      <div class="info-label">Информация об учредителе</div>
-      <div class="info-value">Смоловик Андрей Евгеньевич</div>
-
-      
-      <div class="info-label">Адрес местонахождения образовательной организации</div>
+      <div class="info-label">{{ labels.founder }}</div>
       <div class="info-value">
+        <!-- п. 5 «uchredLaw»: главный тег; п. 5.1 — nameUchred -->
+        <div itemprop="uchredLaw" itemscope>
+          <span itemprop="nameUchred">{{ orgText.founderName }}</span>
+          <meta itemprop="addressUchred" :content="uchredExtra.addressUchred" />
+          <meta itemprop="telUchred" :content="uchredExtra.telUchred" />
+          <meta itemprop="mailUchred" :content="uchredExtra.mailUchred" />
+          <meta itemprop="websiteUchred" :content="uchredExtra.websiteUchred" />
+        </div>
+      </div>
+
+      <div class="info-label">{{ labels.address }}</div>
+      <div class="info-value" itemprop="address">
         {{ SITE_ADDRESS.legal }}
       </div>
 
-      
-      <div class="info-label">Режим, график работы</div>
-      <div class="info-value">
-        Понедельник - пятница с 08:00 по 17:00
-        <br />
-        Суббота, воскресенье - выходной
+      <div class="info-label">{{ labels.workTime }}</div>
+      <div class="info-value item-value--preline" itemprop="workTime">
+        {{ orgText.workTime }}
       </div>
 
-      
-      <div class="info-label">Контактные телефоны</div>
+      <div class="info-label">{{ labels.phones }}</div>
       <div class="info-value phones">
         <a
           v-for="p in SITE_PHONES"
           :key="p.tel"
+          itemprop="telephone"
           :href="`tel:${p.tel}`"
           class="phone-link"
         >{{ p.display8 }}</a>
       </div>
 
-      
-      <div class="info-label">Адрес электронной почты</div>
+      <div class="info-label">{{ labels.email }}</div>
       <div class="info-value">
-        <a :href="siteMailto()" class="email-link">{{ SITE_EMAIL }}</a>
+        <a itemprop="email" :href="siteMailto()" class="email-link">{{ SITE_EMAIL }}</a>
       </div>
     </div>
-  </div>
+  </section>
 </template>
 
 <script setup lang="ts">
-import { SITE_ADDRESS, SITE_EMAIL, SITE_ORG, SITE_PHONES, siteMailto } from '@/utils/site'
+import {
+  SITE_ADDRESS,
+  SITE_EMAIL,
+  SITE_ORG,
+  SITE_PHONES,
+  siteMailto
+} from '@/utils/site'
+import {
+  SVEDEN_ORG_FIELD_LABELS,
+  SVEDEN_ORG_TEXT,
+  SVEDEN_UCHRED_EXTRA
+} from '@/utils/svedenCommonContent'
+
+const labels = SVEDEN_ORG_FIELD_LABELS
+const orgText = SVEDEN_ORG_TEXT
+const uchredExtra = SVEDEN_UCHRED_EXTRA
 </script>
 
 <style scoped lang="scss">
@@ -72,6 +88,10 @@ import { SITE_ADDRESS, SITE_EMAIL, SITE_ORG, SITE_PHONES, siteMailto } from '@/u
   grid-template-columns: 3fr 10fr;
   gap: 16px 24px;
   width: 100%;
+}
+
+.item-value--preline {
+  white-space: pre-line;
 }
 
 .info-label {
@@ -138,7 +158,6 @@ import { SITE_ADDRESS, SITE_EMAIL, SITE_ORG, SITE_PHONES, siteMailto } from '@/u
     gap: 0;
   }
 
-  /* Как на десктопе: подпись на голубом, значение на белом — пара визуально связана */
   .info-label {
     margin-top: 14px;
     font-size: clamp(0.875rem, 3.2vw, 1rem);

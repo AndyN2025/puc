@@ -30,9 +30,10 @@
           />
           <a
             :href="doc.file"
-            target="_blank" 
+            target="_blank"
             rel="noopener noreferrer"
             class="download-overlay"
+            :itemprop="doc.micro"
             @click.stop
           >
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">

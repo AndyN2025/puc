@@ -12,7 +12,7 @@
 
     <div class="accessibility-grid">
       
-      <div class="accessibility-grid__card">
+      <div class="accessibility-grid__card" itemprop="eduAccred">
         <div class="accessibility-grid__icon">
           <img :src="eduIcon1" alt="Иконка лифт"  />
         </div>
@@ -44,7 +44,7 @@
           <img :src="eduIcon3" alt="Иконка обучение"  />
         </div>
         <h3 class="accessibility-grid__title">Формы обучения</h3>
-        <ul class="accessibility-grid__text">
+        <ul class="accessibility-grid__text" itemprop="eduForm">
           <li>1. Очная,</li>
           <li>2. Очно-заочная,</li>
           <li>3. Заочная.</li>
@@ -57,7 +57,7 @@
           <img :src="eduIcon4" alt="Иконка завод"  />
         </div>
         <h3 class="accessibility-grid__title">Язык обучения</h3>
-        <p class="accessibility-grid__text">Русский</p>
+        <p class="accessibility-grid__text" itemprop="languageEl">Русский</p>
       </div>
     </div>
   </div>
