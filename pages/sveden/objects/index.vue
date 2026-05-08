@@ -1,7 +1,7 @@
 <template>
   <div class="p">
     <Breadcrumbs :items="breadCrumbs"/> 
-    <NavBlock :navItems="navSvedenItems" :activeIndex="7"/>
+    <NavBlock :navItems="navSvedenItems" :activeIndex="6"/>
     <DotTitle text="Сведения об образовательной организации" />
     <TitleCommon :text="titleCommon"/>
 
@@ -167,7 +167,7 @@ const titleCommon = ref('Материально-техническое обес�
 const breadCrumbs = [
   { text: 'Главная', link: '/' },
   { text: 'Сведения об организации', link: '/sveden/common/' },
-  { text: titleCommon.value + '. Доступная среда', link: '/sveden/vacant/' }
+  { text: titleCommon.value + '. Доступная среда', link: '/sveden/objects/' }
 ] 
 
 const infoMat = [

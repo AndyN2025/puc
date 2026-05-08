@@ -1,7 +1,7 @@
 <template>
   <div class="p">
     <Breadcrumbs :items="breadCrumbs"/> 
-    <NavBlock :navItems="navSvedenItems" :activeIndex="6"/>
+    <NavBlock :navItems="navSvedenItems" :activeIndex="5"/>
     <DotTitle text="Сведения об образовательной организации" />
     <TitleCommon :text="titleCommon"/>
 
@@ -39,7 +39,7 @@ const titleCommon = ref('Педагогический (научно-педаго
 const breadCrumbs = [
   { text: 'Главная', link: '/' },
   { text: 'Сведения об организации', link: '/sveden/common/' },
-  { text: titleCommon.value, link: '/sveden/vacant/' }
+  { text: titleCommon.value, link: '/sveden/employees/' }
 ] 
 
 const getYearWord = (count: number): string => {

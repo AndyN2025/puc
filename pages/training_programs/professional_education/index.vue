@@ -19,7 +19,7 @@
 
     <DotTitle text="начать обучение" />
     <TitleCommon text="Как мы работаем" />
-    <StepsList />
+    <StepsList preset="professional_preparation" />
   </div>
 </template>
 

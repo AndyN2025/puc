@@ -1,26 +1,24 @@
 <template>
   <div class="p">
     <Breadcrumbs :items="breadCrumbs" />
-    <NavBlock
-      :navItems="navCourseItems"
-      :activeIndex="0"
-    />
+    <NavBlock :navItems="navCourseItems" :activeIndex="0" />
     <DotTitle :text="titleCommon" />
     <TitleCommon text="Промышленная безопасность" />
     <ProgramTable
+      v-model="programTab"
       :tabs="programTabs"
       :items="selectedProgramList"
       link="training_programs/industrial_safety"
-      @tab-change="changeProgramList"
     />
 
     <DotTitle text="начать обучение" />
     <TitleCommon text="Как мы работаем" />
-    <StepsList />
+    <StepsList :workflow="programTab" />
   </div>
 </template>
 
 <script setup lang="ts">
+import { ref, watch } from 'vue'
 import Breadcrumbs from '@/components/UI/Breadcrumbs.vue'
 import DotTitle from '@/components/UI/DotTitle.vue'
 import TitleCommon from '@/components/UI/TitleCommon.vue'
@@ -48,16 +46,20 @@ const programTabs = [
   { text: 'Повышение квалификации', value: 'qualification' }
 ]
 
+const programTab = ref<'pre_attest' | 'qualification'>('pre_attest')
 const selectedProgramList = ref(industrialPreAttestForTable)
 
-function changeProgramList(item: { value: string }) {
-  if (item.value === 'qualification') {
-    selectedProgramList.value = [...industrialPkForTable, ...industrialDopForTable]
-    return
-  }
-
-  selectedProgramList.value = industrialPreAttestForTable
-}
+watch(
+  programTab,
+  (v) => {
+    if (v === 'qualification') {
+      selectedProgramList.value = [...industrialPkForTable, ...industrialDopForTable]
+    } else {
+      selectedProgramList.value = industrialPreAttestForTable
+    }
+  },
+  { immediate: true }
+)
 </script>
 
 <style scoped lang="scss">

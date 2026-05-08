@@ -17,7 +17,7 @@
       
     <DotTitle text="начать обучение" v-if="stepOnline"/>
     <TitleCommon text="Как мы работаем" v-if="stepOnline"/>
-    <StepsList v-if="stepOnline"/>
+    <StepsList v-if="stepOnline" preset="remote_standard" />
   </div>
 </template>
 

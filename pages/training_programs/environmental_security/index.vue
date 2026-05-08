@@ -23,7 +23,7 @@
 
     <DotTitle text="начать обучение" />
     <TitleCommon text="Как мы работаем"/>
-    <StepsList />
+    <StepsList preset="remote_standard" />
   </div>
 </template>
 

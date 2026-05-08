@@ -22,7 +22,7 @@ const titleCommon = ref('Финансово-хозяйственная деят�
 const breadCrumbs = [
   { text: 'Главная', link: '/' },
   { text: 'Сведения об организации', link: '/sveden/common/' },
-  { text: titleCommon.value, link: '/sveden/vacant/' }
+  { text: titleCommon.value, link: '/sveden/budget/' }
 ] 
 
 </script>

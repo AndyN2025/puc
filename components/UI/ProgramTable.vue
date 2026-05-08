@@ -71,7 +71,7 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 import { NuxtLink } from '#components'
 
 const props = defineProps({
@@ -129,6 +129,16 @@ const props = defineProps({
 const emit = defineEmits(['update:modelValue', 'tab-change'])
 
 const currentTab = ref(props.modelValue ?? (props.tabs?.[0]?.value ?? null))
+
+watch(
+  () => props.modelValue,
+  (v) => {
+    if (v == null || !props.tabs?.length) return
+    if (props.tabs.some((t) => t.value === v)) {
+      currentTab.value = v
+    }
+  }
+)
 
 function setTab(value, index) {
   currentTab.value = value

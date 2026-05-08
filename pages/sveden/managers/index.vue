@@ -1,7 +1,7 @@
 <template>
   <div class="p">
     <Breadcrumbs :items="breadCrumbs" />
-    <NavBlock :navItems="navSvedenItems" :activeIndex="5" />
+    <NavBlock :navItems="navSvedenItems" :activeIndex="4" />
     <DotTitle text="Сведения об образовательной организации" />
     <TitleCommon :text="titleCommon" />
 

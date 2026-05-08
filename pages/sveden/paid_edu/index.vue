@@ -1,7 +1,7 @@
 <template>
   <div class="p">
     <Breadcrumbs :items="breadCrumbs"/> 
-    <NavBlock :navItems="navSvedenItems" :activeIndex="3"/>
+    <NavBlock :navItems="navSvedenItems" :activeIndex="7"/>
     <DotTitle text="Сведения об образовательной организации" />
     <TitleCommon :text="titleCommon"/>
     <div class="paidContent">
@@ -35,7 +35,7 @@ const titleCommon = ref(' Платные образовательные услу
 const breadCrumbs = [
   { text: 'Главная', link: '/' },
   { text: 'Сведения об организации', link: '/sveden/common/' },
-  { text: titleCommon.value, link: '/sveden/inter/' }
+  { text: titleCommon.value, link: '/sveden/paid_edu/' }
 ] 
 
 const documents =[{ title: 'Положение об оказании платных образовательных услуг', file: paidDoc },]

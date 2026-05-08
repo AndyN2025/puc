@@ -26,7 +26,7 @@ const titleCommon = ref('Стипендии и меры поддержки об�
 const breadCrumbs = [
   { text: 'Главная', link: '/' },
   { text: 'Сведения об организации', link: '/sveden/common/' },
-  { text: titleCommon.value, link: '/sveden/vacant/' }
+  { text: titleCommon.value, link: '/sveden/grants/' }
 ] 
 
 </script>

@@ -32,7 +32,7 @@ const titleCommon = ref('Основные сведения ')
 const breadCrumbs = [
   { text: 'Главная', link: '/' },
   { text: 'Сведения об организации', link: '/sveden/common/' },
-  { text: titleCommon.value, link: '/sveden/vacant/' }
+  { text: titleCommon.value, link: '/sveden/common/' }
 ] 
 
 const gridItems = [

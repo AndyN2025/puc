@@ -1,17 +1,24 @@
+/**
+ * Порядок подразделов — как в перечне п. 6 приказа Рособрнадзора от 04.08.2023 № 1493.
+ */
 export const navSvedenItems = [
   { text: 'Основные сведения', link: '/sveden/common/', active: false },
   { text: 'Структура и органы управления образовательной организации', link: '/sveden/struct/', active: false },
   { text: 'Документы', link: '/sveden/document/', active: false },
-  { text: 'Платные образовательные услуги', link: '/sveden/paid_edu/', active: false },
   { text: 'Образование', link: '/sveden/education/', active: false },
   { text: 'Руководство', link: '/sveden/managers/', active: false },
   { text: 'Педагогический состав', link: '/sveden/employees/', active: false },
-  { text: 'Материально техническое обеспечение и оснащенность образовательного процесса. Доступная среда', link: '/sveden/objects/', active: false },
-  { text: 'Финансовая-хозяйственная деятельность', link: '/sveden/budget/', active: false },
+  {
+    text: 'Материально-техническое обеспечение и оснащенность образовательного процесса. Доступная среда',
+    link: '/sveden/objects/',
+    active: false
+  },
+  { text: 'Платные образовательные услуги', link: '/sveden/paid_edu/', active: false },
+  { text: 'Финансово-хозяйственная деятельность', link: '/sveden/budget/', active: false },
   { text: 'Вакантные места для приема (перевода) обучающихся', link: '/sveden/vacant/', active: false },
   { text: 'Стипендии и меры поддержки обучающихся', link: '/sveden/grants/', active: false },
   { text: 'Международное сотрудничество', link: '/sveden/inter/', active: false },
-  { text: 'Организация питания в образовательной орагнизации', link: '/sveden/catering/', active: false },
+  { text: 'Организация питания в образовательной организации', link: '/sveden/catering/', active: false }
 ]
 
 

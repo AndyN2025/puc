@@ -28,7 +28,7 @@ const titleCommon = ref('Структура и органы управления
 const breadCrumbs = [
   { text: 'Главная', link: '/' },
   { text: 'Сведения об организации', link: '/sveden/common/' },
-  { text: titleCommon.value, link: '/sveden/inter/' }
+  { text: titleCommon.value, link: '/sveden/struct/' }
 ] 
 
 const peoples = [

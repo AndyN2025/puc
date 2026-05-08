@@ -40,7 +40,7 @@ const titleCommon = ref('Документы')
 const breadCrumbs = [
   { text: 'Главная', link: '/' },
   { text: 'Сведения об организации', link: '/sveden/common/' },
-  { text: titleCommon.value, link: '/sveden/vacant/' }
+  { text: titleCommon.value, link: '/sveden/document/' }
 ] 
 
 const documents = [
