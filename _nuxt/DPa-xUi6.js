@@ -1,0 +1,1 @@
+import{c as e,E as o,i as s,R as a}from"./DyGuluEm.js";const c={class:"documents-title"},r={__name:"UITitleCommon",props:{text:{type:String,required:!0,default:""}},setup(t){return(n,_)=>(o(),s("h2",c,a(t.text),1))}},m=e(r,[["__scopeId","data-v-af98373b"]]);export{m as T};
