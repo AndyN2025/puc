@@ -66,7 +66,12 @@ export default defineNuxtConfig({
   devtools: { enabled: false },
   ssr: true,
   ignore: ['**/pages/**/*.ts'],
-  modules: ['@pinia/nuxt'],
+  modules: ['@pinia/nuxt', '@nuxt/image'],
+
+  /** GitHub Pages: без сервера IPX, только корректный baseURL в src */
+  image: {
+    provider: 'none'
+  },
 
   /**
    * Почта для формы «Заказать звонок» (server/api/callback-request.post.ts).

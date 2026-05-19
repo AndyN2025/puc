@@ -85,7 +85,7 @@
                     class="image-wrapper"
                     @click="openModal(img)"
                   >
-                    <img
+                    <NuxtImg
                       :src="courseImageSrc(img)"
                       :alt="SITE_TEXT.trainingDetail.imageAlt(index)"
                       class="info__image"
@@ -102,7 +102,7 @@
                 </div>
 
                 <div v-else class="image-wrapper" @click="openModal(course.img)">
-                  <img
+                  <NuxtImg
                     :src="courseImageSrc(course.img)"
                     :alt="SITE_TEXT.trainingDetail.documentAlt(documentAlt)"
                     class="info__image"
@@ -195,8 +195,9 @@
         <div v-if="showModal" class="image-modal" @click.self="showModal = false">
           <div class="modal-content">
             <button type="button" class="modal-close" @click="showModal = false">×</button>
-            <img
-              :src="selectedImage ? courseImageSrc(selectedImage) : undefined"
+            <NuxtImg
+              v-if="selectedImage"
+              :src="courseImageSrc(selectedImage)"
               :alt="SITE_TEXT.trainingDetail.documentAlt(documentAlt)"
               class="modal-image"
             />
@@ -273,6 +274,8 @@ const emit = defineEmits<{
   downloadProgram: []
 }>()
 
+const { app } = useRuntimeConfig()
+
 const showModal = ref(false)
 const selectedImage = ref<string | null>(null)
 const showPhoneTooltip = ref(false)
@@ -306,7 +309,7 @@ const documentAlt = computed(() => {
 })
 
 function courseImageSrc(src: string) {
-  return withAppBase(src)
+  return withAppBase(src, app.baseURL)
 }
 
 const openModal = (img: string) => {
