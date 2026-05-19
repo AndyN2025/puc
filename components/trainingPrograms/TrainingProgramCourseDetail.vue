@@ -86,7 +86,7 @@
                     @click="openModal(img)"
                   >
                     <img
-                      :src="img"
+                      :src="courseImageSrc(img)"
                       :alt="SITE_TEXT.trainingDetail.imageAlt(index)"
                       class="info__image"
                     />
@@ -103,7 +103,7 @@
 
                 <div v-else class="image-wrapper" @click="openModal(course.img)">
                   <img
-                    :src="course.img"
+                    :src="courseImageSrc(course.img)"
                     :alt="SITE_TEXT.trainingDetail.documentAlt(documentAlt)"
                     class="info__image"
                   />
@@ -196,7 +196,7 @@
           <div class="modal-content">
             <button type="button" class="modal-close" @click="showModal = false">×</button>
             <img
-              :src="selectedImage ?? undefined"
+              :src="selectedImage ? courseImageSrc(selectedImage) : undefined"
               :alt="SITE_TEXT.trainingDetail.documentAlt(documentAlt)"
               class="modal-image"
             />
@@ -223,6 +223,7 @@ import ConsultationWidget from '@/components/UI/ConsultantWidget.vue'
 import checkIkon from '@/assets/img/checkIcon.svg'
 import { SITE_PHONES } from '@/utils/site'
 import { SITE_TEXT } from '@/utils/siteText'
+import { withAppBase } from '@/utils/withAppBase'
 
 export interface TrainingProgramCourseDetailBreadcrumb {
   text: string
@@ -303,6 +304,10 @@ const documentAlt = computed(() => {
   if (!d) return ''
   return Array.isArray(d) ? (d[0] ?? '') : d
 })
+
+function courseImageSrc(src: string) {
+  return withAppBase(src)
+}
 
 const openModal = (img: string) => {
   if (!img) return
