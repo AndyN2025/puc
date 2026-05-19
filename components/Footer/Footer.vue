@@ -60,7 +60,6 @@
             </div>
             <div class="footer__contacts-oferta">
               <span class="footer__contacts-oferta-text">{{ SITE_TEXT.footer.offerDisclaimer }}</span>
-              <button type="button" class="footer__cookie-settings" @click="openCookieConsentBanner">{{ SITE_TEXT.footer.cookieSettings }}</button>
             </div>
         </div>
 
@@ -83,7 +82,6 @@
 
 <script setup lang="ts">
 import HeaderBrand from '@/components/Header/HeaderBrand.vue'
-import { openCookieConsentBanner } from '@/utils/cookieConsent'
 import { SITE_ADDRESS, SITE_EMAIL, SITE_PHONES, siteMailto } from '@/utils/site'
 import { SITE_TEXT } from '@/utils/siteText'
 import License from '@/assets/documents/common/Лицензия на осуществление образовательной деятельности.pdf'

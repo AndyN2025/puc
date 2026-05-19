@@ -6,24 +6,23 @@
         class="cookie-consent"
         role="dialog"
         aria-modal="false"
-        aria-labelledby="cookie-consent-title"
+        :aria-label="SITE_TEXT.cookieConsent.ariaLabel"
         aria-describedby="cookie-consent-desc"
       >
         <div class="cookie-consent__wrap">
           <div class="cookie-consent__panel">
+            <button
+              type="button"
+              class="cookie-consent__close"
+              :aria-label="SITE_TEXT.common.close"
+              @click="close"
+            >
+              <span class="cookie-consent__close-icon" aria-hidden="true" />
+            </button>
             <div class="cookie-consent__content">
-            <h2 id="cookie-consent-title" class="cookie-consent__title">
-              {{ SITE_TEXT.cookieConsent.title }}
-            </h2>
-            <p id="cookie-consent-desc" class="cookie-consent__text">
-              {{ SITE_TEXT.cookieConsent.description.beforeStorage }}
-              <strong>{{ SITE_TEXT.cookieConsent.description.storage }}</strong>
-              {{ SITE_TEXT.cookieConsent.description.afterStorage }}
-              <code class="cookie-consent__code">{{ COOKIE_CONSENT_STORAGE_KEY }}</code>{{ SITE_TEXT.cookieConsent.description.afterKey }}
-            </p>
-            <p class="cookie-consent__hint">
-              {{ SITE_TEXT.cookieConsent.hint }}
-            </p>
+              <p id="cookie-consent-desc" class="cookie-consent__text">
+                {{ SITE_TEXT.cookieConsent.message }}
+              </p>
             </div>
             <div class="cookie-consent__actions">
             <button
@@ -49,10 +48,7 @@
 </template>
 
 <script setup lang="ts">
-import {
-  COOKIE_CONSENT_OPEN_EVENT,
-  COOKIE_CONSENT_STORAGE_KEY
-} from '@/utils/cookieConsent'
+import { COOKIE_CONSENT_STORAGE_KEY } from '@/utils/cookieConsent'
 import { SITE_TEXT } from '@/utils/siteText'
 
 const mounted = ref(false)
@@ -65,18 +61,9 @@ function readStored(): 'accepted' | 'rejected' | null {
   return null
 }
 
-function showBannerFromFooter() {
-  isOpen.value = true
-}
-
 onMounted(() => {
   mounted.value = true
   isOpen.value = readStored() === null
-  window.addEventListener(COOKIE_CONSENT_OPEN_EVENT, showBannerFromFooter)
-})
-
-onUnmounted(() => {
-  window.removeEventListener(COOKIE_CONSENT_OPEN_EVENT, showBannerFromFooter)
 })
 
 function accept() {
@@ -87,6 +74,10 @@ function accept() {
 function decline() {
   localStorage.setItem(COOKIE_CONSENT_STORAGE_KEY, 'rejected')
   isOpen.value = false
+}
+
+function close() {
+  decline()
 }
 </script>
 
@@ -118,14 +109,23 @@ function decline() {
       display: flex;
       justify-content: center;
     }
+
+    @include m.from($bp-lg) {
+      max-width: none;
+      margin: 0;
+      display: flex;
+      justify-content: flex-end;
+      align-items: flex-end;
+    }
   }
 
   &__panel {
+    position: relative;
     pointer-events: auto;
     width: 100%;
     max-width: 100%;
     border-radius: $radius-xl;
-    padding: clamp(1.125rem, 3vw, 1.5rem) clamp(1rem, 3vw, 1.75rem);
+    padding: clamp(1.125rem, 3vw, 1.5rem) clamp(2.25rem, 4vw, 2.5rem) clamp(1.125rem, 3vw, 1.5rem) clamp(1rem, 3vw, 1.75rem);
     display: flex;
     flex-direction: column;
     align-items: stretch;
@@ -154,9 +154,76 @@ function decline() {
       max-width: min(22rem, 100%);
       margin-left: auto;
       margin-right: auto;
-      padding: $spacing-md $spacing-md;
+      padding: $spacing-md calc(#{$spacing-md} + 1.75rem) $spacing-md $spacing-md;
       text-align: center;
       align-items: center;
+    }
+
+    /* Десктоп: 25% ширины, правый нижний угол */
+    @include m.from($bp-lg) {
+      width: 25%;
+      max-width: 25%;
+      flex-shrink: 0;
+      margin: 0;
+    }
+  }
+
+  &__close {
+    position: absolute;
+    top: clamp(0.5rem, 1.5vw, 0.75rem);
+    right: clamp(0.5rem, 1.5vw, 0.75rem);
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    margin: 0;
+    padding: 0;
+    border: none;
+    border-radius: $radius-sm;
+    background: transparent;
+    color: $color-text-muted;
+    cursor: pointer;
+    transition:
+      color $transition-fast,
+      background-color $transition-fast;
+
+    &:hover {
+      color: $color-darkBlue;
+      background: color-mix(in srgb, $color-lightBlue 55%, transparent);
+    }
+
+    &:focus-visible {
+      outline: 2px solid $color-darkBlue;
+      outline-offset: 2px;
+    }
+  }
+
+  &__close-icon {
+    position: relative;
+    display: block;
+    width: 0.875rem;
+    height: 0.875rem;
+
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 100%;
+      height: 2px;
+      background: currentColor;
+      border-radius: 1px;
+    }
+
+    &::before {
+      transform: translate(-50%, -50%) rotate(45deg);
+    }
+
+    &::after {
+      transform: translate(-50%, -50%) rotate(-45deg);
     }
   }
 
@@ -169,89 +236,49 @@ function decline() {
     }
   }
 
-  &__title {
-    margin: 0 0 $spacing-sm;
-    font-family: $font-ibm-m;
-    font-size: clamp(1.0625rem, 2.2vw, 1.2rem);
-    font-weight: $font-weight-semibold;
-    color: $color-darkBlue;
-    line-height: $line-height-tight;
-
-    @include m.until($bp-md) {
-      text-align: center;
-      font-size: 1rem;
-    }
-  }
-
   &__text {
-    margin: 0 0 $spacing-sm;
+    margin: 0;
     font-family: $font-ibm;
-    font-size: $font-size-sm;
+    font-size: 0.75rem;
     line-height: $line-height-body;
     color: $color-text-body;
 
     @include m.until($bp-md) {
-      font-size: 0.8125rem;
+      font-size: 0.6875rem;
       line-height: 1.5;
       text-align: left;
     }
   }
 
-  &__hint {
-    margin: 0;
-    font-family: $font-ibm;
-    font-size: 0.8125rem;
-    line-height: $line-height-body;
-    color: $color-text-muted;
-
-    @include m.until($bp-md) {
-      font-size: 0.75rem;
-      line-height: 1.45;
-      text-align: left;
-    }
-  }
-
-  &__code {
-    font-family: ui-monospace, monospace;
-    font-size: 0.8em;
-    padding: 0.1em 0.35em;
-    border-radius: $radius-sm;
-    background: color-mix(in srgb, $color-lightBlue 80%, transparent);
-    color: $color-darkBlue;
-    word-break: break-all;
-  }
-
   &__actions {
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     gap: $spacing-sm;
     flex-shrink: 0;
     margin-top: 0;
-    justify-content: flex-start;
+    justify-content: stretch;
     align-self: stretch;
+    width: 100%;
 
     @include m.from($bp-md) {
-      gap: $spacing-md;
-    }
-
-    @include m.until($bp-md) {
-      flex-direction: column;
-      align-items: stretch;
-      max-width: 16rem;
-      align-self: center;
+      gap: $spacing-sm;
     }
   }
 
   &__btn {
+    flex: 1 1 0;
+    min-width: 0;
     font-family: $font-ibm-m;
-    font-size: $font-size-base;
+    font-size: 0.8125rem;
     font-weight: $font-weight-semibold;
     line-height: 1.25;
-    padding: 0.65rem 1.25rem;
+    padding: 0.4rem 0.5rem;
     border-radius: $radius-lg;
     cursor: pointer;
     border: none;
+    text-align: center;
+    white-space: nowrap;
     transition:
       background-color $transition-fast,
       color $transition-fast,
@@ -291,9 +318,8 @@ function decline() {
     }
 
     @include m.until($bp-md) {
-      width: 100%;
-      font-size: $font-size-sm;
-      padding: 0.55rem 1rem;
+      font-size: 0.6875rem;
+      padding: 0.4rem 0.5rem;
     }
   }
 }

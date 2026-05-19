@@ -2,8 +2,7 @@
   <header
     class="header"
     :class="{
-      'header--home': isHomePage,
-      'header--solid': isSolidHeader,
+      'header--home-top': isHomeTop,
       'header--menu-open': menuOpen
     }"
   >
@@ -71,13 +70,16 @@ const headerPhoneSecond = SITE_PHONES[0]!.display8
 
 const navItems = SITE_TEXT.header.nav
 
-const isScrolled = ref(false)
+const isScrolledPastTop = ref(false)
 const menuOpen = ref(false)
 
-const isSolidHeader = computed(() => !isHomePage.value || isScrolled.value || menuOpen.value)
+/** Главная, scrollY < 100px; при открытом меню снимаем — иначе белый крест на белой панели */
+const isHomeTop = computed(
+  () => isHomePage.value && !isScrolledPastTop.value && !menuOpen.value
+)
 
 const handleScroll = () => {
-  isScrolled.value = window.scrollY >= 100
+  isScrolledPastTop.value = window.scrollY >= 80
 }
 
 const toggleMenu = () => {
@@ -96,6 +98,9 @@ watch(menuOpen, (open) => {
 
 watch(() => route.fullPath, () => {
   closeMenu()
+  if (import.meta.client) {
+    handleScroll()
+  }
 })
 
 onMounted(() => {

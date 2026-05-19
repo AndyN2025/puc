@@ -3,15 +3,17 @@
     <div class="left-column">
       <div class="section-block">
         <h2 class="section-title">{{ SITE_TEXT.newsSection.title }}</h2>
-        <ul class="section-text">
-          <li
-            v-for="item in textAboutUC"
-            :key="item.id"
-            class="section-text__item"
-          >
-            {{ item.text }}
-          </li>
-        </ul>
+        <div class="section-text-wrap">
+          <ul class="section-text">
+            <li
+              v-for="item in textAboutUC"
+              :key="item.id"
+              class="section-text__item"
+            >
+              {{ item.text }}
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
 
@@ -101,6 +103,41 @@ const textAboutUC = SITE_TEXT.newsSection.aboutTexts.map((text, index) => ({
         color: $color-darkBlue;
         margin-bottom: 12px;
         position: relative;
+
+        @include m.until(800px) {
+          font-size: 1.125rem;
+          margin-bottom: 10px;
+        }
+      }
+
+      .section-text-wrap {
+        @include m.until(800px) {
+          position: relative;
+          max-height: calc(0.875rem * 1.55 * 4);
+          overflow: hidden;
+
+          &::before {
+            content: '...';
+            position: absolute;
+            z-index: 1;
+            right: 0;
+            bottom: 0;
+            font-size: 0.875rem;
+            line-height: 1.55;
+            color: $color-text-muted;
+            padding-left: 0.35rem;
+            background: linear-gradient(90deg, rgba($color-white, 0) 0%, $color-white 55%);
+          }
+
+          &::after {
+            content: '';
+            position: absolute;
+            inset: auto 0 0;
+            height: 2.5rem;
+            background: linear-gradient(to bottom, rgba($color-white, 0), $color-white 90%);
+            pointer-events: none;
+          }
+        }
       }
 
       .section-text {
@@ -112,12 +149,27 @@ const textAboutUC = SITE_TEXT.newsSection.aboutTexts.map((text, index) => ({
         list-style: none;
         padding: 0;
 
+        @include m.until(800px) {
+          font-size: 0.875rem;
+          line-height: 1.55;
+          margin-bottom: 0;
+          text-align: left;
+        }
+
         &__item {
           margin: 8px 0;
+
+          @include m.until(800px) {
+            margin: 6px 0;
+          }
 
           &:last-child {
             font-family: $font-ibm-m;
             font-size: 18px;
+
+            @include m.until(800px) {
+              font-size: 1rem;
+            }
           }
         }
 
@@ -174,6 +226,11 @@ const textAboutUC = SITE_TEXT.newsSection.aboutTexts.map((text, index) => ({
       margin: 0 0 $spacing-md;
       text-align: center;
 
+      @include m.until(800px) {
+        font-size: 1.0625rem;
+        margin-bottom: $spacing-sm;
+      }
+
       @include m.from($bp-md) {
         text-align: center;
       }
@@ -185,6 +242,12 @@ const textAboutUC = SITE_TEXT.newsSection.aboutTexts.map((text, index) => ({
       line-height: $line-height-body;
       color: $color-text-muted;
       text-align: center;
+
+      @include m.until(800px) {
+        font-size: 0.8125rem;
+        line-height: 1.5;
+        margin-bottom: $spacing-md;
+      }
     }
 
     .news-cta-link {
@@ -253,6 +316,15 @@ const textAboutUC = SITE_TEXT.newsSection.aboutTexts.map((text, index) => ({
           line-height: 1.4;
           display: block;
           transition: color $transition-fast;
+
+          @include m.until(800px) {
+            font-size: 0.875rem;
+            line-height: 1.45;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+            overflow: hidden;
+          }
 
           &:hover {
             color: $color-darkBlue;

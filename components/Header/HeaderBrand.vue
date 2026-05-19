@@ -44,7 +44,6 @@ import { SITE_TEXT } from '@/utils/siteText'
   -webkit-mask-repeat: no-repeat;
   -webkit-mask-size: contain;
   -webkit-mask-position: center;
-  transition: background-color 0.3s ease;
 }
 
 .header__title {

@@ -24,6 +24,7 @@ defineProps({
 
 <style lang="scss" scoped>
 @use '@/assets/styles/vars' as *;
+@use '@/assets/styles/mixins' as m;
 
 .section-title {
   display: flex;
@@ -58,6 +59,20 @@ defineProps({
     .dot {
       width: 6px;
       height: 6px;
+    }
+  }
+
+  @include m.until(800px) {
+    margin-bottom: 1rem;
+
+    .title-text {
+      font-size: 0.875rem;
+      line-height: 1.35;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
     }
   }
 }
