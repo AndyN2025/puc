@@ -1,11 +1,10 @@
 <template>
   <div class="p news-page">
     <Breadcrumbs :items="breadCrumbs" />
-    <DotTitle text="Новости центра" />
+    <DotTitle :text="SITE_TEXT.newsIndexPage.title" />
 
     <p class="news-page__lead">
-      Актуальные объявления о наборах, форматах обучения и направлениях подготовки
-      в АНО ДПО «Приокский учебный центр». Выберите материал, чтобы открыть полный текст.
+      {{ SITE_TEXT.newsIndexPage.lead }}
     </p>
 
     <NewsArchiveGrid :items="newsArticles" />
@@ -17,10 +16,11 @@ import Breadcrumbs from '@/components/UI/Breadcrumbs.vue'
 import DotTitle from '@/components/UI/DotTitle.vue'
 import NewsArchiveGrid from '@/components/UI/NewsArchiveGrid.vue'
 import { newsArticles } from '@/data/news'
+import { SITE_TEXT } from '@/utils/siteText'
 
 const breadCrumbs = [
-  { text: 'Главная', link: '/' },
-  { text: 'Новости', link: '/news' }
+  { text: SITE_TEXT.newsIndexPage.breadcrumbs.home, link: '/' },
+  { text: SITE_TEXT.newsIndexPage.breadcrumbs.news, link: '/news' }
 ]
 </script>
 

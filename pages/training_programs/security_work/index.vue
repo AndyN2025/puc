@@ -8,6 +8,7 @@
       @update:modelValue="handleTabChange"/>
 
     <DotTitle :text="titleCommon" />
+    <TitleCommon :text="SITE_TEXT.trainingPages.sections.laborProtection" />
 
     <ProgramTable 
       :tabs="tabs"
@@ -15,8 +16,8 @@
       link="training_programs/security_work"
       @tab-change="changeProgrammList"/>
       
-    <DotTitle text="начать обучение" v-if="stepOnline"/>
-    <TitleCommon text="Как мы работаем" v-if="stepOnline"/>
+    <DotTitle :text="SITE_TEXT.trainingPages.indexPages.startLearning" v-if="stepOnline"/>
+    <TitleCommon :text="SITE_TEXT.trainingPages.indexPages.howWeWork" v-if="stepOnline"/>
     <StepsList v-if="stepOnline" preset="remote_standard" />
   </div>
 </template>
@@ -30,18 +31,19 @@ import ProgramTable from '@/components/UI/ProgramTable.vue';
 import StepsList from '@/components/UI/StepsList.vue'
 import { programsOnline, programsOffline } from './utils'
 import { navCourseItems } from '@/utils/svedenUtils'
+import { SITE_TEXT } from '@/utils/siteText'
 
-const titleCommon = ref('Виды обучения')
+const titleCommon = ref(SITE_TEXT.trainingPages.indexPages.titleCommon)
 
 const breadCrumbs = [
-  { text: 'Главная', link: '/' },
+  { text: SITE_TEXT.trainingPages.breadcrumbs.home, link: '/' },
   { text: titleCommon.value, link: '/training_programs/' },
-  { text: 'Охрана труда', link: '/training_programs/security_work/' },
+  { text: SITE_TEXT.trainingPages.sections.laborProtection, link: '/training_programs/security_work/' },
 ] 
 
 const tabs = [
-  { text: 'Очно', value: 'offline' },
-  { text: 'Дистанционно', value: 'online' }
+  { text: SITE_TEXT.trainingPages.indexPages.tabs.fullTime, value: 'offline' },
+  { text: SITE_TEXT.trainingPages.indexPages.tabs.distance, value: 'online' }
 ]
 
 const selectProgrammList = ref(programsOffline)

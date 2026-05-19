@@ -4,14 +4,19 @@
       <NuxtLink
         :to="item.link"
         class="course-card"
-        :aria-label="`Перейти к разделу: ${item.title}`"
+        :aria-label="SITE_TEXT.listCourses.courseAria(item.title)"
       >
         <span class="course-card__accent" aria-hidden="true" />
 
         <div class="course-card__media">
-          <div
+          <img
             class="course-card__image"
-            :style="{ backgroundImage: `url(${item.image})` }"
+            :src="item.image"
+            alt=""
+            width="500"
+            height="300"
+            loading="lazy"
+            decoding="async"
             aria-hidden="true"
           />
           <div class="course-card__media-fade" aria-hidden="true" />
@@ -21,7 +26,7 @@
           <h3 class="course-card__title">{{ item.title }}</h3>
           <p class="course-card__excerpt">{{ item.text }}</p>
           <span class="course-card__cta">
-            <span class="course-card__cta-text">Подробнее</span>
+            <span class="course-card__cta-text">{{ SITE_TEXT.listCourses.cta }}</span>
             <span class="course-card__cta-icon" aria-hidden="true">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
@@ -42,6 +47,7 @@
 
 <script setup lang="ts">
 import { courseList } from '@/utils/svedenUtils'
+import { SITE_TEXT } from '@/utils/siteText'
 </script>
 
 <style lang="scss" scoped>
@@ -149,10 +155,11 @@ import { courseList } from '@/utils/svedenUtils'
 }
 
 .course-card__image {
+  display: block;
   width: 100%;
   height: 100%;
-  background-size: cover;
-  background-position: center;
+  object-fit: cover;
+  object-position: center;
   transition: transform 0.55s cubic-bezier(0.33, 1, 0.68, 1);
 }
 

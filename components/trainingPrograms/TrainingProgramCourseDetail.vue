@@ -7,7 +7,7 @@
           <h1 class="top__title" :class="titleLengthClass">{{ displayTitle }}</h1>
 
           <p v-if="showProgramCodeLine" class="top__code">
-            Код программы: {{ course.textCode }}
+            {{ SITE_TEXT.trainingDetail.programCode }} {{ course.textCode }}
           </p>
 
           <div v-if="course.mainDescription" class="top__description">
@@ -31,7 +31,7 @@
           </div>
 
           <div v-if="hasRequirements" class="block__require">
-            <p class="block__title">Требования к слушателям:</p>
+            <p class="block__title">{{ SITE_TEXT.trainingDetail.requirements }}</p>
             <ul class="info__users-list">
               <li
                 v-for="(user, index) in course.requiremets!"
@@ -46,12 +46,12 @@
 
           <div class="block__row row">
             <div class="row-item">
-              <p class="block__title">Продолжительность обучения:</p>
+              <p class="block__title">{{ SITE_TEXT.trainingDetail.duration }}</p>
               <p class="info__value">{{ hoursDisplay }}</p>
             </div>
 
             <div v-if="course.format" class="row-item">
-              <p class="block__title">Форма обучения:</p>
+              <p class="block__title">{{ SITE_TEXT.trainingDetail.format }}</p>
               <p class="info__value">{{ course.format }}</p>
             </div>
 
@@ -62,7 +62,7 @@
           </div>
 
           <div class="block__document">
-            <p class="block__title">Получаемый документ:</p>
+            <p class="block__title">{{ SITE_TEXT.trainingDetail.document }}</p>
             <div class="info__value">
               <template v-if="Array.isArray(course.document) && course.document.length">
                 <ul class="info__value-list">
@@ -87,7 +87,7 @@
                   >
                     <img
                       :src="img"
-                      :alt="`Изображение ${index + 1}`"
+                      :alt="SITE_TEXT.trainingDetail.imageAlt(index)"
                       class="info__image"
                     />
                     <div class="zoom-overlay">
@@ -104,7 +104,7 @@
                 <div v-else class="image-wrapper" @click="openModal(course.img)">
                   <img
                     :src="course.img"
-                    :alt="`Образец документа: ${documentAlt}`"
+                    :alt="SITE_TEXT.trainingDetail.documentAlt(documentAlt)"
                     class="info__image"
                   />
                   <div class="zoom-overlay">
@@ -122,7 +122,7 @@
 
           <div class="block__buttons">
             <button type="button" class="info__back-btn" @click="$router.back()">
-              Назад к списку
+              {{ SITE_TEXT.trainingDetail.backToList }}
             </button>
             <button
               type="button"
@@ -143,7 +143,7 @@
                 <polyline points="7 10 12 15 17 10" />
                 <line x1="12" y1="15" x2="12" y2="3" />
               </svg>
-              Заявка на обучение
+              {{ SITE_TEXT.trainingDetail.applicationButton }}
             </button>
             <button
               type="button"
@@ -164,16 +164,16 @@
                 <polyline points="7 10 12 15 17 10" />
                 <line x1="12" y1="15" x2="12" y2="3" />
               </svg>
-              Получить программу *
+              {{ SITE_TEXT.trainingDetail.programButton }}
             </button>
             <p class="info__hint">
-              * Полную программу обучения уточняйте у менеджера по
+              {{ SITE_TEXT.trainingDetail.programHintBefore }}
               <span
                 class="info__phone-highlight"
                 @mouseenter="showPhoneTooltip = true"
                 @mouseleave="showPhoneTooltip = false"
               >
-                телефону
+                {{ SITE_TEXT.trainingDetail.phoneWord }}
                 <div
                   v-if="showPhoneTooltip"
                   class="info__phone-tooltip"
@@ -197,7 +197,7 @@
             <button type="button" class="modal-close" @click="showModal = false">×</button>
             <img
               :src="selectedImage ?? undefined"
-              :alt="`Образец документа: ${documentAlt}`"
+              :alt="SITE_TEXT.trainingDetail.documentAlt(documentAlt)"
               class="modal-image"
             />
           </div>
@@ -210,7 +210,7 @@
     <div v-else class="not-found">
       <h1 class="top__title">{{ notFoundTitle }}</h1>
       <button type="button" class="info__back-btn" @click="$router.push(listIndexPath)">
-        К списку программ
+        {{ SITE_TEXT.trainingDetail.toProgramsList }}
       </button>
     </div>
   </div>
@@ -222,6 +222,7 @@ import Breadcrumbs from '@/components/UI/Breadcrumbs.vue'
 import ConsultationWidget from '@/components/UI/ConsultantWidget.vue'
 import checkIkon from '@/assets/img/checkIcon.svg'
 import { SITE_PHONES } from '@/utils/site'
+import { SITE_TEXT } from '@/utils/siteText'
 
 export interface TrainingProgramCourseDetailBreadcrumb {
   text: string
@@ -259,9 +260,9 @@ const props = withDefaults(
     showConsultationWidget?: boolean
   }>(),
   {
-    periodLabel: 'Периодичность обучения:',
+    periodLabel: SITE_TEXT.trainingDetail.periodLabel,
     pageTitle: null,
-    notFoundTitle: 'Курс не найден',
+    notFoundTitle: SITE_TEXT.trainingDetail.notFoundTitle,
     showConsultationWidget: true
   }
 )

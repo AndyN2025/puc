@@ -24,7 +24,7 @@
           </div>
           <h2 class="news-archive__title">{{ item.title }}</h2>
           <p class="news-archive__excerpt">{{ item.excerpt }}</p>
-          <span class="news-archive__cta">Читать полностью</span>
+          <span class="news-archive__cta">{{ SITE_TEXT.newsIndexPage.readFull }}</span>
         </div>
       </NuxtLink>
     </li>
@@ -33,6 +33,7 @@
 
 <script setup lang="ts">
 import type { NewsArticle } from '@/data/news'
+import { SITE_TEXT } from '@/utils/siteText'
 
 defineProps<{
   items: NewsArticle[]

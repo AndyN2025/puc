@@ -23,12 +23,13 @@ defineProps<{ items: { label: string; to: string }[] }>()
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: center;
   flex-wrap: nowrap;
   gap: clamp(0.4rem, 1.2vw, 1rem);
+  flex: 1 1 auto;
   min-width: 0;
   text-transform: uppercase;
-  font-size: clamp(0.75rem, 0.65rem + 0.35vw, 0.875rem);
+  font-size: clamp(0.72rem, 0.62rem + 0.32vw, 0.8125rem);
   line-height: 1.25;
   letter-spacing: 0.02em;
 

@@ -8,15 +8,15 @@
       :modelValue="selectedTab"
       @update:modelValue="handleTabChange"/>
     <DotTitle :text="titleCommon" />
-    <TitleCommon text="Энергетическая безопасность (очно, заочно, дистанционно)"/>
+    <TitleCommon :text="SITE_TEXT.trainingPages.indexPages.energySafetyFull"/>
     <ProgramTable
       :items="energyPrograms"
       link="training_programs/energy_security"
-      :centralTitle="`Подготовка в области «Энергетической безопасности»`"
+      :centralTitle="SITE_TEXT.trainingPages.indexPages.energyCentralTitle"
     />
 
-    <DotTitle text="начать обучение" />
-    <TitleCommon text="Как мы работаем"/>
+    <DotTitle :text="SITE_TEXT.trainingPages.indexPages.startLearning" />
+    <TitleCommon :text="SITE_TEXT.trainingPages.indexPages.howWeWork"/>
     <StepsList preset="energy" />
   </div>
 </template>
@@ -30,19 +30,20 @@ import NavBlock from '@/components/UI/NavBlock.vue'
 import StepsList from '@/components/UI/StepsList.vue'
 import { navCourseItems } from '@/utils/svedenUtils'
 import { energyPrograms } from './utils'
+import { SITE_TEXT } from '@/utils/siteText'
 
-const titleCommon = ref('Виды обучения')
+const titleCommon = ref(SITE_TEXT.trainingPages.indexPages.titleCommon)
 
 const breadCrumbs = [
-  { text: 'Главная', link: '/' },
+  { text: SITE_TEXT.trainingPages.breadcrumbs.home, link: '/' },
   { text: titleCommon.value, link: '/training_programs/' },
-  { text: 'Энергетическая безопасность', link: '/training_programs/energy_security/' },
+  { text: SITE_TEXT.trainingPages.sections.energySafety, link: '/training_programs/energy_security/' },
 ] 
 
 const tabs = [
-  { text: 'Все', value: 'all' },
-  { text: 'Дистанционно', value: 'online' },
-  { text: 'Очно', value: 'offline' }
+  { text: SITE_TEXT.trainingPages.indexPages.tabs.all, value: 'all' },
+  { text: SITE_TEXT.trainingPages.indexPages.tabs.distance, value: 'online' },
+  { text: SITE_TEXT.trainingPages.indexPages.tabs.fullTime, value: 'offline' }
 ]
 
 const selectedTab = ref('all')

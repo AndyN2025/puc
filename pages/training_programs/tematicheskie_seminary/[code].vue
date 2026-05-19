@@ -3,7 +3,7 @@
     <TrainingProgramCourseDetail
       :course="course ?? null"
       :bread-crumbs="breadCrumbs"
-      listeners-title="Категории слушателей:"
+      :listeners-title="SITE_TEXT.trainingPages.listeners.categories"
       :hours-display="hoursDisplay"
       list-index-path="/training_programs/tematicheskie_seminary/"
       @download-application="downloadApplication"
@@ -17,6 +17,8 @@ import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { findOpoProgramByCode, type OpoTrainingProgram } from './utils'
 import TrainingProgramCourseDetail from '@/components/trainingPrograms/TrainingProgramCourseDetail.vue'
+import { downloadSafeDocument } from '@/utils/documentLinks'
+import { SITE_TEXT } from '@/utils/siteText'
 
 const route = useRoute()
 
@@ -35,15 +37,15 @@ const hoursDisplay = computed(() => {
   const c = course.value
   if (!c) return ''
   const h = c.hours
-  return typeof h === 'string' ? h : `${h} часов`
+  return typeof h === 'string' ? h : `${h} ${SITE_TEXT.trainingPages.hours.hours}`
 })
 
 const breadCrumbs = computed(() => {
   const crumbs = [
-    { text: 'Главная', link: '/' },
-    { text: 'Виды обучения', link: '/training_programs/' },
+    { text: SITE_TEXT.trainingPages.breadcrumbs.home, link: '/' },
+    { text: SITE_TEXT.trainingPages.breadcrumbs.trainingPrograms, link: '/training_programs/' },
     {
-      text: 'Обучение рабочего персонала ОПО',
+      text: SITE_TEXT.trainingPages.sections.opoWorkers,
       link: '/training_programs/tematicheskie_seminary/'
     }
   ]
@@ -58,27 +60,23 @@ const breadCrumbs = computed(() => {
 
 const downloadApplication = () => {
   if (!course.value?.application) {
-    alert('Файл заявки не найден для этого курса')
+    alert(SITE_TEXT.trainingPages.alerts.missingCourseApplication)
     return
   }
-  const link = document.createElement('a')
-  link.href = course.value.application
-  link.download = `Заявка_${course.value.code || 'на_обучение'}.doc`
-  document.body.appendChild(link)
-  link.click()
-  document.body.removeChild(link)
+  downloadSafeDocument(
+    course.value.application,
+    `${SITE_TEXT.trainingPages.files.applicationPrefix}_${course.value.code || SITE_TEXT.trainingPages.files.applicationFallback}.doc`
+  )
 }
 
 const openShortInfo = () => {
   if (!course.value?.programm) {
-    alert('Программа обучения не найдена для этого курса')
+    alert(SITE_TEXT.trainingPages.alerts.missingCourseProgram)
     return
   }
-  const link = document.createElement('a')
-  link.href = course.value.programm
-  link.download = `Программа_${course.value.code || 'обучения'}.doc`
-  document.body.appendChild(link)
-  link.click()
-  document.body.removeChild(link)
+  downloadSafeDocument(
+    course.value.programm,
+    `${SITE_TEXT.trainingPages.files.programPrefix}_${course.value.code || SITE_TEXT.trainingPages.files.programFallback}.doc`
+  )
 }
 </script>

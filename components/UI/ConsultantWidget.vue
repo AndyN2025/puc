@@ -123,10 +123,7 @@ const isFormVisible = ref(false)
 let showTimer = null
 
 const toggleForm = () => {
-  console.log('[Widget] toggleForm вызван, текущее состояние:', isFormVisible.value)
-  
   if (showTimer) {
-    console.log('[Widget] Очищаем таймер')
     clearTimeout(showTimer)
     showTimer = null
   }
@@ -134,52 +131,34 @@ const toggleForm = () => {
   isFormVisible.value = !isFormVisible.value
   
   if (!isFormVisible.value) {
-    console.log('[Widget] Форма закрыта, включаем моргание')
     isPulsing.value = true
   } else {
-    console.log('[Widget] Форма открыта, выключаем моргание')
     isPulsing.value = false
   }
 }
 
-const handleCall = () => {
-  console.log('[Widget] Пользователь нажал на номер телефона')
-}
+const handleCall = () => {}
 
 const initWidget = () => {
-  console.log('[Widget] 🚀 initWidget вызван')
-  console.log('[Widget] autoShow:', props.autoShow)
-  console.log('[Widget] delay:', props.delay, 'мс')
-  
   if (props.autoShow) {
-    console.log('[Widget] ⏰ Запускаем таймер на', props.delay, 'мс')
-    
     showTimer = setTimeout(() => {
-      console.log('[Widget] ✅ Таймер сработал! Открываем форму')
       isFormVisible.value = true
       isPulsing.value = false
-      console.log('[Widget] isFormVisible =', isFormVisible.value)
     }, props.delay)
-    
-    console.log('[Widget] Таймер ID:', showTimer)
   }
 }
 
 onMounted(() => {
-  console.log('[Widget] 📦 onMounted - компонент смонтирован')
   initWidget()
 })
 
 onUnmounted(() => {
-  console.log('[Widget] 🗑️ onUnmounted - компонент размонтирован')
   if (showTimer) {
     clearTimeout(showTimer)
-    console.log('[Widget] Таймер очищен')
   }
 })
 
 const forceShowForm = () => {
-  console.log('[Widget] forceShowForm вызван')
   isFormVisible.value = true
   isPulsing.value = false
   
@@ -190,7 +169,6 @@ const forceShowForm = () => {
 }
 
 const forceHideForm = () => {
-  console.log('[Widget] forceHideForm вызван')
   isFormVisible.value = false
   isPulsing.value = true
   

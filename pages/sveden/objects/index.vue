@@ -2,11 +2,11 @@
   <div class="p">
     <Breadcrumbs :items="breadCrumbs"/> 
     <NavBlock :navItems="navSvedenItems" :activeIndex="6"/>
-    <DotTitle text="Сведения об образовательной организации" />
+    <DotTitle :text="SITE_TEXT.svedenPages.commonTitle" />
     <TitleCommon :text="titleCommon"/>
 
     <div class="technic">
-      <div class="technic__content">
+      <div class="technic__content" itemprop="purposeFacil">
         <div class="technic__content-text">
           <p>Учебные кабинеты АНО ДПО «Приокский учебный центр» оснащены современным оборудованием и всем необходимым для реализации образовательных программ:</p>
           <p>Мебель (эргономичные столы и стулья), мультимедийные комплексы (проектор, телевизор, персональные компьютеры, принтеры, акустические системы), специализированные учебные пособия, стенды, плакаты и различное оборудование, в том числе:</p>
@@ -29,9 +29,20 @@
         <li
           v-for="room in rooms"
           :key="room.id"
+          itemscope
+          itemprop="purposeCab"
           class="technic__room"
           :class="{ 'technic__room--open': roomExpanded[room.id] }"
         >
+          <span class="visually-hidden" itemprop="addressCab">
+            Адрес места нахождения учебного кабинета: {{ mtoAddress }}
+          </span>
+          <span
+            class="visually-hidden"
+            itemprop="ovzCab"
+          >
+            Сведения о приспособленности учебных помещений для инвалидов и лиц с ОВЗ — в блоке «Доступная среда» ниже на странице.
+          </span>
           <button
             type="button"
             class="technic__room-trigger"
@@ -40,7 +51,7 @@
             :aria-controls="`technic-room-panel-${room.id}`"
             @click="toggleRoom(room.id)"
           >
-            <span class="technic__room-title">{{ room.name }}</span>
+            <span class="technic__room-title" itemprop="nameCab">{{ room.name }}</span>
             <span class="technic__room-trigger-hint" aria-hidden="true">
               {{ roomExpanded[room.id] ? 'Свернуть' : 'Подробнее' }}
             </span>
@@ -68,7 +79,7 @@
           >
             <div class="technic__room-body">
               <template v-if="room.id !== 1">
-                <ul class="technic__room-list">
+                <ul class="technic__room-list" itemprop="osnCab">
                   <li
                     v-for="(item, idx) in room.content"
                     :key="idx"
@@ -82,7 +93,7 @@
                 </ul>
               </template>
               <template v-else>
-                <ul class="technic__room-list">
+                <ul class="technic__room-list" itemprop="osnCab">
                   <li
                     v-for="(item, idx) in room.content[0]"
                     :key="'r1a-' + idx"
@@ -97,7 +108,7 @@
                 <p class="technic__room-subtitle">
                   Учебно-демонстрационные приборы (устройства) для оборудования работающего под избыточным давлением:
                 </p>
-                <ul class="technic__room-list">
+                <ul class="technic__room-list" itemprop="osnCab">
                   <li
                     v-for="(item, idx) in room.content[1]"
                     :key="'r1b-' + idx"
@@ -115,7 +126,7 @@
         </li>
       </ul>
 
-      <div class="technic__info">
+      <div class="technic__info" itemprop="comNet">
         <p class="technic__info-title">Перечень электронных образовательных ресурсов, к которым обеспечивается доступ обучающихся:</p>
         <ul class="technic__info-list">
           <li class="technic__info-item" v-for="mat in infoMat" :key="mat.id">
@@ -130,7 +141,7 @@
 
     <TitleCommon text="Доступная среда" />
 
-    <div class="ovz">
+    <div class="ovz" itemprop="ovz">
       <ul class="ovz__list">
         <li
           v-for="(item, idx) in rawItems"
@@ -156,18 +167,23 @@ import DotTitle from '@/components/UI/DotTitle.vue';
 import TitleCommon from '@/components/UI/TitleCommon.vue';
 import NavBlock from '@/components/UI/NavBlock.vue'
 import { navSvedenItems } from '@/utils/svedenUtils'
+import { SITE_ADDRESS } from '@/utils/site'
 import checkIcon from '@/assets/img/checkIcon.svg'
 import material1 from '@/assets/img/common/material01.png'
 import material2 from '@/assets/img/common/material02.png'
 import material3 from '@/assets/img/common/material03.png'
 import material4 from '@/assets/img/common/material04.png'
+import { SITE_TEXT } from '@/utils/siteText'
 
-const titleCommon = ref('Материально-техническое обеспечение и оснащенность образовательного процесса')
+const titleCommon = ref(SITE_TEXT.svedenPages.titles.objects)
+
+/** Адрес места оснащения учебных кабинетов (табл. 3.9.1 — addressCab) */
+const mtoAddress = SITE_ADDRESS.legal
 
 const breadCrumbs = [
-  { text: 'Главная', link: '/' },
-  { text: 'Сведения об организации', link: '/sveden/common/' },
-  { text: titleCommon.value + '. Доступная среда', link: '/sveden/objects/' }
+  { text: SITE_TEXT.svedenPages.breadcrumbs.home, link: '/' },
+  { text: SITE_TEXT.svedenPages.breadcrumbs.organization, link: '/sveden/common/' },
+  { text: `${titleCommon.value}. ${SITE_TEXT.svedenPages.titles.ovz}`, link: '/sveden/objects/' }
 ] 
 
 const infoMat = [
@@ -698,6 +714,18 @@ const rawItems = [
     padding: $spacing-md;
     font-size: $font-size-base;
   }
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 .ovz {

@@ -2,13 +2,30 @@
   <div class="p">
     <Breadcrumbs :items="breadCrumbs"/> 
     <NavBlock :navItems="navSvedenItems" :activeIndex="9"/>
-    <DotTitle text="Сведения об образовательной организации" />
+    <DotTitle :text="SITE_TEXT.svedenPages.commonTitle" />
     <TitleCommon :text="titleCommon"/>
 
-    <ul class="vacant">
+    <ul class="vacant" itemprop="vacant">
       <li class="vacant__item" v-for="item in vacantList" :key="item.id">
         <p class="vacant__item-title">{{ item.title }}</p>
         <p class="vacant__item-text">{{ item.text }}</p>
+      </li>
+      <li
+        v-for="program in vacantPrograms"
+        :key="program.id"
+        class="visually-hidden"
+        itemscope
+      >
+        <div itemprop="eduCode">{{ program.code }}</div>
+        <div itemprop="eduName">{{ program.name }}</div>
+        <div itemprop="eduLevel">{{ program.level }}</div>
+        <div itemprop="eduProf">{{ program.profile }}</div>
+        <div itemprop="eduCourse">{{ program.course }}</div>
+        <div itemprop="eduForm">{{ program.form }}</div>
+        <div itemprop="numberBFVacant">0</div>
+        <div itemprop="numberBRVacant">0</div>
+        <div itemprop="numberBMVacant">0</div>
+        <div itemprop="numberPVacant">По заявкам заказчиков</div>
       </li>
     </ul>
   </div>
@@ -20,12 +37,13 @@ import DotTitle from '@/components/UI/DotTitle.vue';
 import TitleCommon from '@/components/UI/TitleCommon.vue';
 import NavBlock from '@/components/UI/NavBlock.vue'
 import { navSvedenItems } from '@/utils/svedenUtils'
+import { SITE_TEXT } from '@/utils/siteText'
 
-const titleCommon = ref('Вакантные места для приема (перевода) обучающихся')
+const titleCommon = ref(SITE_TEXT.svedenPages.titles.vacant)
 
 const breadCrumbs = [
-  { text: 'Главная', link: '/' },
-  { text: 'Сведения об организации', link: '/sveden/common/' },
+  { text: SITE_TEXT.svedenPages.breadcrumbs.home, link: '/' },
+  { text: SITE_TEXT.svedenPages.breadcrumbs.organization, link: '/sveden/common/' },
   { text: titleCommon.value, link: '/sveden/vacant/' }
 ] 
 
@@ -44,6 +62,27 @@ const vacantList = [
       различных уровней, а также обучение по договорам за счёт средств физических и юридических лиц, 
       не распространяются на АНО ДПО «ПУЦ», реализующую программы дополнительного профессионального образования.`
   },
+]
+
+const vacantPrograms = [
+  {
+    id: 1,
+    code: 'не применимо',
+    name: 'Дополнительное профессиональное образование',
+    level: 'Дополнительное профессиональное образование',
+    profile: 'Программы повышения квалификации и профессиональной переподготовки',
+    course: 'не применимо',
+    form: 'Очная, очно-заочная, заочная'
+  },
+  {
+    id: 2,
+    code: 'не применимо',
+    name: 'Профессиональное обучение',
+    level: 'Профессиональное обучение',
+    profile: 'Программы профессионального обучения по профессиям рабочих',
+    course: 'не применимо',
+    form: 'Очная, очно-заочная, заочная'
+  }
 ]
 
 </script>
@@ -94,5 +133,17 @@ const vacantList = [
       width: 100%;
     }
   }
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 </style>

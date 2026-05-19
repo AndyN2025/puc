@@ -5,6 +5,14 @@
     <DotTitle :text="pageTexts.dotTitleSveden" />
 
     <OrganizationInfo />
+    <section class="visually-hidden" aria-label="Места осуществления образовательной деятельности">
+      <div itemprop="addressPlaceSet">Места осуществления образовательной деятельности при использовании сетевой формы реализации образовательных программ: не применимо</div>
+      <div itemprop="addressPlacePrac">Места проведения практики: {{ SITE_ADDRESS.legal }}</div>
+      <div itemprop="addressPlacePodg">Места проведения практической подготовки обучающихся: {{ SITE_ADDRESS.legal }}</div>
+      <div itemprop="addressPlaceGia">Места проведения государственной итоговой аттестации: не применимо</div>
+      <div itemprop="addressPlaceDop">Места осуществления образовательной деятельности по дополнительным образовательным программам: {{ SITE_ADDRESS.legal }}</div>
+      <div itemprop="addressPlaceOppo">Места осуществления образовательной деятельности по основным программам профессионального обучения: {{ SITE_ADDRESS.legal }}</div>
+    </section>
     <DotTitle :text="pageTexts.dotTitleDocuments" />
     <DocumentAccordion :documents="documents" style="margin-bottom: 60px" />
   </div>
@@ -22,6 +30,8 @@ import {
   SVEDEN_COMMON_DOC_TITLES,
   SVEDEN_COMMON_PAGE
 } from '@/utils/svedenCommonContent'
+import { SITE_ADDRESS } from '@/utils/site'
+import { SITE_TEXT } from '@/utils/siteText'
 
 import License from '@/assets/documents/common/(01)Лицензия на осуществление образовательной деятельности.pdf'
 import LicenseChange from '@/assets/documents/common/(02)Выписка из реестра лицензий по состоянию на 01.08.2024г (изменение лицензии).pdf'
@@ -31,7 +41,7 @@ import AkkreditDoc from '@/assets/documents/common/(04)Уведомление о
 const pageTexts = SVEDEN_COMMON_PAGE
 
 const breadCrumbs = [
-  { text: 'Главная', link: '/' },
+  { text: SITE_TEXT.svedenPages.breadcrumbs.home, link: '/' },
   { text: pageTexts.breadcrumbOrg, link: '/sveden/common/' },
   { text: pageTexts.pageTitle, link: '/sveden/common/' }
 ]
@@ -110,6 +120,18 @@ const documents = [
       height: 100%;
     }
   }
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 .grid {

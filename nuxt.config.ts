@@ -36,10 +36,36 @@ const extraPrerenderRoutes = [
   ...newsPrerenderPaths
 ]
 
+const contentSecurityPolicy = [
+  "default-src 'self'",
+  "base-uri 'self'",
+  "object-src 'self'",
+  "frame-ancestors 'self'",
+  "form-action 'self'",
+  "script-src 'self' 'unsafe-inline'",
+  "style-src 'self' 'unsafe-inline'",
+  "img-src 'self' data: blob:",
+  "font-src 'self' data:",
+  "connect-src 'self'",
+  "frame-src 'self' https://yandex.ru https://*.yandex.ru",
+  "media-src 'self'",
+  "manifest-src 'self'",
+  "worker-src 'self' blob:"
+].join('; ')
+
+const securityHeaders = {
+  'Content-Security-Policy': contentSecurityPolicy,
+  'X-Content-Type-Options': 'nosniff',
+  'Referrer-Policy': 'strict-origin-when-cross-origin',
+  'Permissions-Policy': 'camera=(), microphone=(), geolocation=(), payment=(), usb=()',
+  'X-Frame-Options': 'SAMEORIGIN'
+}
+
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
-  devtools: { enabled: true },
+  devtools: { enabled: false },
   ssr: true,
+  ignore: ['**/pages/**/*.ts'],
   modules: ['@pinia/nuxt'],
 
   /**
@@ -69,6 +95,11 @@ export default defineNuxtConfig({
 
   nitro: {
     preset: 'static',
+    routeRules: {
+      '/**': {
+        headers: securityHeaders
+      }
+    },
 
     prerender: {
       crawlLinks: true,

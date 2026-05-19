@@ -2,14 +2,19 @@
   <div class="header__mail">
     <div class="header__mail-contact">
       
-      <span class="header__mail-logo" v-html="mailIcon" />
+      <img
+        class="header__mail-logo"
+        :src="mailIconUrl"
+        alt=""
+        aria-hidden="true"
+      >
       <a :href="link" class="header__mail-text">{{ text }}</a>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import mailIcon from '@/assets/img/mailIcon.svg?raw'
+import mailIconUrl from '@/assets/img/mailIcon.svg'
 
 defineProps<{
   text: string;
@@ -33,20 +38,21 @@ defineProps<{
 
   &-text{
     color: inherit;
-    font-size: 14px;
+    font-size: 15px;
     line-height: 18px;
   }
 
-  &-logo :deep(svg) {
-    width: 18px;
-    height: auto;
+  &-logo {
+    width: 15px;
+    height: 15px;
     display: block;
-    fill: currentColor;
+    flex: 0 0 auto;
+    filter: brightness(0) invert(1);
+    transition: filter 0.3s ease;
   }
+}
 
-  &-logo :deep(path) {
-    fill: currentColor;
-    transition: fill 0.3s ease;
-  }
+:global(.header--solid) .header__mail-logo {
+  filter: brightness(0) saturate(100%) invert(17%) sepia(72%) saturate(1232%) hue-rotate(190deg) brightness(91%) contrast(96%);
 }
 </style>

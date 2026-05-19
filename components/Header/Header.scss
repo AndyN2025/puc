@@ -7,28 +7,24 @@
   left: 0;
   top: 0;
   width: 100%;
-  color: white;
-  transition: color $transition-slow ease;
+  color: $color-darkBlue;
+  background-color: $color-white;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.178);
+  transition:
+    background-color $transition-slow ease,
+    color $transition-slow ease,
+    border-bottom-color $transition-slow ease;
 
-  &::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: white;
-    opacity: 0;
-    transition: opacity $transition-slow ease;
-    pointer-events: none;
-    z-index: -1;
+  &.header--home:not(.header--solid) {
+    color: $color-white;
+    background-color: transparent;
+    border-bottom-color: transparent;
   }
 
-  &--scrolled,
-  &--solid {
+  &.header--solid {
     color: $color-darkBlue;
-    border-bottom: 1px solid rgba(128, 128, 128, 0.178);
-
-    &::before {
-      opacity: 1;
-    }
+    background-color: $color-white;
+    border-bottom-color: rgba(128, 128, 128, 0.178);
   }
 
   /* Меню открыто: шапка поверх оверлея; крест — из верхней/нижней полоски бургера */
@@ -115,7 +111,7 @@
   &__panel {
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: center;
     flex: 1;
     gap: clamp(0.5rem, 2vw, 1.5rem);
     min-width: 0;

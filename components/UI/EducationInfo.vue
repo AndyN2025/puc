@@ -57,7 +57,7 @@
       <div class="diploma-content">
         <h3 class="diploma-title" v-if="diplomaText">По окончании обучения Вы получаете:</h3>
         <div class="diploma-text" v-if="diplomaText">
-          <p v-if="diplomaText" v-html="diplomaText"></p>
+          <p v-if="diplomaText">{{ diplomaText }}</p>
           <a
             :href="Polozhenie"
             target="_blank"

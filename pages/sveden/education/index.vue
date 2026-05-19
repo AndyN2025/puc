@@ -2,7 +2,7 @@
   <div class="p">
     <Breadcrumbs :items="breadCrumbs"/> 
     <NavBlock :navItems="navSvedenItems" :activeIndex="3"/>
-    <DotTitle text="Сведения об образовательной организации" />
+    <DotTitle :text="SITE_TEXT.svedenPages.commonTitle" />
     <TitleCommon :text="titleCommon"/>
     
 
@@ -10,17 +10,17 @@
     <DotTitle text="программы и формы обучения" />
     <TitleCommon text="Образовательные программы и подготовка специалистов"/>
 
-    <div class="accessibility-grid">
+    <div class="accessibility-grid" itemscope>
       
-      <div class="accessibility-grid__card" itemprop="eduAccred">
+      <div class="accessibility-grid__card" itemprop="eduAccred" itemscope>
         <div class="accessibility-grid__icon">
           <img :src="eduIcon1" alt="Иконка лифт"  />
         </div>
         
         <h3 class="accessibility-grid__title">Реализуемые виды образования</h3>
         <ul class="accessibility-grid__text">
-          <li>1. Профессиональное обучение,</li>
-          <li>2. Дополнительное профессиональное образование.</li>
+          <li itemprop="eduLevel">Профессиональное обучение</li>
+          <li itemprop="eduLevel">Дополнительное профессиональное образование</li>
         </ul>
       </div>
 
@@ -35,7 +35,9 @@
           <img :src="eduIcon2" alt="Иконка кран"  />
         </div>
         <h3 class="accessibility-grid__title">Предаттестационная подготовка</h3>
-        <p class="accessibility-grid__text">Предаттестационная подготовка руководителей и специалистов организаций, поднадзорных Федеральной службе по экологическому и технологическому надзору</p>
+        <p class="accessibility-grid__text" itemprop="eduProf">
+          Предаттестационная подготовка руководителей и специалистов организаций, поднадзорных Федеральной службе по экологическому и технологическому надзору
+        </p>
       </div>
 
       
@@ -60,6 +62,36 @@
         <p class="accessibility-grid__text" itemprop="languageEl">Русский</p>
       </div>
     </div>
+
+    <section class="visually-hidden" aria-label="Обязательные сведения об образовании">
+      <div
+        v-for="course in courseList"
+        :key="course.id"
+        itemprop="eduOp"
+        itemscope
+      >
+        <div itemprop="eduCode">не применимо</div>
+        <div itemprop="eduName">{{ course.title }}</div>
+        <div itemprop="eduLevel">Дополнительное профессиональное образование / профессиональное обучение</div>
+        <div itemprop="eduProf">{{ course.text }}</div>
+        <div itemprop="eduForm">Очная, очно-заочная, заочная</div>
+        <div itemprop="learningTerm">Согласно образовательной программе</div>
+        <div itemprop="eduPred">Согласно образовательной программе</div>
+        <div itemprop="eduPrac">Согласно образовательной программе</div>
+        <div itemprop="opMain">Образовательная программа размещается в составе документов образовательной программы</div>
+        <div itemprop="educationPlan">Учебный план размещается в составе документов образовательной программы</div>
+        <div itemprop="educationRpd">Рабочие программы размещаются в составе документов образовательной программы</div>
+        <div itemprop="educationShedule">Календарный учебный график размещается в составе документов образовательной программы</div>
+        <div itemprop="methodology">Методические и иные документы размещаются в составе документов образовательной программы</div>
+      </div>
+      <div itemprop="languageEl">Русский язык</div>
+      <div itemprop="eduChislenEl">Информация о численности обучающихся: по запросу / согласно текущему набору групп</div>
+      <div itemprop="eduPriemEl">Информация о результатах приема: не применимо</div>
+      <div itemprop="eduPerevodEl">Информация о результатах перевода, восстановления и отчисления: не применимо</div>
+      <div itemprop="eduAdOp">Адаптированные образовательные программы: отсутствуют</div>
+      <div itemprop="eduNir">Научная (научно-исследовательская) деятельность: не применимо</div>
+      <div itemprop="graduateJob">Информация о трудоустройстве выпускников: не применимо</div>
+    </section>
   </div>
 </template>
 
@@ -70,19 +102,20 @@ import TitleCommon from '@/components/UI/TitleCommon.vue';
 import NavBlock from '@/components/UI/NavBlock.vue'
 import ListCourses from '@/components/UI/ListCourses.vue';
 import CardSlider from '@/components/UI/CardSlider.vue'
-import { navSvedenItems } from '@/utils/svedenUtils'
+import { courseList, navSvedenItems } from '@/utils/svedenUtils'
 import eduIcon1 from '@/assets/img/common/educ1.svg'
 import eduIcon2 from '@/assets/img/common/educ2.svg'
 import eduIcon3 from '@/assets/img/common/educ3.svg'
 import eduIcon4 from '@/assets/img/common/educ4.svg'
 import build from '@/assets/img/common/building.webp'
+import { SITE_TEXT } from '@/utils/siteText'
 
 
-const titleCommon = ref('Образование')
+const titleCommon = ref(SITE_TEXT.svedenPages.titles.education)
 
 const breadCrumbs = [
-  { text: 'Главная', link: '/' },
-  { text: 'Сведения об организации', link: '/sveden/common/' },
+  { text: SITE_TEXT.svedenPages.breadcrumbs.home, link: '/' },
+  { text: SITE_TEXT.svedenPages.breadcrumbs.organization, link: '/sveden/common/' },
   { text: titleCommon.value, link: '/sveden/education/' }
 ] 
 
@@ -174,5 +207,17 @@ const breadCrumbs = [
     grid-row: span 1;
     aspect-ratio: 16 / 9;
   }
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 </style>

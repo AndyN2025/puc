@@ -1,26 +1,34 @@
 <template>
-  <div class="p">
+  <div class="p" itemscope>
     <Breadcrumbs :items="breadCrumbs"/> 
     <NavBlock :navItems="navSvedenItems" :activeIndex="5"/>
-    <DotTitle text="Сведения об образовательной организации" />
+    <DotTitle :text="SITE_TEXT.svedenPages.commonTitle" />
     <TitleCommon :text="titleCommon"/>
 
-    <AccordionTeacher
+    <div
       v-for="teacher in teacherList"
       :key="teacher.id"
-      :title="teacher.title"
-      :tags="teacher.tags"
+      itemscope
+      itemprop="teachingStaff"
+      class="employees__staff"
     >
-      <AccContent
-        :diploma="teacher.diploma "
-        :document="teacher.document "
-        :specialty="teacher.specialty"
-        :programs="teacher.programs"
-      />
-      <div class="opit">
-        Общий стаж работы в профессиональной сфере {{ teacher.stach }} {{ getYearWord(teacher.stach) }}
-      </div>
-    </AccordionTeacher>
+      <AccordionTeacher
+        :title="teacher.title"
+        :tags="teacher.tags"
+        :tag-itemprops="staffTagItemprops(teacher)"
+        title-itemprop="fio"
+      >
+        <AccContent
+          :diploma="teacher.diploma"
+          :document="teacher.document"
+          :specialty="teacher.specialty"
+          :programs="teacher.programs"
+        />
+        <div class="opit" itemprop="specExperience">
+          Общий стаж работы в профессиональной сфере {{ teacher.stach }} {{ getYearWord(teacher.stach) }}
+        </div>
+      </AccordionTeacher>
+    </div>
     <span style="display:block; margin-bottom: 60px;"></span>
   </div>
 </template>
@@ -33,12 +41,13 @@ import NavBlock from '@/components/UI/NavBlock.vue'
 import AccordionTeacher from '@/components/UI/AccordeonTeacher.vue'
 import AccContent from '@/components/UI/AccContent.vue'
 import { navSvedenItems } from '@/utils/svedenUtils'
+import { SITE_TEXT } from '@/utils/siteText'
 
-const titleCommon = ref('Педагогический (научно-педагогический) состав')
+const titleCommon = ref(SITE_TEXT.svedenPages.titles.employees)
 
 const breadCrumbs = [
-  { text: 'Главная', link: '/' },
-  { text: 'Сведения об организации', link: '/sveden/common/' },
+  { text: SITE_TEXT.svedenPages.breadcrumbs.home, link: '/' },
+  { text: SITE_TEXT.svedenPages.breadcrumbs.organization, link: '/sveden/common/' },
   { text: titleCommon.value, link: '/sveden/employees/' }
 ] 
 
@@ -57,6 +66,22 @@ const getYearWord = (count: number): string => {
   } else {
     return 'лет'
   }
+}
+
+/** Микроразметка п. 3.8 — вспомогательные поля */
+function staffTagItemprops(teacher: { tags: string[] }) {
+  return teacher.tags.map((tag) => {
+    if (/преподаватель|профессор/i.test(tag)) {
+      return 'post'
+    }
+    if (tag === 'Доцент') {
+      return 'post academStat'
+    }
+    if (tag.includes('Кандидат')) {
+      return 'degree'
+    }
+    return 'teachingLevel'
+  })
 }
 
 const hrapovaList = [

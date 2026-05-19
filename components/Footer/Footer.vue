@@ -5,15 +5,15 @@
       <div class="footer__brand">
         <HeaderBrand />
         <p class="footer__copyright">
-          © Приокский учебный центр<br />
-          Автономная некоммерческая организация дополнительного профессионального образования, 2016–2025
+          {{ SITE_TEXT.footer.copyright.org }}<br />
+          {{ SITE_TEXT.footer.copyright.legal }}
         </p>
       </div>
 
       
        <div class="footer__navigation">
-            <nav class="footer__nav" aria-label="Навигация для клиентов">
-                <h3 class="footer__nav-title">Клиентам</h3>
+            <nav class="footer__nav" :aria-label="SITE_TEXT.footer.navAria">
+                <h3 class="footer__nav-title">{{ SITE_TEXT.footer.navTitle }}</h3>
                 <ul class="footer__nav-list">
                   <li v-for="item in navItems" :key="item.to">
                       <NuxtLink :to="item.to">{{ item.label }}</NuxtLink>
@@ -36,7 +36,7 @@
         <div class="footer__contacts-block">
             <div class="footer__contacts-content">
                 <div class="footer__contacts-content__item">
-                    <h3 class="footer__contacts-title">Для связи</h3>
+                    <h3 class="footer__contacts-title">{{ SITE_TEXT.footer.contactsTitle }}</h3>
                     <div class="footer__contacts-text">
                         <ul class="footer__contacts-list">
                             <li
@@ -52,15 +52,15 @@
 
                 </div>
                 <div class="footer__contacts-content__item">
-                    <h3 class="footer__contacts-title">Адрес</h3>
+                    <h3 class="footer__contacts-title">{{ SITE_TEXT.footer.addressTitle }}</h3>
                     <address class="footer__contacts-text">
                         {{ SITE_ADDRESS.footer }}
                     </address>
                 </div>
             </div>
             <div class="footer__contacts-oferta">
-              <span class="footer__contacts-oferta-text">Вся информация на сайте не является публичной офертой.</span>
-              <button type="button" class="footer__cookie-settings" @click="openCookieConsentBanner">Настройки файлов cookie</button>
+              <span class="footer__contacts-oferta-text">{{ SITE_TEXT.footer.offerDisclaimer }}</span>
+              <button type="button" class="footer__cookie-settings" @click="openCookieConsentBanner">{{ SITE_TEXT.footer.cookieSettings }}</button>
             </div>
         </div>
 
@@ -70,9 +70,9 @@
             target="_blank"
             rel="noopener noreferrer"
             class="footer__license-link"
-            aria-label="Посмотреть государственную лицензию"
+            :aria-label="SITE_TEXT.footer.licenses.stateLicenseAria"
             >
-            Государственная лицензия
+            {{ SITE_TEXT.footer.licenses.stateLicense }}
         </a>
       </div>
 
@@ -85,23 +85,18 @@
 import HeaderBrand from '@/components/Header/HeaderBrand.vue'
 import { openCookieConsentBanner } from '@/utils/cookieConsent'
 import { SITE_ADDRESS, SITE_EMAIL, SITE_PHONES, siteMailto } from '@/utils/site'
+import { SITE_TEXT } from '@/utils/siteText'
 import License from '@/assets/documents/common/Лицензия на осуществление образовательной деятельности.pdf'
 import Akkredit from '@/assets/documents/common/АккредитацияОТ2022.pdf'
 import ReestrLic from '@/assets/documents/common/Выписка из реестра лицензий № Л035-01224-40-00374085.pdf'
 import ReestrOrg from '@/assets/documents/common/Выписка из реестра организаций, оказывающих услуги в области охраны труда.pdf'
 
-const navItems = [
-  { to: '/', label: 'Главная' },
-  { to: '/training_programs/', label: 'Программы обучения' },
-  { to: '/docs/', label: 'Бланки документов' },
-  { to: '/news/', label: 'Новости' },
-  { to: '/contacts/', label: 'Контакты' },
-];
+const navItems = SITE_TEXT.footer.nav
 
 const licensesList = [
-    { title: 'Аккредитация', url: Akkredit },
-    { title: 'Выписка из реестра лицензий', url: ReestrLic },
-    { title: 'Выписка из реестра организаций', url: ReestrOrg },
+    { title: SITE_TEXT.footer.licenses.accreditation, url: Akkredit },
+    { title: SITE_TEXT.footer.licenses.licenseExtract, url: ReestrLic },
+    { title: SITE_TEXT.footer.licenses.laborProtectionExtract, url: ReestrOrg },
 ]
 
 const openDocument = (url:string) => {

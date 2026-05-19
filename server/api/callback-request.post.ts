@@ -1,5 +1,18 @@
 import nodemailer from 'nodemailer'
+import type { H3Event } from 'h3'
 import { SITE_EMAIL } from '~/utils/site'
+
+const MAX_BODY_BYTES = 8 * 1024
+const RATE_LIMIT_WINDOW_MS = 60 * 1000
+const RATE_LIMIT_MAX_REQUESTS = 5
+const rateLimitStore = new Map<string, number[]>()
+
+interface CallbackRequestBody {
+  name?: string
+  phone?: string
+  phoneDigits?: string
+  website?: string
+}
 
 function escapeHtml(s: string) {
   return s
@@ -23,13 +36,85 @@ function formatRuMobileFromDigits(d: string) {
   return `+7 (${r.slice(0, 3)}) ${r.slice(3, 6)}-${r.slice(6, 8)}-${r.slice(8, 10)}`
 }
 
+function getClientIp(event: H3Event) {
+  const forwarded = getRequestHeader(event, 'x-forwarded-for')
+  const firstForwarded = forwarded?.split(',')[0]?.trim()
+  return firstForwarded || event.node.req.socket.remoteAddress || 'unknown'
+}
+
+function assertRateLimit(ip: string) {
+  const now = Date.now()
+  const recent = (rateLimitStore.get(ip) || []).filter(
+    (time) => now - time < RATE_LIMIT_WINDOW_MS
+  )
+
+  if (recent.length >= RATE_LIMIT_MAX_REQUESTS) {
+    rateLimitStore.set(ip, recent)
+    throw createError({
+      statusCode: 429,
+      message: 'Слишком много заявок. Попробуйте позже.'
+    })
+  }
+
+  recent.push(now)
+  rateLimitStore.set(ip, recent)
+}
+
+async function readLimitedJsonBody(event: H3Event): Promise<CallbackRequestBody> {
+  const chunks: Buffer[] = []
+  let total = 0
+
+  for await (const chunk of event.node.req) {
+    const buffer = Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk)
+    total += buffer.length
+
+    if (total > MAX_BODY_BYTES) {
+      throw createError({
+        statusCode: 413,
+        message: 'Слишком большой запрос.'
+      })
+    }
+
+    chunks.push(buffer)
+  }
+
+  if (chunks.length === 0) {
+    return {}
+  }
+
+  try {
+    const parsed = JSON.parse(Buffer.concat(chunks).toString('utf8'))
+    if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) {
+      throw new Error('Body must be a JSON object')
+    }
+    return parsed as CallbackRequestBody
+  } catch {
+    throw createError({
+      statusCode: 400,
+      message: 'Некорректный JSON в запросе.'
+    })
+  }
+}
+
 export default defineEventHandler(async (event) => {
-  const body = await readBody<{
-    name?: string
-    phone?: string
-    phoneDigits?: string
-    website?: string
-  }>(event)
+  if (getMethod(event) !== 'POST') {
+    throw createError({
+      statusCode: 405,
+      message: 'Метод не поддерживается.'
+    })
+  }
+
+  const contentType = getRequestHeader(event, 'content-type') || ''
+  if (!contentType.toLowerCase().includes('application/json')) {
+    throw createError({
+      statusCode: 415,
+      message: 'Ожидается Content-Type: application/json.'
+    })
+  }
+
+  assertRateLimit(getClientIp(event))
+
+  const body = await readLimitedJsonBody(event)
 
   if (body?.website) {
     return { ok: true }

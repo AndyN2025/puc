@@ -6,11 +6,13 @@
 </template>
 
 <script setup>
+import { SITE_TEXT } from '@/utils/siteText'
+
 defineProps({
   text: {
     type: String,
     required: true,
-    default: 'ЧТО НОВОГО?'
+    default: SITE_TEXT.dotTitle.defaultText
   },
   size: {
     type: String,
@@ -21,6 +23,8 @@ defineProps({
 </script>
 
 <style lang="scss" scoped>
+@use '@/assets/styles/vars' as *;
+
 .section-title {
   display: flex;
   align-items: center;
@@ -42,7 +46,7 @@ defineProps({
   .title-text {
     position: relative;
     font-size: 16px;
-    font-family: 'Inter M', sans-serif;
+    font-family: $font-ibm-m, sans-serif;
     line-height: 24px;
     letter-spacing: -0.5px;
   }

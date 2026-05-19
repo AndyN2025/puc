@@ -86,9 +86,9 @@
     list-style: none;
     padding: 0;
     margin: 0;
-    font-family: $font-ibm;
+    font-family: "IBM", sans-serif;
     font-size: clamp(1rem, 2vw, 1.125rem);
-    line-height: 1.45;
+    line-height: 1.3;
 
     li {
       margin-bottom: $spacing-sm;
@@ -220,7 +220,7 @@
   &__contacts-title {
     font-size: clamp(1rem, 2.2vw, 1.5rem);
     line-height: 1.35;
-    font-family: $font-inter-m;
+    font-family: $font-ibm-m;
     color: $color-darkBlue;
     margin: 0;
   }

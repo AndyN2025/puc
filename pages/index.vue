@@ -4,31 +4,34 @@
       <MainWindow/>
     </section>
     <section class="section-item container">
-      <DotTitle text="Виды обучения"/>
+      <DotTitle :text="SITE_TEXT.homePage.sections.courses"/>
       <ListCourses />
     </section>
     <section class="section-item container">
-      <DotTitle text="Коротко о центре" />
+      <DotTitle :text="SITE_TEXT.homePage.sections.about" />
       <NewsSection />
     </section>
     <section class="section-item container">
-      <DotTitle text="Партнеры" />
+      <DotTitle :text="SITE_TEXT.homePage.sections.partners" />
       <PartnerSlider />
     </section>
     <section class="section-item container">
-      <DotTitle text="Как нас найти" />
+      <DotTitle :text="SITE_TEXT.homePage.sections.map" />
       <MapSection />
     </section>
   </div>
 </template>
 
 <script setup lang="ts">
+import { defineAsyncComponent } from 'vue'
 import MainWindow from '@/components/UI/MainWindow.vue'
-import NewsSection from '@/components/UI/NewsSection.vue'
-import PartnerSlider from '@/components/UI/PartnerSlider.vue'
-import MapSection from '@/components/UI/MapSection.vue'
 import DotTitle from '@/components/UI/DotTitle.vue';
 import ListCourses from '@/components/UI/ListCourses.vue'
+import { SITE_TEXT } from '@/utils/siteText'
+
+const NewsSection = defineAsyncComponent(() => import('@/components/UI/NewsSection.vue'))
+const PartnerSlider = defineAsyncComponent(() => import('@/components/UI/PartnerSlider.vue'))
+const MapSection = defineAsyncComponent(() => import('@/components/UI/MapSection.vue'))
 </script>
 
 <style scoped lang="scss">

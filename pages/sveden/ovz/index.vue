@@ -2,10 +2,10 @@
   <div class="p">
     <Breadcrumbs :items="breadCrumbs" />
     <NavBlock :navItems="navSvedenItems" :activeIndex="6" />
-    <DotTitle text="Сведения об образовательной организации" />
+    <DotTitle :text="SITE_TEXT.svedenPages.commonTitle" />
     <TitleCommon :text="titleCommon" />
 
-    <div class="ovz">
+    <div class="ovz" itemprop="ovz">
       <ul class="ovz__list">
         <li
           v-for="(item, idx) in rawItems"
@@ -31,12 +31,13 @@ import DotTitle from '@/components/UI/DotTitle.vue'
 import TitleCommon from '@/components/UI/TitleCommon.vue'
 import NavBlock from '@/components/UI/NavBlock.vue'
 import { navSvedenItems } from '@/utils/svedenUtils'
+import { SITE_TEXT } from '@/utils/siteText'
 
-const titleCommon = ref('Доступная среда')
+const titleCommon = ref(SITE_TEXT.svedenPages.titles.ovz)
 
 const breadCrumbs = [
-  { text: 'Главная', link: '/' },
-  { text: 'Сведения об организации', link: '/sveden/common/' },
+  { text: SITE_TEXT.svedenPages.breadcrumbs.home, link: '/' },
+  { text: SITE_TEXT.svedenPages.breadcrumbs.organization, link: '/sveden/common/' },
   { text: titleCommon.value, link: '/sveden/ovz/' }
 ]
 

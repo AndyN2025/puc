@@ -18,10 +18,18 @@
         <!-- п. 5 «uchredLaw»: главный тег; п. 5.1 — nameUchred -->
         <div itemprop="uchredLaw" itemscope>
           <span itemprop="nameUchred">{{ orgText.founderName }}</span>
-          <meta itemprop="addressUchred" :content="uchredExtra.addressUchred" />
-          <meta itemprop="telUchred" :content="uchredExtra.telUchred" />
-          <meta itemprop="mailUchred" :content="uchredExtra.mailUchred" />
-          <meta itemprop="websiteUchred" :content="uchredExtra.websiteUchred" />
+          <span class="visually-hidden" itemprop="addressUchred">
+            Адрес учредителя: {{ uchredExtra.addressUchred }}
+          </span>
+          <span class="visually-hidden" itemprop="telUchred">
+            Телефон учредителя: {{ uchredExtra.telUchred }}
+          </span>
+          <span class="visually-hidden" itemprop="mailUchred">
+            Электронная почта учредителя: {{ uchredExtra.mailUchred }}
+          </span>
+          <span class="visually-hidden" itemprop="websiteUchred">
+            Сайт учредителя: {{ uchredExtra.websiteUchred }}
+          </span>
         </div>
       </div>
 
@@ -150,6 +158,18 @@ const uchredExtra = SVEDEN_UCHRED_EXTRA
 .email-link:hover {
   color: #1d4ed8;
   text-decoration: underline;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 @media (max-width: 768px) {

@@ -1,15 +1,15 @@
 <template>
   <div class="p contacts-page">
     <Breadcrumbs :items="breadCrumbs" />
-    <DotTitle text="Контакты" />
+    <DotTitle :text="SITE_TEXT.contactsPage.title" />
 
     <p class="contacts-page__lead">
       {{ SITE_COPY.contactsLead }}
     </p>
 
-    <section class="contacts-page__cards" aria-label="Краткие контакты">
+    <section class="contacts-page__cards" :aria-label="SITE_TEXT.contactsPage.cardsAria">
       <article class="contact-card">
-        <h2 class="contact-card__title">Телефоны</h2>
+        <h2 class="contact-card__title">{{ SITE_TEXT.contactsPage.phonesTitle }}</h2>
         <ul class="contact-card__list">
           <li v-for="p in SITE_PHONES" :key="p.tel">
             <a :href="`tel:${p.tel}`">{{ p.display8 }}</a>
@@ -18,14 +18,14 @@
       </article>
 
       <article class="contact-card">
-        <h2 class="contact-card__title">Электронная почта</h2>
+        <h2 class="contact-card__title">{{ SITE_TEXT.contactsPage.emailTitle }}</h2>
         <p class="contact-card__text">
           <a :href="siteMailto()">{{ SITE_EMAIL_CONTACTS_DISPLAY }}</a>
         </p>
       </article>
 
       <article class="contact-card">
-        <h2 class="contact-card__title">Адрес офиса</h2>
+        <h2 class="contact-card__title">{{ SITE_TEXT.contactsPage.addressTitle }}</h2>
         <address class="contact-card__address">
           {{ SITE_ADDRESS.contactsLine1 }}<br />
           {{ SITE_ADDRESS.contactsLine2 }}
@@ -33,16 +33,16 @@
       </article>
     </section>
 
-    <section class="contacts-page__hours" aria-label="Режим работы">
-      <h2 class="contacts-page__hours-title">Режим работы</h2>
+    <section class="contacts-page__hours" :aria-label="SITE_TEXT.contactsPage.hoursAria">
+      <h2 class="contacts-page__hours-title">{{ SITE_TEXT.contactsPage.hoursTitle }}</h2>
       <p class="contacts-page__hours-text">
-        Понедельник — пятница: с 08:00 до 17:00<br />
-        Суббота и воскресенье — выходной
+        {{ SITE_TEXT.contactsPage.hoursText.weekdays }}<br />
+        {{ SITE_TEXT.contactsPage.hoursText.weekend }}
       </p>
     </section>
 
-    <section class="contacts-page__map" aria-label="Карта проезда">
-      <h2 class="visually-hidden">Как нас найти</h2>
+    <section class="contacts-page__map" :aria-label="SITE_TEXT.contactsPage.mapAria">
+      <h2 class="visually-hidden">{{ SITE_TEXT.contactsPage.mapTitle }}</h2>
       <MapSection />
     </section>
   </div>
@@ -59,10 +59,11 @@ import {
   SITE_PHONES,
   siteMailto
 } from '@/utils/site'
+import { SITE_TEXT } from '@/utils/siteText'
 
 const breadCrumbs = [
-  { text: 'Главная', link: '/' },
-  { text: 'Контакты', link: '/contacts' }
+  { text: SITE_TEXT.contactsPage.breadcrumbs.home, link: '/' },
+  { text: SITE_TEXT.contactsPage.breadcrumbs.contacts, link: '/contacts' }
 ]
 </script>
 

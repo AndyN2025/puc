@@ -2,10 +2,15 @@
   <div class="accordion-item" :class="{ 'accordion-item--open': isOpen }">
     
     <div class="accordion-item__header" @click="toggle">
-      <div class="accordion-item__title">{{ title }}</div>
+      <div class="accordion-item__title" :itemprop="titleItemprop || undefined">{{ title }}</div>
       <div class="accordion-item__text">
         <div v-if="tags && tags.length" class="accordion-item__tags">
-            <span v-for="(tag, idx) in tags" :key="idx" class="accordion-item__tag">
+            <span
+              v-for="(tag, idx) in tags"
+              :key="idx"
+              class="accordion-item__tag"
+              :itemprop="tagItemprops[idx] || undefined"
+            >
             {{ tag }}
             </span>
         </div>
@@ -37,6 +42,15 @@ const props = defineProps({
     required: true
   },
   tags: {
+    type: Array as () => string[],
+    default: () => []
+  },
+  /** Микроразметка сведений (п. 3.8): например `fio` для ФИО в заголовке */
+  titleItemprop: {
+    type: String,
+    default: ''
+  },
+  tagItemprops: {
     type: Array as () => string[],
     default: () => []
   }

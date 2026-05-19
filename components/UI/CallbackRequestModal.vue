@@ -9,21 +9,21 @@
     >
       <div class="cb-modal__backdrop" aria-hidden="true" @click="close" />
       <div class="cb-modal__panel">
-        <button type="button" class="cb-modal__close" aria-label="Закрыть" @click="close">
+        <button type="button" class="cb-modal__close" :aria-label="SITE_TEXT.callbackModal.closeAria" @click="close">
           ×
         </button>
-        <h2 :id="titleId" class="cb-modal__title">Заказать звонок</h2>
+        <h2 :id="titleId" class="cb-modal__title">{{ SITE_TEXT.callbackModal.title }}</h2>
         <p class="cb-modal__lead">
-          Оставьте имя и телефон — мы перезвоним в удобное время.
+          {{ SITE_TEXT.callbackModal.lead }}
         </p>
 
         <div v-if="success" class="cb-modal__success" role="status">
-          Спасибо! Заявка отправлена. Мы свяжемся с вами в ближайшее время.
+          {{ SITE_TEXT.callbackModal.success }}
         </div>
 
         <form v-else class="cb-modal__form" novalidate @submit.prevent="onSubmit">
           <label class="cb-modal__field">
-            <span class="cb-modal__label">Имя</span>
+            <span class="cb-modal__label">{{ SITE_TEXT.callbackModal.labels.name }}</span>
             <input
               :value="name"
               type="text"
@@ -31,13 +31,13 @@
               autocomplete="name"
               maxlength="120"
               class="cb-modal__input"
-              placeholder="Иван Петров"
+              :placeholder="SITE_TEXT.callbackModal.placeholders.name"
               @input="onNameInput"
             />
           </label>
 
           <label class="cb-modal__field">
-            <span class="cb-modal__label">Телефон</span>
+            <span class="cb-modal__label">{{ SITE_TEXT.callbackModal.labels.phone }}</span>
             <input
               :value="phoneDisplay"
               type="tel"
@@ -46,14 +46,14 @@
               autocomplete="tel"
               maxlength="18"
               class="cb-modal__input"
-              placeholder="+7 (___) ___-__-__"
+              :placeholder="SITE_TEXT.callbackModal.placeholders.phone"
               @input="onPhoneInput"
             />
           </label>
 
           <div class="cb-modal__hp" aria-hidden="true">
             <label>
-              <span>Компания</span>
+              <span>{{ SITE_TEXT.callbackModal.labels.company }}</span>
               <input v-model="honeypot" type="text" name="website" tabindex="-1" />
             </label>
           </div>
@@ -62,7 +62,7 @@
           <p v-if="serverError" class="cb-modal__error" role="alert">{{ serverError }}</p>
 
           <button type="submit" class="cb-modal__submit" :disabled="pending">
-            {{ pending ? 'Отправка…' : 'Отправить' }}
+            {{ pending ? SITE_TEXT.callbackModal.pending : SITE_TEXT.callbackModal.submit }}
           </button>
         </form>
       </div>
@@ -72,6 +72,7 @@
 
 <script setup lang="ts">
 import { computed, onMounted, ref, watch } from 'vue'
+import { SITE_TEXT } from '@/utils/siteText'
 
 const mounted = ref(false)
 onMounted(() => {
@@ -186,17 +187,17 @@ function validate(): boolean {
   clientError.value = ''
   const n = name.value.trim()
   if (n.length < 2) {
-    clientError.value = 'Введите имя (не короче 2 символов).'
+    clientError.value = SITE_TEXT.callbackModal.errors.shortName
     return false
   }
   if (!NAME_PATTERN.test(n)) {
     clientError.value =
-      'Имя только на русском: буквы, при необходимости пробел, дефис или апостроф.'
+      SITE_TEXT.callbackModal.errors.invalidName
     return false
   }
   if (!/^79\d{9}$/.test(phoneDigits.value)) {
     clientError.value =
-      'Введите полный номер мобильного телефона: 10 цифр после +7 (начинается с 9).'
+      SITE_TEXT.callbackModal.errors.invalidPhone
     return false
   }
   return true
@@ -228,7 +229,7 @@ async function onSubmit() {
       err?.data?.message ||
       err?.data?.statusMessage ||
       err?.message ||
-      'Не удалось отправить заявку. Позвоните нам или попробуйте позже.'
+      SITE_TEXT.callbackModal.errors.submitFailed
   } finally {
     pending.value = false
   }

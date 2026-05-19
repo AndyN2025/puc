@@ -2,7 +2,7 @@
   <div class="p">
     <Breadcrumbs :items="breadCrumbs"/> 
     <NavBlock :navItems="navSvedenItems" :activeIndex="7"/>
-    <DotTitle text="Сведения об образовательной организации" />
+    <DotTitle :text="SITE_TEXT.svedenPages.commonTitle" />
     <TitleCommon :text="titleCommon"/>
     <div class="paidContent">
       <p class="paidContent__lead">
@@ -17,6 +17,11 @@
       </div>
     </div>
     <DocumentAccordion :documents="documents" style="margin-bottom: 130px;"/>
+    <section class="visually-hidden" aria-label="Дополнительные сведения о платных образовательных услугах">
+      <div itemprop="paidDog">Образец договора об оказании платных образовательных услуг: отсутствует</div>
+      <div itemprop="paidSt">Документ об утверждении стоимости обучения по каждой образовательной программе: уточняется у специалистов по телефонам, указанным на странице</div>
+      <div itemprop="paidParents">Платные образовательные услуги за счет средств родителей: не применимо</div>
+    </section>
   </div>
 </template>
 
@@ -29,12 +34,13 @@ import DocumentAccordion from '@/components/UI/DocumentAccordion.vue'
 import paidDoc from '@/assets/documents/paidEdu/Polozhenie_ob_okazanii_platnyh_obrazovatelnyh_uslug.pdf'
 import { navSvedenItems } from '@/utils/svedenUtils'
 import { SITE_PHONES } from '@/utils/site'
+import { SITE_TEXT } from '@/utils/siteText'
 
-const titleCommon = ref(' Платные образовательные услуги')
+const titleCommon = ref(SITE_TEXT.svedenPages.titles.paidEdu)
 
 const breadCrumbs = [
-  { text: 'Главная', link: '/' },
-  { text: 'Сведения об организации', link: '/sveden/common/' },
+  { text: SITE_TEXT.svedenPages.breadcrumbs.home, link: '/' },
+  { text: SITE_TEXT.svedenPages.breadcrumbs.organization, link: '/sveden/common/' },
   { text: titleCommon.value, link: '/sveden/paid_edu/' }
 ] 
 
@@ -93,5 +99,17 @@ const documents = [
       min-width: 0;
     }
   }
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 </style>

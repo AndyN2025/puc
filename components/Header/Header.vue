@@ -2,8 +2,8 @@
   <header
     class="header"
     :class="{
-      'header--scrolled': isScrolled,
-      'header--solid': !isHomePage,
+      'header--home': isHomePage,
+      'header--solid': isSolidHeader,
       'header--menu-open': menuOpen
     }"
   >
@@ -14,7 +14,7 @@
         class="header__burger"
         :aria-expanded="menuOpen"
         aria-controls="header-mobile-panel"
-        :aria-label="menuOpen ? 'Свернуть меню' : 'Открыть меню'"
+        :aria-label="menuOpen ? SITE_TEXT.common.closeMenu : SITE_TEXT.common.openMenu"
         @click="toggleMenu"
       >
         <span class="header__burger-line" aria-hidden="true" />
@@ -57,6 +57,7 @@ import {
   SITE_PHONES,
   siteMailto
 } from '@/utils/site'
+import { SITE_TEXT } from '@/utils/siteText'
 
 const route = useRoute()
 
@@ -68,20 +69,15 @@ const isHomePage = computed(() => {
 const headerPhoneFirst = `${SITE_PHONES[2]!.display8}, `
 const headerPhoneSecond = SITE_PHONES[0]!.display8
 
-const navItems = [
-  { label: 'Главная', to: '/' },
-  { label: 'Об организации', to: '/sveden/common/' },
-  { label: 'Обучение', to: '/training_programs/' },
-  { label: 'Бланки документов', to: '/docs/' },
-  { label: 'Новости', to: '/news/' },
-  { label: 'Контакты', to: '/contacts/' }
-]
+const navItems = SITE_TEXT.header.nav
 
 const isScrolled = ref(false)
 const menuOpen = ref(false)
 
+const isSolidHeader = computed(() => !isHomePage.value || isScrolled.value || menuOpen.value)
+
 const handleScroll = () => {
-  isScrolled.value = window.scrollY > 10
+  isScrolled.value = window.scrollY >= 100
 }
 
 const toggleMenu = () => {

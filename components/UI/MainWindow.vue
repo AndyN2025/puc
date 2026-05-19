@@ -12,16 +12,15 @@
     <div class="container main__inner">
       <div class="main__content">
         <h1 class="main__title">
-          Дополнительное профессиональное образование<br />
-          Очно, заочно, онлайн
+          {{ SITE_TEXT.mainWindow.title }}<br />
+          {{ SITE_TEXT.mainWindow.subtitle }}
         </h1>
         <p class="main__text">
-          Более 20 лет мы занимаемся профессиональным обучением, дополнительным профессиональным образованием в области
-          промышленной, экологической, энергетической, пожарной безопасности, охраны труда.
+          {{ SITE_TEXT.mainWindow.lead }}
         </p>
         <div class="main__buttons">
-          <button type="button" class="main__buttons-item main__buttons-item--dark" @click="callbackModalOpen = true">Заказать звонок</button>
-          <NuxtLink to="/training_programs" class="main__buttons-item main__buttons-item--light">Наши курсы</NuxtLink>
+          <button type="button" class="main__buttons-item main__buttons-item--dark" @click="callbackModalOpen = true">{{ SITE_TEXT.mainWindow.callbackButton }}</button>
+          <NuxtLink to="/training_programs" class="main__buttons-item main__buttons-item--light">{{ SITE_TEXT.mainWindow.coursesButton }}</NuxtLink>
           <a
             :href="`tel:${mainPhone.tel}`"
             class="main__buttons-item main__buttons-item--number"
@@ -30,14 +29,16 @@
       </div>
     </div>
   </div>
-  <CallbackRequestModal v-model="callbackModalOpen" />
+  <CallbackRequestModal v-if="callbackModalOpen" v-model="callbackModalOpen" />
 </template>
 
 <script setup lang="ts">
+import { defineAsyncComponent } from 'vue'
 import mainPic from '@/assets/img/mainTest1.webp'
-import CallbackRequestModal from '@/components/UI/CallbackRequestModal.vue'
 import { SITE_PHONES } from '@/utils/site'
+import { SITE_TEXT } from '@/utils/siteText'
 
+const CallbackRequestModal = defineAsyncComponent(() => import('@/components/UI/CallbackRequestModal.vue'))
 const mainPhone = SITE_PHONES[0]!
 const callbackModalOpen = ref(false)
 </script>

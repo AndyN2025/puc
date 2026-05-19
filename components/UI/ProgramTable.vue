@@ -19,7 +19,7 @@
     >
       <div class="table-header">
         <div v-if="!hideCodeColumn" class="header-cell">{{ codeColumnTitle }}</div>
-        <div class="header-cell">Наименование программы</div>
+        <div class="header-cell">{{ SITE_TEXT.programTable.programName }}</div>
         <div class="header-cell">{{ hoursColumnTitle }}</div>
       </div>
 
@@ -73,6 +73,7 @@
 <script setup>
 import { ref, computed, watch } from 'vue'
 import { NuxtLink } from '#components'
+import { SITE_TEXT } from '@/utils/siteText'
 
 const props = defineProps({
   tabs: {
@@ -89,11 +90,11 @@ const props = defineProps({
   },
   codeColumnTitle: {
     type: String,
-    default: 'Код'
+    default: SITE_TEXT.programTable.defaultCodeLabel
   },
   hoursColumnTitle: {
     type: String,
-    default: 'Объем (часы)'
+    default: SITE_TEXT.programTable.defaultHoursLabel
   },
   items: {
     type: Array,
@@ -154,7 +155,7 @@ function formatHours(item) {
   const h = item?.hours
   if (h == null) return ''
   if (typeof h === 'string') return h
-  return `${h} ч.`
+  return SITE_TEXT.programTable.hoursShort(h)
 }
 
 function displayCode(item) {

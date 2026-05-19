@@ -1,19 +1,19 @@
 <template>
   <div class="document-list">
     <a
-      v-for="(doc, index) in documents"
+      v-for="(doc, index) in safeDocuments"
       :key="index"
       class="document-item"
-      :href="doc.file"
+      :href="doc.safeFile"
       :target="type === 'read' ? '_blank' : undefined"
       :rel="type === 'read' ? 'noopener noreferrer' : undefined"
       :download="type === 'save' ? '' : undefined"
-      :itemprop="doc.micro"
+      v-bind="doc.micro ? { itemprop: doc.micro } : {}"
     >
       <span class="document-number">{{ String(index + 1).padStart(2, '0') }}</span>
       <span class="document-title">{{ doc.title }}</span>
       <span class="download-icon">
-        <img :src="dwnlIcon" :alt="type === 'save' ? 'Скачать документ' : 'Открыть документ'" />
+        <img :src="dwnlIcon" :alt="type === 'save' ? SITE_TEXT.documentList.saveAlt : SITE_TEXT.documentList.readAlt" />
       </span>
     </a>
   </div>
@@ -22,6 +22,8 @@
 <script setup lang="ts">
 import type { PropType } from 'vue'
 import dwnlIcon from '@/assets/img/common/downLoadIcon.svg'
+import { SITE_TEXT } from '@/utils/siteText'
+import { getSafeDocumentHref } from '@/utils/documentLinks'
 
 export interface DocumentListItem {
   title: string
@@ -30,7 +32,7 @@ export interface DocumentListItem {
   micro?: string
 }
 
-defineProps({
+const props = defineProps({
   documents: {
     type: Array as PropType<DocumentListItem[]>,
     required: true
@@ -41,6 +43,15 @@ defineProps({
     validator: (value: string) => ['read', 'save'].includes(value)
   }
 })
+
+const safeDocuments = computed(() =>
+  props.documents
+    .map((doc) => ({
+      ...doc,
+      safeFile: getSafeDocumentHref(doc.file)
+    }))
+    .filter((doc): doc is DocumentListItem & { safeFile: string } => Boolean(doc.safeFile))
+)
 </script>
 
 <style lang="scss" scoped>

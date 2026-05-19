@@ -12,6 +12,7 @@ import Breadcrumbs from '@/components/UI/Breadcrumbs.vue';
 import DotTitle from '@/components/UI/DotTitle.vue';
 import TitleCommon from '@/components/UI/TitleCommon.vue';
 import DocumentList from '@/components/UI/DocumentList.vue';
+import { SITE_TEXT } from '@/utils/siteText'
 import request1 from '@/assets/documents/request/1) Заявка Промышленная безопасность (ДПО).doc';
 import request2 from '@/assets/documents/request/2) Заявка Промышленная безопасность (предаттестационная подготовка).doc';
 import request3 from '@/assets/documents/request/3) Заявка ТЭУ.doc';
@@ -31,87 +32,38 @@ import request16 from '@/assets/documents/request/16) Заявка Профес�
 import request17 from '@/assets/documents/request/17) Заявка Организация деятельности по обороту наркотических средств, психотропных веществ и их прекурсоров.doc';
 import request18 from '@/assets/documents/request/18) Заявка Госрегулирование НС ПВ медфарм.doc';
 
-const titleCommon = ref('Бланки документов')
+const titleCommon = ref(SITE_TEXT.docsPage.title)
 
 const breadCrumbs = [
-  { text: 'Главная', link: '/' },
-  { text: 'Бланки документов', link: '/docs' }
+  { text: SITE_TEXT.docsPage.breadcrumbs.home, link: '/' },
+  { text: SITE_TEXT.docsPage.breadcrumbs.docs, link: '/docs' }
 ] 
 
-const documents = [
-  {
-    title: 'Заявка Промышленная безопасность (ДПО)',
-    file: request1
-  },
-  {
-    title: 'Заявка Промышленная безопасность (предаттестационная подготовка)',
-    file: request2
-  },
-  {
-    title: 'Заявка ТЭУ',
-    file: request3
-  },
-  {
-    title: 'Заявка Общие вопросы охраны труда и функционирование системы управления охраной труда (46а)',
-    file: request4
-  },
-  {
-    title: 'Заявка Безопасные методы и приемы выполнения работ при воздействии вредных и (или) опасных производственных факторов (46б)',
-    file: request5
-  },
-  {
-    title: 'Заявка Обучение безопасным методам и приемам выполнения работ повышенной опасности (46в)',
-    file: request6
-  },
-  {
-    title: 'Заявка Обучение по использованию (применению) средств индивидуальной защиты (СИЗ)',
-    file: request7
-  },
-  {
-    title: 'Заявка Оказание первой помощи пострадавшим',
-    file: request8
-  },
-  {
-    title: 'Заявка Обучение работников 3 группы по безопасности работ на высоте',
-    file: request9
-  },
-  {
-    title: 'Заявка Пожарная безопасность',
-    file: request10
-  },
-  {
-    title: 'Заявка Экологическая безопасность',
-    file: request11
-  },
-  {
-    title: 'Заявка Профессиональное обучение по профессии рабочего',
-    file: request12
-  },
-  {
-    title: 'Заявка Подготовка рабочего персонала',
-    file: request13
-  },
-  {
-    title: 'Заявка Программа профессиональной переподготовки "Специалист по охране труда"',
-    file: request14
-  },
-  {
-    title: 'Заявка Профессиональная переподготовка в области промышленной безопасности',
-    file: request15
-  },
-  {
-    title: 'Заявка Профессиональная переподготовка по экологической безопасности',
-    file: request16
-  },
-  {
-    title: 'Заявка Организация деятельности по обороту наркотических средств, психотропных веществ и их прекурсоров',
-    file: request17
-  },
-  {
-    title: 'Заявка Государственное регулирование в сфере оборота наркотических средств, психотропных веществ и их прекурсоров при осуществлении медицинской и фармацевтической деятельности',
-    file: request18
-  }
-] 
+const requestFiles = [
+  request1,
+  request2,
+  request3,
+  request4,
+  request5,
+  request6,
+  request7,
+  request8,
+  request9,
+  request10,
+  request11,
+  request12,
+  request13,
+  request14,
+  request15,
+  request16,
+  request17,
+  request18
+]
+
+const documents = SITE_TEXT.docsPage.documentTitles.map((title, index) => ({
+  title,
+  file: requestFiles[index]!
+}))
 
 </script>
 

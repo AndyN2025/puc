@@ -34,13 +34,13 @@ export const navCourseItems = [
 ]
 
 
-import mainProf from '@/assets/img/mainCard/prof-main.png'
-import mainProm from '@/assets/img/mainCard/prom-main.png'
-import mainOT from '@/assets/img/mainCard/ot-main.png'
-import mainOPO from '@/assets/img/mainCard/opo-main.png'
-import mainFire from '@/assets/img/mainCard/fire-main.png'
-import mainEco from '@/assets/img/mainCard/eco-main.png'
-import mainDrug from '@/assets/img/mainCard/drug-main.png'
+import mainProf from '@/assets/img/mainCard/prof-main.webp'
+import mainProm from '@/assets/img/mainCard/prom-main.webp'
+import mainOT from '@/assets/img/mainCard/ot-main.webp'
+import mainOPO from '@/assets/img/mainCard/opo-main.webp'
+import mainFire from '@/assets/img/mainCard/fire-main.webp'
+import mainEco from '@/assets/img/mainCard/eco-main.webp'
+import mainDrug from '@/assets/img/mainCard/drug-main.webp'
 import mainEnergy from '@/assets/img/mainCard/energy-safety.webp'
 
 export const courseList =[

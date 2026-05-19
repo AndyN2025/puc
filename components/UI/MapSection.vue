@@ -10,7 +10,7 @@
             aria-busy="true"
             aria-live="polite"
           >
-            <span class="map-embed__lazy-text">Загрузка карты…</span>
+            <span class="map-embed__lazy-text">{{ SITE_TEXT.mapSection.loading }}</span>
           </div>
           <template v-else>
             <a
@@ -20,17 +20,17 @@
             <a
               href="https://yandex.ru/maps/6/kaluga/category/occupational_safety_and_health/184105368/?utm_medium=mapframe&utm_source=maps"
               class="map-embed__sr"
-            >Безопасность труда в Калуге</a>
+            >{{ SITE_TEXT.mapSection.yandexSafety }}</a>
             <a
               href="https://yandex.ru/maps/6/kaluga/category/further_education/184106162/?utm_medium=mapframe&utm_source=maps"
               class="map-embed__sr"
-            >Дополнительное образование в Калуге</a>
+            >{{ SITE_TEXT.mapSection.yandexEducation }}</a>
             <iframe
               src="https://yandex.ru/map-widget/v1/?ll=36.272661%2C54.504872&mode=poi&poi%5Bpoint%5D=36.272394%2C54.505870&poi%5Buri%5D=ymapsbm1%3A%2F%2Forg%3Foid%3D1030102847&z=16.73"
               width="560"
               height="400"
               loading="lazy"
-              :title="`Карта: ${SITE_ORG.shortName}, Калуга`"
+              :title="SITE_TEXT.mapSection.title(SITE_ORG.shortName)"
               allowfullscreen
             />
           </template>
@@ -43,18 +43,18 @@
       <div class="contacts-grid">
         
         <div class="address-row">
-          <h3>Учебный центр на ул. Никитина</h3>
+          <h3>{{ SITE_TEXT.mapSection.officeTitle }}</h3>
           <div class="address-info">
             <div class="info-item">
-              <span class="label">Адрес:</span>
+              <span class="label">{{ SITE_TEXT.mapSection.labels.address }}</span>
               <span class="value">{{ SITE_ADDRESS.short }}</span>
             </div>
             <div class="info-item">
-              <span class="label">Офис:</span>
-              <span class="value">401, четвёртый этаж</span>
+              <span class="label">{{ SITE_TEXT.mapSection.labels.office }}</span>
+              <span class="value">{{ SITE_TEXT.mapSection.officeValue }}</span>
             </div>
             <div class="info-item">
-              <span class="label">Телефоны</span>
+              <span class="label">{{ SITE_TEXT.mapSection.labels.phones }}</span>
               <span class="value value--phones">
                 <a
                   v-for="p in SITE_PHONES"
@@ -64,7 +64,7 @@
               </span>
             </div>
             <div class="info-item">
-              <span class="label">E-mail</span>
+              <span class="label">{{ SITE_TEXT.mapSection.labels.email }}</span>
               <span class="value">
                 <a class="map-email" :href="siteMailto()">{{ SITE_EMAIL }}</a>
               </span>
@@ -78,6 +78,7 @@
 
 <script setup lang="ts">
 import { SITE_ADDRESS, SITE_EMAIL, SITE_ORG, SITE_PHONES, siteMailto } from '@/utils/site'
+import { SITE_TEXT } from '@/utils/siteText'
 
 const mapSentinel = ref<HTMLElement | null>(null)
 const mapLoaded = ref(false)

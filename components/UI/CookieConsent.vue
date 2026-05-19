@@ -13,21 +13,16 @@
           <div class="cookie-consent__panel">
             <div class="cookie-consent__content">
             <h2 id="cookie-consent-title" class="cookie-consent__title">
-              Использование файлов cookie
+              {{ SITE_TEXT.cookieConsent.title }}
             </h2>
             <p id="cookie-consent-desc" class="cookie-consent__text">
-              По закону к «cookie» часто относят и похожие технологии в браузере. Сейчас мы
-              сохраняем только ваш ответ в этом окне — в <strong>localStorage</strong> вашего
-              устройства (ключ <code class="cookie-consent__code">puc_cookie_consent</code>):
-              значения «принято» или «отклонено», чтобы не показывать плашку снова. На наши серверы
-              это не передаётся. Отдельные HTTP-cookie сайт сам не ставит; счётчики аналитики
-              (Яндекс.Метрика и т.п.) при подключении могут использовать свои файлы — тогда мы
-              обновим текст и настройки.
+              {{ SITE_TEXT.cookieConsent.description.beforeStorage }}
+              <strong>{{ SITE_TEXT.cookieConsent.description.storage }}</strong>
+              {{ SITE_TEXT.cookieConsent.description.afterStorage }}
+              <code class="cookie-consent__code">{{ COOKIE_CONSENT_STORAGE_KEY }}</code>{{ SITE_TEXT.cookieConsent.description.afterKey }}
             </p>
             <p class="cookie-consent__hint">
-              «Принять» — согласие на описанное хранение выбора; «Отклонить» — мы не запишем
-              согласие на необязательные технологии (плашка скроется так же). Данные остаются
-              только в вашем браузере.
+              {{ SITE_TEXT.cookieConsent.hint }}
             </p>
             </div>
             <div class="cookie-consent__actions">
@@ -36,14 +31,14 @@
               class="cookie-consent__btn cookie-consent__btn--secondary"
               @click="decline"
             >
-              Отклонить
+              {{ SITE_TEXT.cookieConsent.decline }}
             </button>
             <button
               type="button"
               class="cookie-consent__btn cookie-consent__btn--primary"
               @click="accept"
             >
-              Принять
+              {{ SITE_TEXT.cookieConsent.accept }}
             </button>
             </div>
           </div>
@@ -58,6 +53,7 @@ import {
   COOKIE_CONSENT_OPEN_EVENT,
   COOKIE_CONSENT_STORAGE_KEY
 } from '@/utils/cookieConsent'
+import { SITE_TEXT } from '@/utils/siteText'
 
 const mounted = ref(false)
 const isOpen = ref(false)

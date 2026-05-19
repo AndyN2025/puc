@@ -2,19 +2,24 @@
     <div class="acc__content">
         <div class="acc__content-item" v-if="props.diploma  || props.document  || props.specialty">
             <div class="acc__content-title" v-if="props.diploma">Диплом</div>
-            <p class="acc__content-text" v-if="props.diploma ">
+            <p class="acc__content-text" itemprop="profDevelopment" v-if="props.diploma ">
                 {{ props.diploma }}
             </p>
 
             <div v-if="document">
                 <div class="acc__content-title udostoveren">Удостоверение</div>
                 <template v-if="Array.isArray(document)">
-                    <p class="acc__content-text udostoveren-text" v-for="(doc, idx) in document" :key="idx">
+                    <p
+                        class="acc__content-text udostoveren-text"
+                        itemprop="profDevelopment"
+                        v-for="(doc, idx) in document"
+                        :key="idx"
+                    >
                         {{ doc }}
                     </p>
                 </template>
                 <template v-else>
-                    <p class="acc__content-text">
+                    <p class="acc__content-text" itemprop="profDevelopment">
                         {{ typeof document === 'string' ? document : document?.text }}
                     </p>
                 </template>
@@ -22,7 +27,7 @@
 
             <div class="acc__content-title" v-if="props.specialty">
                 Наименование направления подготовки и специальности педагогического работника</div>
-            <p class="acc__content-text" v-if="props.specialty">{{ props.specialty }}</p>
+            <p class="acc__content-text" itemprop="teachingLevel" v-if="props.specialty">{{ props.specialty }}</p>
         </div>
 
         <div class="acc__content-item">
@@ -30,7 +35,7 @@
             <ul class="acc__content-list">
                 <li v-for="(program, idx) in props.programs" :key="idx" class="acc__content-list-item">
                     <img :src="checkIcon" alt="" />
-                    <span>{{ program }}</span>
+                    <span itemprop="teachingDiscipline teachingOp">{{ program }}</span>
                 </li>
             </ul>
         </div>

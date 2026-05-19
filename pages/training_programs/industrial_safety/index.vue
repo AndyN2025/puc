@@ -3,7 +3,7 @@
     <Breadcrumbs :items="breadCrumbs" />
     <NavBlock :navItems="navCourseItems" :activeIndex="0" />
     <DotTitle :text="titleCommon" />
-    <TitleCommon text="Промышленная безопасность" />
+    <TitleCommon :text="SITE_TEXT.trainingPages.sections.industrialSafety" />
     <ProgramTable
       v-model="programTab"
       :tabs="programTabs"
@@ -11,8 +11,8 @@
       link="training_programs/industrial_safety"
     />
 
-    <DotTitle text="начать обучение" />
-    <TitleCommon text="Как мы работаем" />
+    <DotTitle :text="SITE_TEXT.trainingPages.indexPages.startLearning" />
+    <TitleCommon :text="SITE_TEXT.trainingPages.indexPages.howWeWork" />
     <StepsList :workflow="programTab" />
   </div>
 </template>
@@ -32,18 +32,19 @@ import {
   industrialPkForTable,
   industrialDopForTable
 } from './utils'
+import { SITE_TEXT } from '@/utils/siteText'
 
-const titleCommon = ref('Виды обучения')
+const titleCommon = ref(SITE_TEXT.trainingPages.indexPages.titleCommon)
 
 const breadCrumbs = [
-  { text: 'Главная', link: '/' },
+  { text: SITE_TEXT.trainingPages.breadcrumbs.home, link: '/' },
   { text: titleCommon.value, link: '/training_programs/' },
-  { text: 'Промышленная безопасность', link: '/training_programs/industrial_safety/' }
+  { text: SITE_TEXT.trainingPages.sections.industrialSafety, link: '/training_programs/industrial_safety/' }
 ]
 
 const programTabs = [
-  { text: 'Предаттестационная подготовка', value: 'pre_attest' },
-  { text: 'Повышение квалификации', value: 'qualification' }
+  { text: SITE_TEXT.trainingPages.indexPages.tabs.preAttest, value: 'pre_attest' },
+  { text: SITE_TEXT.trainingPages.indexPages.tabs.qualification, value: 'qualification' }
 ]
 
 const programTab = ref<'pre_attest' | 'qualification'>('pre_attest')

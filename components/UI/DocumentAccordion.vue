@@ -1,7 +1,7 @@
 <template>
   <div class="document-accordion">
     <div
-      v-for="(doc, index) in documents"
+      v-for="(doc, index) in safeDocuments"
       :key="index"
       class="document-item"
       :class="{ 'is-expanded': expandedIndex === index }"
@@ -23,17 +23,17 @@
       
       <div class="document-content">
         <div class="pdf-preview-wrapper">
-          <embed
-            :src="`${doc.file}#page=1`"
-            type="application/pdf"
+          <iframe
+            :src="doc.embedSrc"
+            :title="doc.title"
             class="pdf-preview"
           />
           <a
-            :href="doc.file"
+            :href="doc.safeFile"
             target="_blank"
             rel="noopener noreferrer"
             class="download-overlay"
-            :itemprop="doc.micro"
+            v-bind="doc.micro ? { itemprop: doc.micro } : {}"
             @click.stop
           >
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
@@ -48,18 +48,37 @@
   </div>
 </template>
 
-<script setup>
-import { ref } from 'vue'
+<script setup lang="ts">
+import { computed, ref } from 'vue'
+import type { PropType } from 'vue'
+import { getSafeDocumentHref, getSafePdfEmbedSrc } from '@/utils/documentLinks'
+
+interface DocumentAccordionItem {
+  title: string
+  file: string
+  size?: string
+  micro?: string
+}
 
 const props = defineProps({
   documents: {
-    type: Array,
+    type: Array as PropType<DocumentAccordionItem[]>,
     required: true
   }
 })
 
-const expandedIndex = ref(null)
-const toggleExpand = (index) => {
+const safeDocuments = computed(() =>
+  props.documents
+    .map((doc) => ({
+      ...doc,
+      safeFile: getSafeDocumentHref(doc.file),
+      embedSrc: getSafePdfEmbedSrc(doc.file)
+    }))
+    .filter((doc) => Boolean(doc.safeFile && doc.embedSrc))
+)
+
+const expandedIndex = ref<number | null>(null)
+const toggleExpand = (index: number) => {
   if (expandedIndex.value === index) {
     expandedIndex.value = null
   } else {

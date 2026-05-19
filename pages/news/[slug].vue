@@ -29,7 +29,7 @@
       </div>
       <footer class="news-article__footer">
         <NuxtLink to="/news/" class="news-article__back">
-          ← Все новости
+          {{ SITE_TEXT.newsArticlePage.allNewsBack }}
         </NuxtLink>
       </footer>
     </article>
@@ -39,6 +39,7 @@
 <script setup lang="ts">
 import Breadcrumbs from '@/components/UI/Breadcrumbs.vue'
 import { getNewsBySlug } from '@/data/news'
+import { SITE_TEXT } from '@/utils/siteText'
 
 const route = useRoute()
 
@@ -55,7 +56,7 @@ watch(
     if (!s || !getNewsBySlug(s)) {
       throw createError({
         statusCode: 404,
-        statusMessage: 'Новость не найдена'
+        statusMessage: SITE_TEXT.newsArticlePage.notFound
       })
     }
   },
@@ -63,12 +64,12 @@ watch(
 )
 
 const breadCrumbs = computed(() => [
-  { text: 'Главная', link: '/' },
-  { text: 'Новости', link: '/news' },
+  { text: SITE_TEXT.newsArticlePage.breadcrumbs.home, link: '/' },
+  { text: SITE_TEXT.newsArticlePage.breadcrumbs.news, link: '/news' },
   {
     text: article.value
       ? truncate(article.value.title, 52)
-      : '…',
+      : SITE_TEXT.newsArticlePage.fallbackBreadcrumb,
     link: article.value ? `/news/${article.value.slug}` : '/news'
   }
 ])
@@ -87,7 +88,7 @@ function isoDate(display: string): string {
 useHead(() => ({
   title: article.value
     ? `${article.value.title} — Новости`
-    : 'Новости'
+    : SITE_TEXT.newsArticlePage.titleFallback
 }))
 </script>
 

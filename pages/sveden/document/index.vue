@@ -2,7 +2,7 @@
   <div class="p">
     <Breadcrumbs :items="breadCrumbs"/> 
     <NavBlock :navItems="navSvedenItems" :activeIndex="2"/>
-    <DotTitle text="Сведения об образовательной организации" />
+    <DotTitle :text="SITE_TEXT.svedenPages.commonTitle" />
     <TitleCommon :text="titleCommon"/>
     <DocumentList :documents="documents" type="read"/>
   </div>
@@ -15,12 +15,12 @@ import TitleCommon from '@/components/UI/TitleCommon.vue';
 import NavBlock from '@/components/UI/NavBlock.vue'
 import DocumentList from '@/components/UI/DocumentList.vue';
 import { navSvedenItems } from '@/utils/svedenUtils'
+import { SITE_TEXT } from '@/utils/siteText'
 import Ustav from '@/assets/documents/documents/Ustav.pdf'
 
 import License from '@/assets/documents/common/Лицензия на осуществление образовательной деятельности.pdf'
 
 import samoObsl from '@/assets/documents/Отчет о самообследовании 2025.pdf'
-import podtver from '@/assets/documents/documents/podtv_2334.pdf'
 import vnutrTrud from '@/assets/documents/documents/local_act_trud_rasp.pdf'
 import pedsovet from '@/assets/documents/documents/local_act_pedsovet.pdf'
 import kurenie from '@/assets/documents/documents/local_act_kuren.pdf'
@@ -35,15 +35,15 @@ import perevodOtch from '@/assets/documents/documents/local_perevod_otchislenie.
 import uspevaemost from '@/assets/documents/documents/local_uspevaemost.pdf'
 import obuchenie from '@/assets/documents/documents/local_obuchenie.pdf'
 
-const titleCommon = ref('Документы')
+const titleCommon = ref(SITE_TEXT.svedenPages.titles.documents)
 
 const breadCrumbs = [
-  { text: 'Главная', link: '/' },
-  { text: 'Сведения об организации', link: '/sveden/common/' },
+  { text: SITE_TEXT.svedenPages.breadcrumbs.home, link: '/' },
+  { text: SITE_TEXT.svedenPages.breadcrumbs.organization, link: '/sveden/common/' },
   { text: titleCommon.value, link: '/sveden/document/' }
 ] 
 
-/** itemprop соответствуют методическим рекомендациям (микроразметка для мониторинга) */
+/** itemprop — табл. 3.4.1; доп. локальные акты без отдельного тега — addRef (п. про addRef в методичке) */
 const documents = [
   {
     title: 'Устав',
@@ -57,7 +57,8 @@ const documents = [
   },
   {
     title: 'Выписка из реестра организаций, оказывающих услуги в области охраны труда',
-    file: reestrOT
+    file: reestrOT,
+    micro: 'addRef'
   },
   {
     title: 'Правила внутреннего распорядка обучающихся',
@@ -71,19 +72,23 @@ const documents = [
   },
   {
     title: 'Положение о Педагогическом совете',
-    file: pedsovet
+    file: pedsovet,
+    micro: 'addRef'
   },
   {
     title: 'Положение о комиссии по урегулированию споров между участниками образовательных отношений',
-    file: spor
+    file: spor,
+    micro: 'addRef'
   },
   {
     title: 'Положение о запрете курения',
-    file: kurenie
+    file: kurenie,
+    micro: 'addRef'
   },
   {
     title: 'Положение о нормах профессиональной этики педагогических работников',
-    file: profEtik
+    file: profEtik,
+    micro: 'addRef'
   },
   {
     title: 'Правила приема слушателей на обучение',
@@ -92,7 +97,8 @@ const documents = [
   },
   {
     title: 'Положение о практической подготовке обучающихся',
-    file: practic
+    file: practic,
+    micro: 'addRef'
   },
   {
     title: 'Положение о порядке перевода, отчисления и восстановления обучающихся',
@@ -106,7 +112,8 @@ const documents = [
   },
   {
     title: 'Положение об организации и осуществлении образовательной деятельности по дополнительным общеобразовательным общеразвивающим программам',
-    file: obuchenie
+    file: obuchenie,
+    micro: 'addRef'
   },
   {
     title: 'Результаты последнего самообследования организации',
