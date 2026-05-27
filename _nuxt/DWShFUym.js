@@ -1,1 +1,0 @@
-import{g as e}from"./DCbYdJOS.js";import{o as s,i as n,f as t,V as a,W as o,H as r}from"./sFyKhLQR.js";const c={class:"p"},l={class:"text-2xl font-bold"},m=s({__name:"index",setup(_){return(i,p)=>(r(),n("div",c,[t("h1",l,a(o(e).aboutPage.title),1),t("p",null,a(o(e).aboutPage.lead),1)]))}});export{m as default};
