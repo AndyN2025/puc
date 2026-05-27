@@ -31,7 +31,7 @@
         </div>
 
         <div class="acc__content-item">
-            <div class="acc__content-title">Перечень преподаваемых программ:</div>
+            <div class="acc__content-title">{{ programsTitle }}</div>
             <ul class="acc__content-list">
                 <li v-for="(program, idx) in props.programs" :key="idx" class="acc__content-list-item">
                     <img :src="checkIcon" alt="" />
@@ -62,6 +62,11 @@ const props = defineProps({
     programs: {
         type: Array as () => string[],
         default: () => []
+    },
+    programsTitle: {
+        type: String,
+        default:
+            'Перечень преподаваемых программ дополнительного образования и профессионального обучения:'
     }
 })
 </script>

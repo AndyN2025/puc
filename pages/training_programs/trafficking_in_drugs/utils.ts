@@ -57,9 +57,7 @@ export const drugsPrograms: DrugsTrainingProgram[] = [
     format: drugsFormatCombined,
     document: drugsDocumentDefault,
     img: '/diploms/doc-13.jpg',
-    programm: getProgramDocByRelativePath(
-      'Прекурсоры/Организация деятельности по обороту наркотических средств, психотропных веществ и их прекурсоров.doc'
-    ),
+    programm: getProgramDocByRelativePath('nar/nar_01.doc'),
     application: requestDrugs17
   },
   {
@@ -74,9 +72,7 @@ export const drugsPrograms: DrugsTrainingProgram[] = [
     format: drugsFormatCombined,
     document: drugsDocumentDefault,
     img: '/diploms/doc-13.jpg',
-    programm: getProgramDocByRelativePath(
-      'Прекурсоры/«Государственное регулирование в сфере оборота наркотических средств, психотропных веществ и их прекурсоров при осуществлении медицинской и фармацевтической деятельности».doc'
-    ),
+    programm: getProgramDocByRelativePath('nar/nar_02.doc'),
     application: requestDrugs18
   }
 ]

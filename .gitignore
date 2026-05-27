@@ -13,6 +13,9 @@ node_modules
 logs
 *.log
 
+# Копируется из assets/documents/programs при npm run build
+public/documents/programs/
+
 # Misc
 .DS_Store
 .fleet

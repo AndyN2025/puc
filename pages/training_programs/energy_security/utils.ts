@@ -60,9 +60,7 @@ export const energyPrograms: EnergyTrainingProgram[] = [
     requiremets: energyRequirements,
     format: energyTrainingFormatsLine,
     document: energyDocumentDefault,
-    programm: getProgramDocByRelativePath(
-      'ТЭУ/Предэкзаменационная подготовка работников  организаций потребителей тепловой энергии (обслуживающих организаций).doc'
-    )
+    programm: getProgramDocByRelativePath('teu/teu_01.doc')
   },
   {
     code: 'en_02',
@@ -76,9 +74,7 @@ export const energyPrograms: EnergyTrainingProgram[] = [
     format: energyTrainingFormatsLine,
     document: energyDocumentDefault,
     img: ['/diploms/doc-03.jpg', '/diploms/doc-04.jpg'],
-    programm: getProgramDocByRelativePath(
-      'ТЭУ/Предэкзаменационная подготовка работников теплоснабжающих.doc'
-    ),
+    programm: getProgramDocByRelativePath('teu/teu_02.doc'),
     application: requestEnergy
   }
 ]

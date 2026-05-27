@@ -53,9 +53,7 @@ export const environmentalProgramsPq: EnvironmentalTrainingProgram[] = [
     period: 'Не реже одного раза в 3 года.',
     document: docPq,
     img: '/diploms/doc-09.jpg',
-    programm: getProgramDocByRelativePath(
-      'Экология/«Обеспечение экологической безопасности при работах в области обращения с отходами I-IV классов опасности».docx'
-    ),
+    programm: getProgramDocByRelativePath('eco/eco_01.docx'),
     application: requestEco11
   },
   {
@@ -73,9 +71,7 @@ export const environmentalProgramsPq: EnvironmentalTrainingProgram[] = [
     period: 'Не реже одного раза в 5 лет.',
     document: docPq,
     img: '/diploms/doc-10.jpg',
-    programm: getProgramDocByRelativePath(
-      'Экология/«Обеспечение экологической безопасности руководителями и специалистами».docx'
-    ),
+    programm: getProgramDocByRelativePath('eco/eco_02.docx'),
     application: requestEco11
   },
   {
@@ -113,9 +109,7 @@ export const environmentalProgramsPpo: EnvironmentalTrainingProgram[] = [
     format: ecoFormat,
     document: docPpo,
     img: '/diploms/doc-12.jpg',
-    programm: getProgramDocByRelativePath(
-      'Экология/Переподготовка  «Специалист по экологической безопасности»  .docx'
-    ),
+    programm: getProgramDocByRelativePath('eco/eco_04.docx'),
     application: requestEco16
   }
 ]

@@ -43,7 +43,7 @@ export const firePrograms: FireTrainingProgram[] = [
       'Удостоверение о повышении квалификации установленного образца с внесением в реестр ФИС ФРДО.',
     period: 'Не реже 1 раза в 5 лет.',
     img: '/diploms/doc-05.jpg',
-    programm: getProgramDocByRelativePath('Пожарная безопасность/Пож. без. Программа №1.docx'),
+    programm: getProgramDocByRelativePath('fire/fire_01.docx'),
     application: requestFireSafety
   },
   {
@@ -67,7 +67,7 @@ export const firePrograms: FireTrainingProgram[] = [
       'Удостоверение о повышении квалификации установленного образца с внесением в реестр ФИС ФРДО.',
     period: 'Не реже 1 раза в 5 лет.',
     img: '/diploms/doc-06.jpg',
-    programm: getProgramDocByRelativePath('Пожарная безопасность/Пож. без. Программа №3.docx'),
+    programm: getProgramDocByRelativePath('fire/fire_03.docx'),
     application: requestFireSafety
   },
   {
@@ -91,7 +91,7 @@ export const firePrograms: FireTrainingProgram[] = [
       'Удостоверение о повышении квалификации установленного образца с внесением в реестр ФИС ФРДО.',
     period: 'Не реже 1 раза в 5 лет.',
     img: '/diploms/doc-07.jpg',
-    programm: getProgramDocByRelativePath('Пожарная безопасность/Пож. без. Программа №4.docx'),
+    programm: getProgramDocByRelativePath('fire/fire_04.docx'),
     application: requestFireSafety
   },
   {
@@ -115,7 +115,7 @@ export const firePrograms: FireTrainingProgram[] = [
     format: 'Дистанционное (онлайн в любое время и из любого региона).',
     document: 'Диплом о профессиональной переподготовке с внесением в реестр ФИС ФРДО.',
     img: '/diploms/doc-08.jpg',
-    programm: getProgramDocByRelativePath('Пожарная безопасность/Пож. без. Программа №5 переподготовка.docx'),
+    programm: getProgramDocByRelativePath('fire/fire_05.docx'),
     application: requestFireSafety
   }
 ]

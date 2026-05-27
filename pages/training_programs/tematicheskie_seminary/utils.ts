@@ -19,25 +19,25 @@ const opoDocument =
 const opoPeriod = 'Не реже 1 раза в год.'
 
 const opoProgramByCode: Record<string, string | undefined> = {
-  opo_01: getProgramDocByRelativePath('ДОП Персонал/Рабочий люльки, находящийся на подъемнике (вышке).doc'),
-  opo_02: getProgramDocByRelativePath('ДОП Персонал/Подготовка персонала, имеющего профессию  Стропальщик.doc'),
-  opo_05: getProgramDocByRelativePath('ДОП Персонал/«Управление подъемными сооружениями с пола».doc'),
-  opo_06: getProgramDocByRelativePath('ДОП Персонал/«Управление подъемными сооружениями с использованием системы дистанционного управления по радиоканалу или иной линии связи».doc'),
-  opo_07: getProgramDocByRelativePath('ДОП Персонал/Подготовка персонала, имеющего профессию  машинист крана  автомобильного .doc'),
-  opo_08: getProgramDocByRelativePath('ДОП Персонал/Подготовка персонала, имеющего профессию  машинист крана (крановщик).doc'),
-  opo_09: getProgramDocByRelativePath('ДОП Персонал/Персонал взрывопожароопасных химических, нефтехимических производств .doc'),
-  opo_10: getProgramDocByRelativePath('ДОП Персонал/Программа развивающая  Кислоты и щелочи.doc'),
-  opo_11: getProgramDocByRelativePath('ДОП Персонал/«Персонал химически опасных производственных объектов, на которых используются и хранятся токсичные и высокотоксичные вещества»   .doc'),
-  opo_12: getProgramDocByRelativePath('ДОП Персонал/«Персонал химически опасных производственных объектов».doc'),
-  opo_13: getProgramDocByRelativePath('ДОП Персонал/«Персонал, эксплуатирующий взрывопожароопасные производственные».doc'),
-  opo_14: getProgramDocByRelativePath('ДОП Персонал/Персонал, эксплуатирующий  баллоны со сжатыми, сжиженными и растворенными под давлением газами  .doc'),
-  opo_15: getProgramDocByRelativePath('ДОП Персонал/Подготовка персонала, имеющего профессию  сливщик-разливщик.doc'),
-  opo_16: getProgramDocByRelativePath('ДОП Персонал/Подготовка персонала, имеющего профессию  сливщик-разливщик.doc'),
-  opo_17: getProgramDocByRelativePath('ДОП Персонал/персонал обслуживающий трубопроводы пара и горячей воды  ДОП.doc'),
-  opo_19: getProgramDocByRelativePath('ДОП Персонал/«Персонал, обслуживающий сосуды, работающие под избыточным».doc'),
-  opo_20: getProgramDocByRelativePath('ДОП Персонал/«Подготовка персонала, имеющего профессию «Оператор котельной».doc'),
-  opo_21: getProgramDocByRelativePath('ДОП Персонал/Персонал, обслуживающий сосуды (газификаторы, баллоны), работающие под избыточным давлением, для хранения медицинского кислорода.doc'),
-  opo_22: getProgramDocByRelativePath('ДОП Персонал/«Персонал, обслуживающий газовое оборудование промышленных печей».doc')
+  opo_01: getProgramDocByRelativePath('opo/opo_01.doc'),
+  opo_02: getProgramDocByRelativePath('opo/opo_02.doc'),
+  opo_05: getProgramDocByRelativePath('opo/opo_05.doc'),
+  opo_06: getProgramDocByRelativePath('opo/opo_06.doc'),
+  opo_07: getProgramDocByRelativePath('opo/opo_07.doc'),
+  opo_08: getProgramDocByRelativePath('opo/opo_08.doc'),
+  opo_09: getProgramDocByRelativePath('opo/opo_09.doc'),
+  opo_10: getProgramDocByRelativePath('opo/opo_10.doc'),
+  opo_11: getProgramDocByRelativePath('opo/opo_11.doc'),
+  opo_12: getProgramDocByRelativePath('opo/opo_12.doc'),
+  opo_13: getProgramDocByRelativePath('opo/opo_13.doc'),
+  opo_14: getProgramDocByRelativePath('opo/opo_14.doc'),
+  opo_15: getProgramDocByRelativePath('opo/opo_15.doc'),
+  opo_16: getProgramDocByRelativePath('opo/opo_16.doc'),
+  opo_17: getProgramDocByRelativePath('opo/opo_17.doc'),
+  opo_19: getProgramDocByRelativePath('opo/opo_19.doc'),
+  opo_20: getProgramDocByRelativePath('opo/opo_20.doc'),
+  opo_21: getProgramDocByRelativePath('opo/opo_21.doc'),
+  opo_22: getProgramDocByRelativePath('opo/opo_22.doc')
 }
 
 export interface OpoTrainingProgram {

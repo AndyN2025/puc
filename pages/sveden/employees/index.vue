@@ -23,6 +23,7 @@
           :document="teacher.document"
           :specialty="teacher.specialty"
           :programs="teacher.programs"
+          :programs-title="teacher.programsTitle"
         />
         <div class="opit" itemprop="specExperience">
           Общий стаж работы в профессиональной сфере {{ teacher.stach }} {{ getYearWord(teacher.stach) }}
@@ -138,6 +139,10 @@ const aleksandrovList = [
   'Охрана труда.',
 ]
 
+const programsTitleDpoAndProf =
+  'Перечень преподаваемых программ дополнительного образования и профессионального обучения:'
+const programsTitleDpoOnly = 'Перечень преподаваемых программ дополнительного образования:'
+
 const burmistrovList = [
   'Оператор котельной;',
   'Аппаратчик ХВО;',
@@ -155,6 +160,7 @@ const teacherList = [
     diploma: 'Диплом о профессиональной переподготовке №772411478303 от 30.06.2020 “Преподаватель в сфере дополнительного профессионального образования”',
     specialty: 'Химическая технология лаков, красок и лакокрасочных покрытий',
     programs: hrapovaList,
+    programsTitle: programsTitleDpoAndProf,
     stach: 39
   },
   {
@@ -165,6 +171,7 @@ const teacherList = [
     document: ['Удостоверение о повышении квалификации «Оказание первой помощи пострадавшим» от 18.09.2024 г.', 'Удостоверение о повышении квалификации «Обеспечение пожарной безопасности для руководителей и ответственных лиц организации» от 25.10.2022 г.'],
     specialty: 'Подъемно-транспортные машины и оборудование',
     programs: smolovikList,
+    programsTitle: programsTitleDpoAndProf,
     stach: 41
   },
   {
@@ -175,6 +182,7 @@ const teacherList = [
     document: ['Удостоверение о повышении квалификации  «Использование современных информационных технологий и ресурсов в электронной информационно-образовательной среде ВУЗа» от 08.04.2023 г.'],
     specialty: 'Технология и оборудование сварочного производства',
     programs: raevskiList,
+    programsTitle: programsTitleDpoAndProf,
     stach: 25
   },
   {
@@ -183,7 +191,8 @@ const teacherList = [
     tags: [ 'Преподаватель','Высшее образование', 'Инженер-механик',  'Подъемно-транспортные машины и оборудование' ],
     diploma: 'Диплом о профессиональной переподготовке «Педагог профессионального обучения» от 03.09.2018 ',
     specialty: 'Подъемно-транспортные машины и оборудование',
-    programs:  kozlovList,
+    programs: kozlovList,
+    programsTitle: programsTitleDpoAndProf,
     stach: 45
   },
   {
@@ -193,6 +202,7 @@ const teacherList = [
     diploma: 'Диплом о профессиональной переподготовке «Преподаватель в сфере дополнительного профессионального образования» от 30.09.2022',
     specialty: 'Промышленная теплоэнергетика',
     programs: diachukList,
+    programsTitle: programsTitleDpoAndProf,
     stach: 46
   },
   {
@@ -201,6 +211,7 @@ const teacherList = [
     tags: [ 'Преподаватель', 'Высшее образование', 'Экономист', 'Финансы и кредит' ],
     diploma: 'Диплом о профессиональной переподготовке «Преподаватель в сфере дополнительного профессионального образования» от 30.09.2022 г.',
     programs: aleksandrovList,
+    programsTitle: programsTitleDpoOnly,
     specialty: 'Финансы и кредит',
     stach: 53
   },
@@ -210,6 +221,7 @@ const teacherList = [
     tags: [ 'Преподаватель', 'Высшее образование', 'Инженер-теплоэнергетик',  'Тепловые и электрические станции' ],
     specialty: 'Тепловые и электрические станции',
     programs: burmistrovList,
+    programsTitle: programsTitleDpoAndProf,
     stach: 35
   }
 ]

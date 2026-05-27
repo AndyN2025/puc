@@ -38,20 +38,20 @@ import programBez3App from '@/assets/documents/training/securityWorks/11-Applica
 import programPz from '@/assets/documents/training/securityWorks/12-Program.doc'
 import programPzApp from '@/assets/documents/training/securityWorks/12-Application.doc'
 
-const otProgram46A = getProgramDocByRelativePath('Охрана труда/46А.doc')
-const otProgram46B = getProgramDocByRelativePath('Охрана труда/46Б.doc')
-const otProgramSiz = getProgramDocByRelativePath('Охрана труда/СИЗ.docx')
-const otProgramOpp = getProgramDocByRelativePath('Охрана труда/ОПП.doc')
-const otProgramVis1 = getProgramDocByRelativePath('Охрана труда/Высота 1.docx')
-const otProgramVis2 = getProgramDocByRelativePath('Охрана труда/Высота 2.docx')
-const otProgramVis3 = getProgramDocByRelativePath('Охрана труда/Высота 3.doc')
-const otProgramPodmash = getProgramDocByRelativePath('Охрана труда/Высота бг.doc')
-const otProgramOzp1 = getProgramDocByRelativePath('Охрана труда/ОЗП 1.docx')
-const otProgramOzp2 = getProgramDocByRelativePath('Охрана труда/ОЗП 2.docx')
-const otProgramOzp3 = getProgramDocByRelativePath('Охрана труда/ОЗП 3.docx')
-const otProgramPogr = getProgramDocByRelativePath('Охрана труда/Погр-разгр.doc')
+const otProgram46A = getProgramDocByRelativePath('ot/ot_46a.doc')
+const otProgram46B = getProgramDocByRelativePath('ot/ot_46b.doc')
+const otProgramSiz = getProgramDocByRelativePath('ot/ot_siz.docx')
+const otProgramOpp = getProgramDocByRelativePath('ot/ot_opp.doc')
+const otProgramVis1 = getProgramDocByRelativePath('ot/ot_vis_1.docx')
+const otProgramVis2 = getProgramDocByRelativePath('ot/ot_vis_2.docx')
+const otProgramVis3 = getProgramDocByRelativePath('ot/ot_vis_3.doc')
+const otProgramPodmash = getProgramDocByRelativePath('ot/ot_vis_bg.doc')
+const otProgramOzp1 = getProgramDocByRelativePath('ot/ot_ozp_1.docx')
+const otProgramOzp2 = getProgramDocByRelativePath('ot/ot_ozp_2.docx')
+const otProgramOzp3 = getProgramDocByRelativePath('ot/ot_ozp_3.docx')
+const otProgramPogr = getProgramDocByRelativePath('ot/ot_pogr.doc')
 const otProgramSpec = getProgramDocByRelativePath(
-  'Охрана труда/Программа Переподготовка Специалист по охране труда.docx'
+  'ot/ot_spec.docx'
 )
 
 export interface TrainingProgram {
