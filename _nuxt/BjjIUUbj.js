@@ -1,0 +1,1 @@
+import{c as e,H as o,i as s,V as a}from"./57rpr9do.js";const c={class:"documents-title"},r={__name:"UITitleCommon",props:{text:{type:String,required:!0,default:""}},setup(t){return(n,_)=>(o(),s("h2",c,a(t.text),1))}},m=e(r,[["__scopeId","data-v-af98373b"]]);export{m as T};
