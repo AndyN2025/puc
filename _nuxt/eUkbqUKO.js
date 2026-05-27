@@ -1,0 +1,1 @@
+function e(n){return n.replace(/\\/g,"/").trim()}function t(n){return n.split("/").map(r=>encodeURIComponent(r)).join("/")}function a(n){const r=e(n);if(r)return`/documents/programs/${t(r)}`}function i(n,r,o="doc"){if(!(!r||r==="—"||r==="-"))return a(`${n}/${r}.${o}`)}export{i as a,a as g};

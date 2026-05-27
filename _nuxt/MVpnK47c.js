@@ -1,1 +1,0 @@
-function o(e){return e.replace(/\\/g,"/").trim()}function c(e){const r=o(e);return r?`/documents/programs/${encodeURI(r).replace(/%2F/g,"/")}`:void 0}function a(e,r,n="doc"){if(!(!r||r==="—"||r==="-"))return c(`${e}/${r}.${n}`)}export{a,c as g};
