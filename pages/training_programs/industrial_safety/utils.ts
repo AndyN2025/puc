@@ -1,4 +1,5 @@
 import { industrialPkGroups } from './industrial_pk_data'
+import { getProgramDocByRelativePath } from '../../../utils/programDocs'
 const requestIndustrialPk = '/request-study/req-01.doc'
 const requestIndustrialPre = '/request-study/req-02.doc'
 const requestIndustrialRetrain = '/request-study/req-15.doc'
@@ -305,6 +306,7 @@ export interface IndustrialTrainingProgram {
   hours: number
   mainDescription: string
   document: string | string[]
+  hideDocumentTitle?: boolean
   format: string
   period: string
   users: string[]
@@ -323,6 +325,51 @@ const INDUSTRIAL_PRE_INTRO =
 
 const INDUSTRIAL_PK_INTRO =
   'Дополнительное профессиональное обучение по программам повышения квалификации в целях поддержания уровня квалификации и подтверждения знания требований промышленной безопасности в соответствии со статьёй 14.1 Федерального закона «О промышленной безопасности опасных производственных объектов» № 116-ФЗ от 21.07.1997 г.'
+
+/** Программы повышения квалификации (папка «ДПО») — привязка по коду программы */
+const industrialDpoByTextCode: Record<string, string | undefined> = {
+  'А.1': getProgramDocByRelativePath('ДПО/Программа ДПО А1 Основы промышленной безопасности.doc'),
+  'Б.1.1': getProgramDocByRelativePath('ДПО/Программа ДПО Б 1.1.doc'),
+  'Б.1.2': getProgramDocByRelativePath('ДПО/Программа ДПО Б 1.2.doc'),
+  'Б.1.6': getProgramDocByRelativePath('ДПО/Программа ДПО Б 1.6.doc'),
+  'Б.1.8': getProgramDocByRelativePath('ДПО/Программа ДПО Б 1.8.doc'),
+  'Б.1.9': getProgramDocByRelativePath('ДПО/Программа ДПО Б 1.9.doc'),
+  'Б.1.10': getProgramDocByRelativePath('ДПО/Программа ДПО Б 1.10.doc'),
+  'Б.1.11': getProgramDocByRelativePath('ДПО/Программа ДПО Б 1.11.doc'),
+  'Б.1.12': getProgramDocByRelativePath('ДПО/Программа ДПО Б 1.12.doc'),
+  'Б.1.13': getProgramDocByRelativePath('ДПО/Программа ДПО Б 1.13.doc'),
+  'Б.2.1': getProgramDocByRelativePath('ДПО/Программа ДПО Б 2.1.doc'),
+  'Б.2.7': getProgramDocByRelativePath('ДПО/Программа ДПО Б 2.7.doc'),
+  'Б.2.8': getProgramDocByRelativePath('ДПО/Программа ДПО Б 2.8.doc'),
+  'Б.2.10': getProgramDocByRelativePath('ДПО/Программа ДПО Б 2.10.doc'),
+  'Б.7.1': getProgramDocByRelativePath('ДПО/Программа повышения квалификации Б7.1.doc'),
+  'Б.7.3': getProgramDocByRelativePath('ДПО/Программа повышения квалификации Б7.3.doc'),
+  'Б.7.5': getProgramDocByRelativePath('ДПО/Программа повышения квалификации Б7.5  .doc'),
+  'Б.8.1': getProgramDocByRelativePath('ДПО/Программа повышения квалификации Б8.1.doc'),
+  'Б.8.2': getProgramDocByRelativePath('ДПО/Программа повышения квалификации Б8.2.doc'),
+  'Б.8.3': getProgramDocByRelativePath('ДПО/Программа повышения квалификации Б8.3.doc'),
+  'Б.8.6': getProgramDocByRelativePath('ДПО/Программа повышения квалификации Б8.6.doc'),
+  'Б.10.1': getProgramDocByRelativePath('ДПО/Программа ДПО Б 10.1.doc'),
+  'Б.10.2': getProgramDocByRelativePath('ДПО/Программа ДПО Б 10.2.doc'),
+  'Б.11.1': getProgramDocByRelativePath('ДПО/Программа ДПО Б 11.1.doc')
+}
+
+/** Предаттестационная подготовка (папка «ДОП Предаттестационная») */
+const industrialPreAttestByTextCode: Record<string, string | undefined> = {
+  'А.1': getProgramDocByRelativePath('ДОП  Предаттестационная/А.1 Предаттестационная.doc'),
+  'Б.1.1': getProgramDocByRelativePath('ДОП  Предаттестационная/Б.1.1 Предаттестационная.doc'),
+  'Б.1.2': getProgramDocByRelativePath('ДОП  Предаттестационная/Б.1.2 Предаттестационная.doc'),
+  'Б.1.7': getProgramDocByRelativePath('ДОП  Предаттестационная/Б.1.7 Предаттестационная.doc'),
+  'Б.7.1': getProgramDocByRelativePath('ДОП  Предаттестационная/Б.7.1.doc Программа.doc'),
+  'Б.7.4': getProgramDocByRelativePath('ДОП  Предаттестационная/Б.7.4.doc Программа.doc'),
+  'Б.8.1': getProgramDocByRelativePath('ДОП  Предаттестационная/Б 8.1 Предаттестационная .doc'),
+  'Б.8.1.2': getProgramDocByRelativePath('ДОП  Предаттестационная/Б 8.1.2 Предаттестационная.doc'),
+  'Б.8.2': getProgramDocByRelativePath('ДОП  Предаттестационная/Б 8.2 Предаттестационная.doc'),
+  'Б.8.3': getProgramDocByRelativePath('ДОП  Предаттестационная/Б 8.3 Предаттестационная.doc'),
+  'Б.9.3': getProgramDocByRelativePath('ДОП  Предаттестационная/Б 9.3 предаттестационная .doc'),
+  'Б.9.5': getProgramDocByRelativePath('ДОП  Предаттестационная/Б 9.5 предаттестационная .doc'),
+  'Б.11.1': getProgramDocByRelativePath('ДОП  Предаттестационная/Б.11.1 Предаттестационная.doc')
+}
 
 const industrialPreUsers: string[] = [
   'Руководители и специалисты организаций (обособленных подразделений организаций), осуществляющих проектирование, строительство, эксплуатацию, реконструкцию, капитальный ремонт, техническое перевооружение, консервацию и ликвидацию опасных производственных объектов.',
@@ -399,8 +446,9 @@ function buildIndustrialTrainingPrograms(): IndustrialTrainingProgram[] {
         format: INDUSTRIAL_FORMAT,
         period: 'Не реже 1 раза в 5 лет.',
         document:
-          'По итогам обучения и проверки знаний оформляются документы в соответствии с требованиями аттестации (конкретную форму уточняйте у менеджеров учебного центра).',
-        img: '/diploms/doc-01.jpg',
+          'По итогам обучения и проверки знаний оформляются документы в соответствии с требованиями аттестации (конкретную форму уточняйте у менеджеров учебного центра)',
+        hideDocumentTitle: true,
+        programm: industrialPreAttestByTextCode[tc],
         application: requestIndustrialPre,
         mainDescription: `${INDUSTRIAL_PRE_INTRO}\n\nТема программы: «${row.title}». Код программы: ${tc}.`
       })
@@ -423,6 +471,7 @@ function buildIndustrialTrainingPrograms(): IndustrialTrainingProgram[] {
         format: INDUSTRIAL_FORMAT,
         period: 'Не реже 1 раза в 5 лет.',
         document: 'Удостоверение о повышении квалификации с внесением сведений в реестр ФИС ФРДО.',
+        programm: industrialDpoByTextCode[tc],
         img: '/diploms/doc-01.jpg',
         application: requestIndustrialPk,
         mainDescription: `${INDUSTRIAL_PK_INTRO}\n\n${row.title}`

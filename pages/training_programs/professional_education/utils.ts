@@ -1,4 +1,5 @@
 const requestProfessional12 = '/request-study/req-12.doc'
+import { getProgramDocByRelativePath } from '../../../utils/programDocs'
 
 export const professionalTrainingIntro =
   'Профессиональное обучение направлено на приобретение лицами различного возраста профессиональной компетенции, в том числе для работы с конкретным оборудованием, технологиями, аппаратно-программными и иными профессиональными средствами, получение указанными лицами квалификации по профессии рабочего.'
@@ -16,6 +17,26 @@ const profRequirements = [
   'В том числе ранее не имевшие профессии рабочего или должности служащего.',
   'Не имеющие медицинских противопоказаний к данной профессии.'
 ]
+
+const profProgramByCode: Record<string, string | undefined> = {
+  prof_01: getProgramDocByRelativePath('ПО/Стропальщик 152 часа.doc'),
+  prof_02: getProgramDocByRelativePath('ПО/Программа водитель электро- и автотележки.doc'),
+  prof_03: getProgramDocByRelativePath('ПО/Программа водитель погрузчика .doc'),
+  prof_04: getProgramDocByRelativePath('ПО/Программа варщик 11365.doc'),
+  prof_07: getProgramDocByRelativePath('ПО/Сливщик разливщик 2р.doc'),
+  prof_08: getProgramDocByRelativePath('ПО/Программа сливщик разливщик 3 разряд.doc'),
+  prof_09: getProgramDocByRelativePath('ПО/Программа оператор котельной  новая форма 18.0723.doc'),
+  prof_10: getProgramDocByRelativePath('ПО/Аппаратчик химводоочистки 2 разряд.doc'),
+  prof_15: getProgramDocByRelativePath('ПО/Программа обучения  машиниста 5 раз исправленная.doc'),
+  prof_16: getProgramDocByRelativePath('ПО/Программа обучения  накатчик.doc'),
+  prof_17: getProgramDocByRelativePath('ПО/Программа обучения  прессовщика.doc'),
+  prof_18: getProgramDocByRelativePath('ПО/Программа обучения  размольщика  УРМ.doc'),
+  prof_19: getProgramDocByRelativePath('ПО/Программа обучения  размольщик 4 раз.doc'),
+  prof_20: getProgramDocByRelativePath('ПО/Программа обучения  резчика 2 разряда.doc'),
+  prof_21: getProgramDocByRelativePath('ПО/Программа обучения  резчика.doc'),
+  prof_23: getProgramDocByRelativePath('ПО/Программа обучения  сушильщика 4 раз.doc'),
+  prof_29: getProgramDocByRelativePath('ПО/Машинист подъемника с РП.doc')
+}
 
 export interface ProfessionalTrainingProgram {
   textCode?: string
@@ -168,6 +189,7 @@ function buildProfProgram(
     format: profFormat,
     document: profDocument,
     img: '/diploms/doc-15.jpg',
+    programm: profProgramByCode[`prof_${n}`],
     application: requestProfessional12
   }
 }

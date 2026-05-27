@@ -1,5 +1,6 @@
 const requestEco11 = '/request-study/req-11.doc'
 const requestEco16 = '/request-study/req-16.doc'
+import { getProgramDocByRelativePath } from '../../../utils/programDocs'
 
 const ecoFormat =
   'Заочная с применением дистанционных образовательных технологий, без отрыва от работы (онлайн в любое время и из любого региона).'
@@ -52,6 +53,9 @@ export const environmentalProgramsPq: EnvironmentalTrainingProgram[] = [
     period: 'Не реже одного раза в 3 года.',
     document: docPq,
     img: '/diploms/doc-09.jpg',
+    programm: getProgramDocByRelativePath(
+      'Экология/«Обеспечение экологической безопасности при работах в области обращения с отходами I-IV классов опасности».docx'
+    ),
     application: requestEco11
   },
   {
@@ -69,6 +73,9 @@ export const environmentalProgramsPq: EnvironmentalTrainingProgram[] = [
     period: 'Не реже одного раза в 5 лет.',
     document: docPq,
     img: '/diploms/doc-10.jpg',
+    programm: getProgramDocByRelativePath(
+      'Экология/«Обеспечение экологической безопасности руководителями и специалистами».docx'
+    ),
     application: requestEco11
   },
   {
@@ -106,6 +113,9 @@ export const environmentalProgramsPpo: EnvironmentalTrainingProgram[] = [
     format: ecoFormat,
     document: docPpo,
     img: '/diploms/doc-12.jpg',
+    programm: getProgramDocByRelativePath(
+      'Экология/Переподготовка  «Специалист по экологической безопасности»  .docx'
+    ),
     application: requestEco16
   }
 ]

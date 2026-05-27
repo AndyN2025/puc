@@ -1,4 +1,5 @@
 const requestEnergy = '/request-study/req-03.doc'
+import { getProgramDocByRelativePath } from '../../../utils/programDocs'
 
 /**
  * Кто должен проходить проверку знаний — каждый элемент = категория + периодичность в одном пункте
@@ -58,7 +59,10 @@ export const energyPrograms: EnergyTrainingProgram[] = [
     users: energyKnowledgeCheckAudience,
     requiremets: energyRequirements,
     format: energyTrainingFormatsLine,
-    document: energyDocumentDefault
+    document: energyDocumentDefault,
+    programm: getProgramDocByRelativePath(
+      'ТЭУ/Предэкзаменационная подготовка работников  организаций потребителей тепловой энергии (обслуживающих организаций).doc'
+    )
   },
   {
     code: 'en_02',
@@ -72,6 +76,9 @@ export const energyPrograms: EnergyTrainingProgram[] = [
     format: energyTrainingFormatsLine,
     document: energyDocumentDefault,
     img: ['/diploms/doc-03.jpg', '/diploms/doc-04.jpg'],
+    programm: getProgramDocByRelativePath(
+      'ТЭУ/Предэкзаменационная подготовка работников теплоснабжающих.doc'
+    ),
     application: requestEnergy
   }
 ]

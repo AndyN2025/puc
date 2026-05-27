@@ -61,8 +61,8 @@
             </div>
           </div>
 
-          <div class="block__document">
-            <p class="block__title">{{ SITE_TEXT.trainingDetail.document }}</p>
+          <div v-if="hasDocumentContent" class="block__document">
+            <p v-if="!course.hideDocumentTitle" class="block__title">{{ SITE_TEXT.trainingDetail.document }}</p>
             <div class="info__value">
               <template v-if="Array.isArray(course.document) && course.document.length">
                 <ul class="info__value-list">
@@ -241,6 +241,7 @@ export interface TrainingProgramCourseDetailModel {
   format?: string | null
   period?: string | null
   document: string | string[]
+  hideDocumentTitle?: boolean
   img?: string | string[] | null
   application?: string | null
   programm?: string | null
@@ -306,6 +307,14 @@ const documentAlt = computed(() => {
   const d = props.course?.document
   if (!d) return ''
   return Array.isArray(d) ? (d[0] ?? '') : d
+})
+
+const hasDocumentContent = computed(() => {
+  const d = props.course?.document
+  const hasDocumentText = Array.isArray(d)
+    ? d.some((item) => Boolean(item?.trim()))
+    : Boolean(d?.trim())
+  return hasDocumentText || Boolean(props.course?.img)
 })
 
 function courseImageSrc(src: string) {

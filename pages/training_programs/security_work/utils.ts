@@ -1,3 +1,4 @@
+import { getProgramDocByRelativePath } from '../../../utils/programDocs'
 import protocolOb from '@/assets/img/training/securityWork/ofline/protocolOb.png'
 import protocolOPP from '@/assets/img/training/securityWork/ofline/protocolOPP.png'
 import protocolBase from '@/assets/img/training/securityWork/ofline/protocolBase.png'
@@ -37,6 +38,22 @@ import programBez3App from '@/assets/documents/training/securityWorks/11-Applica
 import programPz from '@/assets/documents/training/securityWorks/12-Program.doc'
 import programPzApp from '@/assets/documents/training/securityWorks/12-Application.doc'
 
+const otProgram46A = getProgramDocByRelativePath('Охрана труда/46А.doc')
+const otProgram46B = getProgramDocByRelativePath('Охрана труда/46Б.doc')
+const otProgramSiz = getProgramDocByRelativePath('Охрана труда/СИЗ.docx')
+const otProgramOpp = getProgramDocByRelativePath('Охрана труда/ОПП.doc')
+const otProgramVis1 = getProgramDocByRelativePath('Охрана труда/Высота 1.docx')
+const otProgramVis2 = getProgramDocByRelativePath('Охрана труда/Высота 2.docx')
+const otProgramVis3 = getProgramDocByRelativePath('Охрана труда/Высота 3.doc')
+const otProgramPodmash = getProgramDocByRelativePath('Охрана труда/Высота бг.doc')
+const otProgramOzp1 = getProgramDocByRelativePath('Охрана труда/ОЗП 1.docx')
+const otProgramOzp2 = getProgramDocByRelativePath('Охрана труда/ОЗП 2.docx')
+const otProgramOzp3 = getProgramDocByRelativePath('Охрана труда/ОЗП 3.docx')
+const otProgramPogr = getProgramDocByRelativePath('Охрана труда/Погр-разгр.doc')
+const otProgramSpec = getProgramDocByRelativePath(
+  'Охрана труда/Программа Переподготовка Специалист по охране труда.docx'
+)
+
 export interface TrainingProgram {
   textCode: string
   code: string
@@ -75,7 +92,7 @@ export const programsOffline: TrainingProgram[] = [
             `Специалисты по охране труда;`,
             `Члены комитетов (комиссий) по охране труда;`,
     ],
-    programm: programOb,
+    programm: otProgram46A ?? programOb,
     application: programObApp
   },
   {
@@ -100,7 +117,7 @@ export const programsOffline: TrainingProgram[] = [
             инструктажи по охране труда и обучение требованиям охраны труда;`,
             `Члены комитетов (комиссий) по охране труда;`
     ],
-    programm: programBez,
+    programm: otProgram46B ?? programBez,
     application: programBezApp
   },
   { 
@@ -122,7 +139,7 @@ export const programsOffline: TrainingProgram[] = [
             `Специалисты по охране труда;`,
             `Члены комитетов (комиссий) по охране труда;`
     ],
-    programm: programSiz,
+    programm: otProgramSiz ?? programSiz,
     application: programSizApp
   },
   {
@@ -148,7 +165,7 @@ export const programsOffline: TrainingProgram[] = [
             оказания первой помощи пострадавшим, специалисты по охране труда, а также члены комитетов (комиссий) по охране труда;`,
             `Иные работники по решению работодателя.`
     ],
-    programm: programOPP,
+    programm: otProgramOpp ?? programOPP,
     application: programOPPApp
   },
   {
@@ -172,7 +189,7 @@ export const programsOffline: TrainingProgram[] = [
     users: [ `Работники, допускаемые к работам в составе бригады или под непосредственным контролем работника, 
                 назначенного приказом работодателя.`
     ],
-    programm: programPodmash,
+    programm: otProgramPodmash ?? programPodmash,
     application: programPodmashApp
   },
   {
@@ -195,7 +212,7 @@ export const programsOffline: TrainingProgram[] = [
     users: [ `Работники, допускаемые к работам в составе бригады или под непосредственным контролем работника, 
         назначенного приказом работодателя.`
     ],
-    programm: programVis1,
+    programm: otProgramVis1 ?? programVis1,
     application: programVis1App
   },
   {
@@ -220,7 +237,7 @@ export const programsOffline: TrainingProgram[] = [
         исполнителями (производителями) работ на высоте и работники, допускаемые к работам в составе бригады из числа 
         высококвалифицированных рабочих и специалистов.`
     ],
-    programm: programVis2,
+    programm: otProgramVis2 ?? programVis2,
     application: programVis2App
   },
   {
@@ -255,7 +272,7 @@ export const programsOffline: TrainingProgram[] = [
             `Должностные лица, в полномочия которых входит утверждение плана производства работ на высоте и/или технологических 
             карт на производство работ на высоте;`,
     ],
-    programm: programVis3,
+    programm: otProgramVis3 ?? programVis3,
     application: programVis3App
   },
   {
@@ -278,7 +295,7 @@ export const programsOffline: TrainingProgram[] = [
     users: [ `Работники, допускаемые к непосредственному выполнению работ в ОЗП в составе бригады или под непосредственным контролем работника, 
                 назначенного приказом работодателя, с учетом специфики конкретных объектов ОЗП.`
     ],
-    programm: programBez1,
+    programm: otProgramOzp1 ?? programBez1,
     application: programBez1App
   },
   {
@@ -306,7 +323,7 @@ export const programsOffline: TrainingProgram[] = [
             `Мастера, бригадиры, осматривающие место проведения работ, обеспечивающие подготовку к работе, умеющие 
                 определить опасности перед началом работ; работники, обеспечивающие безопасность работ в ОЗП во время их выполнения.`
     ],
-    programm: programBez2,
+    programm: otProgramOzp2 ?? programBez2,
     application: programBez2App
   },
   {
@@ -331,7 +348,7 @@ export const programsOffline: TrainingProgram[] = [
             `Ответственные руководители работ;`,
             `Члены экзаменационной комиссии по проверке знаний, умений и навыков безопасных методов и приемов выполнения работ в ОЗП.`
     ],
-    programm: programBez3,
+    programm: otProgramOzp3 ?? programBez3,
     application: programBez3App
   },
   {
@@ -349,7 +366,7 @@ export const programsOffline: TrainingProgram[] = [
     img: protocolPZ,
     period: 'не реже одного раза в год',
     users: [ `Работники, выполняющие погрузочно-разгрузочные работы и размещение грузов.` ],
-    programm: programPz,
+    programm: otProgramPogr ?? programPz,
     application: programPzApp
   }
 ]
@@ -360,7 +377,6 @@ import programDistOb from '@/assets/documents/training/securityWorks/Dist_obshie
 import programmDistSpec from '@/assets/documents/training/securityWorks/Dist_spec_04-17.doc'
 import programDistObApp from '@/assets/documents/training/securityWorks/Dist_application_04-15.doc'
 import programmDistSpecApp from '@/assets/documents/training/securityWorks/Dist_application_spec_04-17.doc'
-
 export const programsOnline: TrainingProgram[] = [
   { 
     textCode: '04-15/1ОТ', 
@@ -384,7 +400,7 @@ export const programsOnline: TrainingProgram[] = [
             `Специалисты по охране труда;`,
             `Члены комитетов (комиссий) по охране труда;`,
     ],
-    programm: programDistOb,
+    programm: otProgram46A ?? programDistOb,
     application: programDistObApp
 },
   { 
@@ -401,7 +417,7 @@ export const programsOnline: TrainingProgram[] = [
     users: [ `Лица, имеющие среднее профессиональное и (или) высшее образование;`,
             `Лица, получающие среднее профессиональное и (или) высшее образование.`,
     ],
-    programm: programmDistSpec,
+    programm: otProgramSpec ?? programmDistSpec,
     application: programmDistSpecApp
 }
   ]

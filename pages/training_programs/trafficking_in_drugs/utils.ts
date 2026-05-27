@@ -1,5 +1,6 @@
 const requestDrugs17 = '/request-study/req-17.doc'
 const requestDrugs18 = '/request-study/req-18.doc'
+import { getProgramDocByRelativePath } from '../../../utils/programDocs'
 
 /** Общие для всех программ раздела (прекурсоры / оборот). */
 export const drugsListeners = [
@@ -56,6 +57,9 @@ export const drugsPrograms: DrugsTrainingProgram[] = [
     format: drugsFormatCombined,
     document: drugsDocumentDefault,
     img: '/diploms/doc-13.jpg',
+    programm: getProgramDocByRelativePath(
+      'Прекурсоры/Организация деятельности по обороту наркотических средств, психотропных веществ и их прекурсоров.doc'
+    ),
     application: requestDrugs17
   },
   {
@@ -70,6 +74,9 @@ export const drugsPrograms: DrugsTrainingProgram[] = [
     format: drugsFormatCombined,
     document: drugsDocumentDefault,
     img: '/diploms/doc-13.jpg',
+    programm: getProgramDocByRelativePath(
+      'Прекурсоры/«Государственное регулирование в сфере оборота наркотических средств, психотропных веществ и их прекурсоров при осуществлении медицинской и фармацевтической деятельности».doc'
+    ),
     application: requestDrugs18
   }
 ]

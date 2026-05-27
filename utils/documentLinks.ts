@@ -1,3 +1,5 @@
+import { withAppBase } from './withAppBase'
+
 const ALLOWED_DOCUMENT_EXTENSIONS = new Set(['pdf', 'doc', 'docx'])
 
 function stripQueryAndHash(url: string) {
@@ -38,13 +40,38 @@ export function sanitizeDownloadFileName(value: string) {
   return value.replace(/[\\/:*?"<>|]+/g, '_').trim() || 'document'
 }
 
-export function downloadSafeDocument(value: unknown, fileName: string) {
+/** Публичный URL документа с учётом app.baseURL (GitHub Pages /puc/). */
+export function resolveDocumentHref(value: unknown) {
   const href = getSafeDocumentHref(value)
+  if (!href) return null
+  return withAppBase(href)
+}
+
+const PROGRAM_FILE_UNAVAILABLE_MSG =
+  'Файл программы недоступен на сайте (не найден на сервере). Обратитесь к менеджерам учебного центра.'
+
+/**
+ * Скачивает документ. Перед скачиванием проверяет, что файл отдаётся сервером (не 404).
+ * Сообщение Chrome «файл недоступен на сайте» обычно значит 404 на GitHub Pages.
+ */
+export async function downloadSafeDocument(value: unknown, fileName: string) {
+  const href = resolveDocumentHref(value)
   if (!href || typeof document === 'undefined') return false
+
+  try {
+    const res = await fetch(href, { method: 'HEAD' })
+    if (!res.ok) {
+      alert(PROGRAM_FILE_UNAVAILABLE_MSG)
+      return false
+    }
+  } catch {
+    // при сбое проверки всё равно пробуем открыть ссылку
+  }
 
   const link = document.createElement('a')
   link.href = href
   link.download = sanitizeDownloadFileName(fileName)
+  link.rel = 'noopener'
   document.body.appendChild(link)
   link.click()
   document.body.removeChild(link)
