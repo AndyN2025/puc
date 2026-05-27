@@ -47,29 +47,44 @@ export function resolveDocumentHref(value: unknown) {
   return withAppBase(href)
 }
 
+function toAbsoluteUrl(href: string): string {
+  if (/^https?:/i.test(href)) return href
+  if (typeof window === 'undefined') return href
+  return new URL(href, window.location.origin).href
+}
+
+async function isDocumentReachable(url: string): Promise<boolean> {
+  try {
+    let res = await fetch(url, { method: 'HEAD' })
+    if (res.status === 405 || res.status === 501) {
+      res = await fetch(url, { method: 'GET', headers: { Range: 'bytes=0-0' } })
+    }
+    return res.ok
+  } catch {
+    return false
+  }
+}
+
 const PROGRAM_FILE_UNAVAILABLE_MSG =
   'Файл программы недоступен на сайте (не найден на сервере). Обратитесь к менеджерам учебного центра.'
 
 /**
  * Скачивает документ. Перед скачиванием проверяет, что файл отдаётся сервером (не 404).
- * Сообщение Chrome «файл недоступен на сайте» обычно значит 404 на GitHub Pages.
  */
 export async function downloadSafeDocument(value: unknown, fileName: string) {
   const href = resolveDocumentHref(value)
   if (!href || typeof document === 'undefined') return false
 
-  try {
-    const res = await fetch(href, { method: 'HEAD' })
-    if (!res.ok) {
-      alert(PROGRAM_FILE_UNAVAILABLE_MSG)
-      return false
-    }
-  } catch {
-    // при сбое проверки всё равно пробуем открыть ссылку
+  const absoluteHref = toAbsoluteUrl(href)
+
+  const reachable = await isDocumentReachable(absoluteHref)
+  if (!reachable) {
+    alert(PROGRAM_FILE_UNAVAILABLE_MSG)
+    return false
   }
 
   const link = document.createElement('a')
-  link.href = href
+  link.href = absoluteHref
   link.download = sanitizeDownloadFileName(fileName)
   link.rel = 'noopener'
   document.body.appendChild(link)
