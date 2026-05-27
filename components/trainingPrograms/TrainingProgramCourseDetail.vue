@@ -124,11 +124,32 @@
             <button type="button" class="info__back-btn" @click="$router.back()">
               {{ SITE_TEXT.trainingDetail.backToList }}
             </button>
+            <a
+              v-if="applicationHref"
+              class="info__action-btn info__action-btn--secondary"
+              :href="applicationHref"
+              download=""
+            >
+              <svg
+                class="info__action-icon"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                <polyline points="7 10 12 15 17 10" />
+                <line x1="12" y1="15" x2="12" y2="3" />
+              </svg>
+              {{ SITE_TEXT.trainingDetail.applicationButton }}
+            </a>
             <button
+              v-else
               type="button"
               class="info__action-btn info__action-btn--secondary"
-              :disabled="!course.application"
-              @click="emit('downloadApplication')"
+              disabled
             >
               <svg
                 class="info__action-icon"
@@ -145,11 +166,32 @@
               </svg>
               {{ SITE_TEXT.trainingDetail.applicationButton }}
             </button>
+            <a
+              v-if="programHref"
+              class="info__action-btn info__action-btn--primary"
+              :href="programHref"
+              download=""
+            >
+              <svg
+                class="info__action-icon"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                <polyline points="7 10 12 15 17 10" />
+                <line x1="12" y1="15" x2="12" y2="3" />
+              </svg>
+              {{ SITE_TEXT.trainingDetail.programButton }}
+            </a>
             <button
+              v-else
               type="button"
               class="info__action-btn info__action-btn--primary"
-              :disabled="!course.programm"
-              @click="emit('downloadProgram')"
+              disabled
             >
               <svg
                 class="info__action-icon"
@@ -224,6 +266,8 @@ import ConsultationWidget from '@/components/UI/ConsultantWidget.vue'
 import checkIkon from '@/assets/img/checkIcon.svg'
 import { SITE_PHONES } from '@/utils/site'
 import { SITE_TEXT } from '@/utils/siteText'
+import { resolveDocumentHref } from '@/utils/documentLinks'
+import { APP_BASE_URL } from '@/utils/appBase'
 import { withAppBase } from '@/utils/withAppBase'
 
 export interface TrainingProgramCourseDetailBreadcrumb {
@@ -270,13 +314,6 @@ const props = withDefaults(
   }
 )
 
-const emit = defineEmits<{
-  downloadApplication: []
-  downloadProgram: []
-}>()
-
-const { app } = useRuntimeConfig()
-
 const showModal = ref(false)
 const selectedImage = ref<string | null>(null)
 const showPhoneTooltip = ref(false)
@@ -317,8 +354,16 @@ const hasDocumentContent = computed(() => {
   return hasDocumentText || Boolean(props.course?.img)
 })
 
+const applicationHref = computed(() =>
+  props.course?.application ? resolveDocumentHref(props.course.application) : null
+)
+
+const programHref = computed(() =>
+  props.course?.programm ? resolveDocumentHref(props.course.programm) : null
+)
+
 function courseImageSrc(src: string) {
-  return withAppBase(src, app.baseURL)
+  return withAppBase(src, APP_BASE_URL)
 }
 
 const openModal = (img: string) => {
@@ -631,6 +676,8 @@ watch(showModal, (isOpen) => {
     padding: $spacing-sm $spacing-lg;
     border-radius: $radius-lg;
     cursor: pointer;
+    text-decoration: none;
+    box-sizing: border-box;
     font-size: $font-size-base;
     font-family: $font-ibm-m;
     font-weight: $font-weight-semibold;

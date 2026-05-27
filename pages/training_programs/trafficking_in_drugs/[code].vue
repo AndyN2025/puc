@@ -6,8 +6,6 @@
       :listeners-title="SITE_TEXT.trainingPages.listeners.categories"
       :hours-display="hoursDisplay"
       list-index-path="/training_programs/trafficking_in_drugs/"
-      @download-application="downloadApplication"
-      @download-program="openShortInfo"
     />
   </div>
 </template>
@@ -17,7 +15,6 @@ import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { drugsPrograms, type DrugsTrainingProgram } from './utils'
 import TrainingProgramCourseDetail from '@/components/trainingPrograms/TrainingProgramCourseDetail.vue'
-import { downloadSafeDocument } from '@/utils/documentLinks'
 import { SITE_TEXT } from '@/utils/siteText'
 
 const route = useRoute()
@@ -61,25 +58,4 @@ const breadCrumbs = computed(() => {
   return crumbs
 })
 
-const downloadApplication = () => {
-  if (!course.value?.application) {
-    alert(SITE_TEXT.trainingPages.alerts.missingCourseApplication)
-    return
-  }
-  downloadSafeDocument(
-    course.value.application,
-    `${SITE_TEXT.trainingPages.files.applicationPrefix}_${course.value.code || SITE_TEXT.trainingPages.files.applicationFallback}.doc`
-  )
-}
-
-const openShortInfo = () => {
-  if (!course.value?.programm) {
-    alert(SITE_TEXT.trainingPages.alerts.missingCourseProgram)
-    return
-  }
-  downloadSafeDocument(
-    course.value.programm,
-    `${SITE_TEXT.trainingPages.files.programPrefix}_${course.value.code || SITE_TEXT.trainingPages.files.programFallback}.doc`
-  )
-}
 </script>

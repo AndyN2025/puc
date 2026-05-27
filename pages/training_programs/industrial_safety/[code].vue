@@ -9,8 +9,6 @@
       :period-label="SITE_TEXT.trainingDetail.periodLabel"
       :not-found-title="SITE_TEXT.trainingPages.notFoundProgram"
       list-index-path="/training_programs/industrial_safety/"
-      @download-application="downloadApplication"
-      @download-program="openShortInfo"
     />
   </div>
 </template>
@@ -23,7 +21,6 @@ import {
   type IndustrialTrainingProgram
 } from './utils'
 import TrainingProgramCourseDetail from '@/components/trainingPrograms/TrainingProgramCourseDetail.vue'
-import { downloadSafeDocument } from '@/utils/documentLinks'
 import { SITE_TEXT } from '@/utils/siteText'
 
 const route = useRoute()
@@ -84,26 +81,4 @@ const breadCrumbs = computed(() => {
   }
   return crumbs
 })
-
-const downloadApplication = () => {
-  if (!course.value?.application) {
-    alert(SITE_TEXT.trainingPages.alerts.missingProgramApplication)
-    return
-  }
-  downloadSafeDocument(
-    course.value.application,
-    `${SITE_TEXT.trainingPages.files.applicationPrefix}_${course.value.textCode || SITE_TEXT.trainingPages.files.applicationFallback}.doc`
-  )
-}
-
-const openShortInfo = () => {
-  if (!course.value?.programm) {
-    alert(SITE_TEXT.trainingPages.alerts.missingProgramProgram)
-    return
-  }
-  downloadSafeDocument(
-    course.value.programm,
-    `${SITE_TEXT.trainingPages.files.programPrefix}_${course.value.textCode || SITE_TEXT.trainingPages.files.programFallback}.doc`
-  )
-}
 </script>
