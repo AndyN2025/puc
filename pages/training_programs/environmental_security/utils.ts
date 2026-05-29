@@ -73,23 +73,24 @@ export const environmentalProgramsPq: EnvironmentalTrainingProgram[] = [
     img: '/diploms/doc-10.jpg',
     programm: getProgramDocByRelativePath('eco/eco_02.docx'),
     application: requestEco11
-  },
-  {
-    code: 'eco_03',
-    textCode: '-',
-    title:
-      'Дополнительная профессиональная программа повышения квалификации. Системы управления обеспечением экологической безопасности',
-    hours: 200,
-    mainDescription: mainFz7Art73,
-    users: [
-      'Руководители и специалисты субъектов хозяйственной или иной деятельности, которая может оказать негативное воздействие на окружающую среду.'
-    ],
-    requiremets: ecoRequirements,
-    format: ecoFormat,
-    period: 'Не реже одного раза в 5 лет.',
-    document: docPq,
-    img: '/diploms/doc-11.jpg'
   }
+  // Скрыто по запросу: программа «Системы управления обеспечением экологической безопасности», 200 ч.
+  // {
+  //   code: 'eco_03',
+  //   textCode: '-',
+  //   title:
+  //     'Дополнительная профессиональная программа повышения квалификации. Системы управления обеспечением экологической безопасности',
+  //   hours: 200,
+  //   mainDescription: mainFz7Art73,
+  //   users: [
+  //     'Руководители и специалисты субъектов хозяйственной или иной деятельности, которая может оказать негативное воздействие на окружающую среду.'
+  //   ],
+  //   requiremets: ecoRequirements,
+  //   format: ecoFormat,
+  //   period: 'Не реже одного раза в 5 лет.',
+  //   document: docPq,
+  //   img: '/diploms/doc-11.jpg'
+  // }
 ]
 
 /** Профессиональная переподготовка */
