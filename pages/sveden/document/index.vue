@@ -20,6 +20,8 @@ import Ustav from '@/assets/documents/documents/Ustav.pdf'
 
 import License from '@/assets/documents/common/Лицензия на осуществление образовательной деятельности.pdf'
 
+import LicenseNew from '@/assets/documents/common/(02)Выписка из реестра лицензий по состоянию на 01.08.2024г (изменение лицензии).pdf'
+
 import samoObsl from '@/assets/documents/Отчет о самообследовании 2025.pdf'
 import vnutrTrud from '@/assets/documents/documents/local_act_trud_rasp.pdf'
 import pedsovet from '@/assets/documents/documents/local_act_pedsovet.pdf'
@@ -52,7 +54,7 @@ const documents = [
   },
   {
     title: 'Лицензия на право осуществления образовательной деятельности',
-    file: License,
+    file: LicenseNew,
     micro: 'licenseDocLink'
   },
   {
